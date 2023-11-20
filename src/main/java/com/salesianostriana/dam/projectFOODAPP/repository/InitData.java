@@ -23,9 +23,6 @@ public class InitData {
     @PostConstruct
     public void initData(){
 
-        List<LineaPedido> lineasDePedido = new ArrayList<>();
-        List<Pedido> pedidos = new ArrayList<>();
-
         Categoria c1 = Categoria.builder()
                 .nombre("Tapas")
                 .build();
@@ -37,6 +34,11 @@ public class InitData {
         categoriaRepository.saveAll(List.of(c1, c2));
 
         Cliente cl1 = Cliente.builder()
+                .username("sebastian")
+                .password("1234")
+                .nombre("Sebastián Millán")
+                .email("sebas@gmail.com")
+                .telefono("987654111")
                 .pin(1234)
                 .direccion("c/Condes de Bustillo, 17")
                 .codPostal("41011")
@@ -46,6 +48,11 @@ public class InitData {
                 .build();
 
         Cliente cl2 = Cliente.builder()
+                .username("fran")
+                .password("4321")
+                .nombre("Francisco Claro")
+                .email("fran@gmail.com")
+                .telefono("334665121")
                 .pin(1234)
                 .direccion("c/Evangelista, 3")
                 .codPostal("41011")
@@ -86,18 +93,26 @@ public class InitData {
                 .categoria(c2)
                 .build();
 
-        productoRepository.saveAll(List.of(p1, p2));
+        productoRepository.saveAll(List.of(p1, p2, p3));
 
         Trabajador t1 = Trabajador.builder()
+                .username("pedro")
+                .password("5555")
+                .nombre("Pedro Franch")
+                .email("pedro@gmail.com")
+                .telefono("545656767")
                 .fechaNacimiento(LocalDate.parse("26-07-2000", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .tipoTrabajador(TipoTrabajador.REPARTIDOR)
-                .pedidos(pedidos)
                 .build();
 
         Trabajador t2 = Trabajador.builder()
+                .username("fernando")
+                .password("8787")
+                .nombre("Fernando Claro")
+                .email("fer@gmail.com")
+                .telefono("121232888")
                 .fechaNacimiento(LocalDate.parse("13-11-2002", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .tipoTrabajador(TipoTrabajador.COCINERO)
-                .pedidos(pedidos)
                 .build();
 
         trabajadorRepository.saveAll(List.of(t1,t2));
@@ -108,7 +123,6 @@ public class InitData {
                 .cliente(cl1)
                 .repartidor(t1)
                 .cocinero(t2)
-                .lineasPedido(lineasDePedido)
                 .build();
 
     }

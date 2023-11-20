@@ -19,10 +19,4 @@ import java.util.List;
 public class Trabajador extends  Usuario{
     private LocalDate fechaNacimiento;
     private TipoTrabajador tipoTrabajador;
-
-    @ToString.Exclude
-    @Builder.Default
-    @OneToMany(mappedBy = "repartidor")
-    private List<Pedido> pedidos= new ArrayList<>();
-
 }
