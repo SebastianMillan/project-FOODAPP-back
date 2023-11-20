@@ -1,13 +1,10 @@
-package com.salesianostriana.dam.projectFOODAPP.model;
+package com.salesianostriana.dam.projectFOODAPP.usuario.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -16,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @SuperBuilder
-public class Trabajador extends  Usuario{
+public class Trabajador extends Usuario {
     private LocalDate fechaNacimiento;
     private TipoTrabajador tipoTrabajador;
 }

@@ -1,9 +1,12 @@
-package com.salesianostriana.dam.projectFOODAPP.model;
+package com.salesianostriana.dam.projectFOODAPP.pedido.model;
 
+import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,8 +19,19 @@ import java.util.Objects;
 public class LineaPedido {
 
     @Id
-    @GeneratedValue
-    private Long codLinea;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(
+                            name = "uuid_gen_strategy_class",
+                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+                    )
+            }
+    )
+    @Column(columnDefinition = "uuid")
+    private UUID codLinea;
 
     @Id
     @ManyToOne

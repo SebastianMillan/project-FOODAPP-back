@@ -1,12 +1,15 @@
-package com.salesianostriana.dam.projectFOODAPP.model;
+package com.salesianostriana.dam.projectFOODAPP.pedido.model;
 
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -17,8 +20,20 @@ import java.util.List;
 @Builder
 public class Pedido {
 
-    @GeneratedValue @Id
-    private Long id;
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(
+                            name = "uuid_gen_strategy_class",
+                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+                    )
+            }
+    )
+    @Column(columnDefinition = "uuid")
+    private UUID id;
 
     private LocalDateTime fecha;
     private EstadoPedido estadoPedido;

@@ -14,10 +14,10 @@ public class OpenApiConfig {
     public OpenAPI openApi(){
         return new OpenAPI()
                 .info(new Info()
-                        .title("GRADESAPP API")
-                        .description("API REST para gestionar las notas del alumnado")
+                        .title("FOOD APP")
+                        .description("API REST para gestionar aplicación de reparto de comida para llevar")
                         .version("v0.0.1")
-                        .license(new License().name("Creative Commons Zero v1.0 Universal").url("https://github.com/SebastianMillan/Project-GRADESAPI"))
+                        .license(new License().name("Creative Commons Zero v1.0 Universal").url("https://github.com/SebastianMillan/project-FOODAPP-back"))
                 ).externalDocs(new ExternalDocumentation()
                         .description("")
                         .url("")

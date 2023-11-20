@@ -1,9 +1,10 @@
-package com.salesianostriana.dam.projectFOODAPP.model;
+package com.salesianostriana.dam.projectFOODAPP.pedido.model;
 
 import lombok.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -11,7 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class LineaPedidoPK implements Serializable {
     private Pedido pedido;
-    private Long codLinea;
+    private UUID codLinea;
 
     private LineaPedidoPK() { }
 

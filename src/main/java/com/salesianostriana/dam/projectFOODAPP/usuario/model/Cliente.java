@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.projectFOODAPP.model;
+package com.salesianostriana.dam.projectFOODAPP.usuario.model;
 
 import jakarta.persistence.Entity;
 import lombok.*;
@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 @NoArgsConstructor
-public class Cliente extends Usuario{
+public class Cliente extends Usuario {
 
     private int pin;
     private String direccion;

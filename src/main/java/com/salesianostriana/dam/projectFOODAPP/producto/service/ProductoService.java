@@ -1,6 +1,6 @@
-package com.salesianostriana.dam.projectFOODAPP.service;
+package com.salesianostriana.dam.projectFOODAPP.producto.service;
 
-import com.salesianostriana.dam.projectFOODAPP.repository.ProductoRepository;
+import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

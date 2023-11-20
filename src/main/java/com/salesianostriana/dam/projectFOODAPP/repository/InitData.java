@@ -1,6 +1,18 @@
 package com.salesianostriana.dam.projectFOODAPP.repository;
 
-import com.salesianostriana.dam.projectFOODAPP.model.*;
+import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
+import com.salesianostriana.dam.projectFOODAPP.categoria.repository.CategoriaRepository;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.EstadoPedido;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
+import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepository;
+import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
+import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.TipoTrabajador;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
+import com.salesianostriana.dam.projectFOODAPP.usuario.repository.ClienteRepository;
+import com.salesianostriana.dam.projectFOODAPP.usuario.repository.TrabajadorRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -8,7 +20,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,6 +30,7 @@ public class InitData {
     private final ClienteRepository clienteRepository;
     private final ProductoRepository productoRepository;
     private final TrabajadorRepository trabajadorRepository;
+    private final PedidoRepository pedidoRepository;
 
     @PostConstruct
     public void initData(){
@@ -117,6 +129,12 @@ public class InitData {
 
         trabajadorRepository.saveAll(List.of(t1,t2));
 
+        LineaPedido ln1 = LineaPedido.builder()
+                .cantidad(1)
+                .precioUnitario(p1.getPrecio())
+                .producto(p1)
+                .build();
+
         Pedido ped1 = Pedido.builder()
                 .fecha(LocalDateTime.now())
                 .estadoPedido(EstadoPedido.EN_PREPARACION)
@@ -124,6 +142,10 @@ public class InitData {
                 .repartidor(t1)
                 .cocinero(t2)
                 .build();
+
+        ped1.addLineaPedido(ln1);
+
+        pedidoRepository.save(ped1);
 
     }
 }
