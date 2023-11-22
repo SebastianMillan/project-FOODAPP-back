@@ -5,6 +5,7 @@ import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedBy;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -38,14 +39,11 @@ public class Pedido {
     private LocalDateTime fecha;
     private EstadoPedido estadoPedido;
 
-    @ManyToOne
-    private Cliente cliente;
+    @CreatedBy
+    private String cliente;
 
-    @ManyToOne
-    private Trabajador repartidor;
-
-    @ManyToOne
-    private Trabajador cocinero;
+    private String repartidor;
+    private String cocinero;
 
     @ToString.Exclude
     @Builder.Default
