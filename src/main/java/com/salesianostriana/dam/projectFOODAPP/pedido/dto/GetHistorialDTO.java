@@ -15,7 +15,7 @@ public record GetHistorialDTO (
 
         EstadoPedido estadoPedido
 ){
-
+/*
     public static GetHistorialDTO of (Cliente cl, Pedido ped, double importeTotal){
 
         return new GetHistorialDTO(
@@ -25,5 +25,5 @@ public record GetHistorialDTO (
                 ped.getEstadoPedido()
         );
     }
-
+*/
 }

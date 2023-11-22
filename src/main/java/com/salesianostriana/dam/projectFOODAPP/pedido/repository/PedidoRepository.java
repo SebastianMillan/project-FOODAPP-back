@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
-
+/*
     @Query("""
             SELECT p
             FROM Pedido p
@@ -17,4 +17,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
             """)
     List<Pedido> getHistorialByClienteID(UUID id);
 
+ */
 }

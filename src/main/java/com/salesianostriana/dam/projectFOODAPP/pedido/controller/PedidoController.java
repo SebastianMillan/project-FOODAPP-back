@@ -20,7 +20,7 @@ import java.util.List;
 public class PedidoController {
 
     private final PedidoService pedidoService;
-
+/*
     @GetMapping("/historial/{cliente}")
     public List<GetHistorialDTO> getHistorialPedidos(@AuthenticationPrincipal Cliente cliente) {
 
@@ -32,5 +32,5 @@ public class PedidoController {
 
         return historial;
     }
-
+*/
 }

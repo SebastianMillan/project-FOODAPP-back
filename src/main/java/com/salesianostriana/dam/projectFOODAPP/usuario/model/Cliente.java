@@ -27,5 +27,4 @@ public class Cliente extends Usuario {
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Pedido> pedidos;
 
-
 }
