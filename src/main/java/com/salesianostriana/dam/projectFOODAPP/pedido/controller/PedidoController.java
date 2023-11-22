@@ -20,17 +20,17 @@ import java.util.List;
 public class PedidoController {
 
     private final PedidoService pedidoService;
-/*
-    @GetMapping("/historial/{cliente}")
-    public List<GetHistorialDTO> getHistorialPedidos(@AuthenticationPrincipal Cliente cliente) {
 
-        List<Pedido> pedidos = pedidoService.getHistorialCliente(cliente.getId());
+    @GetMapping("/historial/{cliente}")
+    public List<GetHistorialDTO> getHistorialPedidosDeUnCliente(@AuthenticationPrincipal Cliente cliente){
+
+        List<Pedido> pedidos = pedidoService.getHistorialCliente(cliente.getId().toString());
 
         List<GetHistorialDTO> historial = new ArrayList<>();
         for (Pedido pedido : pedidos)
-            historial.add(GetHistorialDTO.of(cliente, pedido, pedidoService.calcularImporteTotal(pedido)));
+            historial.add(GetHistorialDTO.of(pedido, pedidoService.calcularImporteTotal(pedido)));
 
         return historial;
     }
-*/
+
 }

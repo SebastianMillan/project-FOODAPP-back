@@ -13,10 +13,10 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class PedidoService {
-/*
+
     private final PedidoRepository pedidoRepository;
 
-    public List<Pedido> getHistorialCliente (UUID clienteId){
+    public List<Pedido> getHistorialCliente (String clienteId){
 
         List<Pedido> pedidos = pedidoRepository.getHistorialByClienteID(clienteId);
 
@@ -35,6 +35,6 @@ public class PedidoService {
 
         return importeTotal;
     }
-    */
+
 
 }
