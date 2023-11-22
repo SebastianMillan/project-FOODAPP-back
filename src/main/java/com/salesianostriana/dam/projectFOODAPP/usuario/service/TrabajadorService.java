@@ -16,10 +16,12 @@ public class TrabajadorService {
 
     private final TrabajadorRepository trabajadorRepository;
     public List<Trabajador> findAllTrabajadores(){
-        List <Trabajador> trabajadorList = findAllTrabajadores();
+        List <Trabajador> trabajadorList = trabajadorRepository.findAll();
         if(trabajadorList.isEmpty()){
             throw new TrabajadoresListEmpty();
         }
         return trabajadorList;
     }
+
+
 }
