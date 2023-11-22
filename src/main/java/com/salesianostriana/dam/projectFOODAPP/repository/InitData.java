@@ -138,9 +138,9 @@ public class InitData {
         Pedido ped1 = Pedido.builder()
                 .fecha(LocalDateTime.now())
                 .estadoPedido(EstadoPedido.EN_PREPARACION)
-                .cliente(cl1)
-                .repartidor(t1)
-                .cocinero(t2)
+                .cliente(cl1.getId().toString())
+                .repartidor(t1.getId().toString())
+                .cocinero(t2.getId().toString())
                 .build();
 
         ped1.addLineaPedido(ln1);
