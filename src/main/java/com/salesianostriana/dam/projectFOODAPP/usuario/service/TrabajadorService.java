@@ -16,7 +16,5 @@ public class TrabajadorService {
     private final TrabajadorRepository trabajadorRepository;
     private final ClienteRepository clienteRepository;
 
-    private List<Cliente> getAllClientes (){
-        return clienteRepository.findAll();
-    }
+
 }
