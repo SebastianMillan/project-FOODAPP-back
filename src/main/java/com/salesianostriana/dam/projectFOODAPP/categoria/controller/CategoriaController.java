@@ -13,11 +13,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/categoria")
 @RequiredArgsConstructor
+
 public class CategoriaController {
 
     private final CategoriaService categoriaService;
 
     @GetMapping("/")
+
     public List<GetDtoCategoria> getAll(){
 
         List<Categoria> categorias = categoriaService.getAllCategorias();
