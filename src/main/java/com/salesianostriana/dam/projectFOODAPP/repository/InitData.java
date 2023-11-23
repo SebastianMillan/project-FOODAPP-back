@@ -9,18 +9,21 @@ import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepositor
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.RolUsuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.TipoTrabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.ClienteRepository;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.TrabajadorRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Component
@@ -31,6 +34,7 @@ public class InitData {
     private final ProductoRepository productoRepository;
     private final TrabajadorRepository trabajadorRepository;
     private final PedidoRepository pedidoRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void initData(){
@@ -47,8 +51,9 @@ public class InitData {
 
         Cliente cl1 = Cliente.builder()
                 .username("sebastian")
-                .password("1234")
+                .password(passwordEncoder.encode("1234"))
                 .nombre("Sebastián Millán")
+                .roles(Set.of(RolUsuario.CLIENTE))
                 .email("sebas@gmail.com")
                 .telefono("987654111")
                 .pin(1234)
@@ -61,9 +66,10 @@ public class InitData {
 
         Cliente cl2 = Cliente.builder()
                 .username("fran")
-                .password("4321")
+                .password(passwordEncoder.encode("4321"))
                 .nombre("Francisco Claro")
                 .email("fran@gmail.com")
+                .roles(Set.of(RolUsuario.CLIENTE))
                 .telefono("334665121")
                 .pin(1234)
                 .direccion("c/Evangelista, 3")
@@ -109,9 +115,10 @@ public class InitData {
 
         Trabajador t1 = Trabajador.builder()
                 .username("pedro")
-                .password("5555")
+                .password(passwordEncoder.encode("5555"))
                 .nombre("Pedro Franch")
                 .email("pedro@gmail.com")
+                .roles(Set.of(RolUsuario.TRABAJADOR))
                 .telefono("545656767")
                 .fechaNacimiento(LocalDate.parse("26-07-2000", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .tipoTrabajador(TipoTrabajador.REPARTIDOR)
@@ -119,8 +126,9 @@ public class InitData {
 
         Trabajador t2 = Trabajador.builder()
                 .username("fernando")
-                .password("8787")
+                .password(passwordEncoder.encode("8787"))
                 .nombre("Fernando Claro")
+                .roles(Set.of(RolUsuario.ADMIN))
                 .email("fer@gmail.com")
                 .telefono("121232888")
                 .fechaNacimiento(LocalDate.parse("13-11-2002", DateTimeFormatter.ofPattern("dd-MM-yyyy")))

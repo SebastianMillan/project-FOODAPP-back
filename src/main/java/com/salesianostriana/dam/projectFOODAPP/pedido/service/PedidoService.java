@@ -16,6 +16,12 @@ public class PedidoService {
 
     private final PedidoRepository pedidoRepository;
 
+
+    public List<Pedido> getAllPedidos(){
+
+        return pedidoRepository.getAllPedidosConLineas();
+    }
+
     public List<Pedido> getHistorialCliente (String clienteId){
 
         List<Pedido> pedidos = pedidoRepository.getHistorialByClienteID(clienteId);
