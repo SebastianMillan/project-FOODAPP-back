@@ -9,9 +9,9 @@ import java.util.UUID;
 public class ClienteNotFoundException extends EntityNotFoundException {
 
     public ClienteNotFoundException(){
-        super("The product could not be found");
+        super("The client could not be found");
     }
     public ClienteNotFoundException(String id){
-        super(String.format("The product with the id %s could not be found", id));
+        super(String.format("The client with the id %s could not be found", id));
     }
 }

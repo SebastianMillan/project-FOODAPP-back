@@ -94,7 +94,7 @@ public class UsuarioController {
 
     @GetMapping("/admin/client/{id}")
     public GetClienteDtoDetail getClientDetailsWithOrders(@PathVariable String id){
-        return clienteService.buscarClienteDetailConPedidos(id);
+        return GetClienteDtoDetail.of(clienteService.buscarClienteDetail(id), clienteService.buscarPedidosByClienteId(id));
     }
 
 
