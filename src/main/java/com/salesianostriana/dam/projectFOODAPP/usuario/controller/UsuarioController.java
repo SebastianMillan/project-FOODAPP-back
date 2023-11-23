@@ -3,6 +3,7 @@ package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 import com.salesianostriana.dam.projectFOODAPP.security.jwt.access.JwtProvider;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.*;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
+import com.salesianostriana.dam.projectFOODAPP.usuario.service.ClienteService;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class UsuarioController {
 
     private final UsuarioService userService;
+    private final ClienteService clienteService;
     private final AuthenticationManager authManager;
     private final JwtProvider jwtProvider;
 
@@ -88,6 +90,11 @@ public class UsuarioController {
     @GetMapping("/me")
     public ResponseEntity<UserResponse> getLoggedUser(@AuthenticationPrincipal Usuario user) {
         return ResponseEntity.ok(UserResponse.fromUser(user));
+    }
+
+    @GetMapping("/admin/client/{id}")
+    public GetClienteDtoDetail getClientDetailsWithOrders(@PathVariable String id){
+        return clienteService.buscarClienteDetailConPedidos(id);
     }
 
 
