@@ -18,7 +18,7 @@ public class ProductoService {
     private final ProductoRepository productoRepository;
 
     public Producto getMonthProduct(){
-        Optional<Producto> result = productoRepository.getMonthProduct();
+        Optional<Producto> result = productoRepository.getProductMonth();
         if(result.isEmpty()){
             throw new ProductoNotFoundException();
         }

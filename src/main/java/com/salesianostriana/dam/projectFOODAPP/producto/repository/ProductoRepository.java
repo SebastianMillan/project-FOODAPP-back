@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface ProductoRepository extends JpaRepository<Producto, UUID> {
 
     @Query("select p from Producto p order by function('RAND') limit 1")
-    Optional<Producto> getMonthProduct();
+    Optional<Producto> getProductMonth();
 
     @Query("select p from Producto p order by function('RAND') limit 6")
     List<Producto> getProductNews();
