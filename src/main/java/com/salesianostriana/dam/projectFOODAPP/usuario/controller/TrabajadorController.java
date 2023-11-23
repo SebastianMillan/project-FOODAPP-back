@@ -29,7 +29,7 @@ import java.util.List;
 public class TrabajadorController {
 
 private final TrabajadorService trabajadorService;
-private final TrabajadorRepository trabajadorRepository;
+
 
 
     @Operation(summary = "Obtiene una lista de trabajadores")

@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.service;
 
-import com.salesianostriana.dam.projectFOODAPP.usuario.Exception.TrabajadoresListEmpty;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.TrabajadoresListEmptyException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 
 
@@ -10,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class TrabajadorService {
@@ -20,7 +18,7 @@ public class TrabajadorService {
     public Page<Trabajador> findAllTrabajadores(Pageable pageable) {
         Page<Trabajador> trabajadorList = trabajadorRepository.trabajadorPage(pageable);
         if(trabajadorList.isEmpty()){
-            throw new TrabajadoresListEmpty();
+            throw new TrabajadoresListEmptyException();
         }
         return trabajadorList;
     }
