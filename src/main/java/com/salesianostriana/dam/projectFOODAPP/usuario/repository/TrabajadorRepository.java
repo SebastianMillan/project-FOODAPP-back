@@ -10,8 +10,6 @@ import java.util.UUID;
 
 public interface TrabajadorRepository extends JpaRepository<Trabajador, UUID> {
 
-    @Query("""
-            Select t from trabajador t
-            """)
+    @Query("SELECT t FROM Trabajador t")
     Page<Trabajador> trabajadorPage(Pageable pageable);
 }
