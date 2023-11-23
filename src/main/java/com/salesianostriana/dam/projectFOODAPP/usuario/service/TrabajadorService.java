@@ -6,6 +6,8 @@ import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.TrabajadorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +17,8 @@ import java.util.List;
 public class TrabajadorService {
 
     private final TrabajadorRepository trabajadorRepository;
-    public List<Trabajador> findAllTrabajadores(){
-        List <Trabajador> trabajadorList = trabajadorRepository.findAll();
+    public Page<Trabajador> findAllTrabajadores(Pageable pageable) {
+        Page<Trabajador> trabajadorList = trabajadorRepository.trabajadorPage(pageable);
         if(trabajadorList.isEmpty()){
             throw new TrabajadoresListEmpty();
         }
