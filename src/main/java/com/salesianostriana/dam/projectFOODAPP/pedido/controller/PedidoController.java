@@ -27,16 +27,13 @@ public class PedidoController {
         return pedidoService.getAllPedidos();
     }
 
+
+    /*
     @GetMapping("/historial/{cliente}")
     public List<GetHistorialDTO> getHistorialPedidosDeUnCliente(@AuthenticationPrincipal Cliente cliente){
 
-        List<Pedido> pedidos = pedidoService.getHistorialCliente(cliente.getId().toString());
+        return pedidoService.getHistorialCliente(cliente.getId().toString());
 
-        List<GetHistorialDTO> historial = new ArrayList<>();
-        for (Pedido pedido : pedidos)
-            historial.add(GetHistorialDTO.of(pedido, pedidoService.calcularImporteTotal(pedido)));
-
-        return historial;
     }
-
+    */
 }

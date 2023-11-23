@@ -7,19 +7,21 @@ import java.time.LocalDateTime;
 
 public record GetHistorialDTO (
 
+        String cliente,
         LocalDateTime fecha,
 
         double importeTotal,
 
-        EstadoPedido estadoPedido
+        String estadoPedido
 ){
 
     public static GetHistorialDTO of (Pedido ped, double importeTotal){
 
         return new GetHistorialDTO(
+                ped.getCliente(),
                 ped.getFecha(),
                 importeTotal,
-                ped.getEstadoPedido()
+                ped.getEstadoPedido().toString()
         );
     }
 

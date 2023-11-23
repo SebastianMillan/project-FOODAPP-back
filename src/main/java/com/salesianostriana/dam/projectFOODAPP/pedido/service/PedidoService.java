@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.service;
 
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetHistorialDTO;
 import com.salesianostriana.dam.projectFOODAPP.pedido.exception.EmptyHistorialException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
@@ -22,9 +23,10 @@ public class PedidoService {
         return pedidoRepository.getAllPedidosConLineas();
     }
 
-    public List<Pedido> getHistorialCliente (String clienteId){
+    /*
+    public List<GetHistorialDTO> getHistorialCliente (String clienteId){
 
-        List<Pedido> pedidos = pedidoRepository.getHistorialByClienteID(clienteId);
+        List<GetHistorialDTO> pedidos = pedidoRepository.getHistorialByClienteID(clienteId);
 
         if (pedidos.isEmpty())
             throw new EmptyHistorialException();
@@ -32,6 +34,8 @@ public class PedidoService {
         return pedidos;
     }
 
+     */
+    /*
     public double calcularImporteTotal (Pedido ped){
 
         List<LineaPedido> lineas = ped.getLineasPedido();
@@ -41,6 +45,6 @@ public class PedidoService {
 
         return importeTotal;
     }
-
+    */
 
 }

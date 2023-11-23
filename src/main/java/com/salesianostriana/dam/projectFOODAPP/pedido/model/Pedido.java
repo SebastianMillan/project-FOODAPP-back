@@ -45,8 +45,8 @@ public class Pedido {
     private String repartidor;
     private String cocinero;
 
+
     @ToString.Exclude
-    @EqualsAndHashCode.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LineaPedido> lineasPedido = new ArrayList<>();

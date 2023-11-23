@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import jakarta.persistence.*;
 import lombok.*;

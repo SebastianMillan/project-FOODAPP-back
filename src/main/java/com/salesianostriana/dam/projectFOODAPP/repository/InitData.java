@@ -86,7 +86,7 @@ public class InitData {
                 .imagen("https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Patatas_bravas_madrid.jpg/640px-Patatas_bravas_madrid.jpg")
                 .descripcion("Patatas fritas acompañadas con una salsa picante de tomate Goya.")
                 .precio(2.30)
-                .precioOferta(1.50)
+                .precioOferta(0)
                 .tags(new String[]{"patatas", "bravas"})
                 .categoria(c1)
                 .build();
@@ -96,7 +96,7 @@ public class InitData {
                 .imagen("https://phantom-expansion.unidadeditorial.es/4a18f7865539ab348461b2ff7fc87fe4/crop/0x455/1197x1253/f/jpg/assets/multimedia/imagenes/2022/02/24/16457011092381.jpg")
                 .descripcion("Plato de Jamón 100% Ibérico y curado")
                 .precio(6.30)
-                .precioOferta(4.50)
+                .precioOferta(0)
                 .tags(new String[]{"Jamón", "Ibérico", "De Bellota"})
                 .categoria(c1)
                 .build();
@@ -111,7 +111,17 @@ public class InitData {
                 .categoria(c2)
                 .build();
 
-        productoRepository.saveAll(List.of(p1, p2, p3));
+        Producto p4 = Producto.builder()
+                .nombre("Hamburguesa Queso")
+                .imagen("https://i.blogs.es/75907e/tarta_queso_philadelphia-min/1366_2000.jpeg")
+                .descripcion("Hamburguesa de Buey con queso de cabra")
+                .precio(3.55)
+                .precioOferta(2.4)
+                .tags(new String[]{"Queso", "Hamburguesa", "Buey"})
+                .categoria(c1)
+                .build();
+
+        productoRepository.saveAll(List.of(p1, p2, p3, p4));
 
         Trabajador t1 = Trabajador.builder()
                 .username("pedro")

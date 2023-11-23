@@ -12,12 +12,32 @@ import java.util.UUID;
 
 public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
 
+    /*
     @Query("""
-            SELECT p
-            FROM Pedido p
-            WHERE p.cliente = ?1
+            SELECT new com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetHistorialDTO(
+            (select c.nombre from Cliente c where c.id = p.cliente), p.fecha,
+                (lp.precioUnitario * lp.cantidad), p.estadoPedido)
+                from Pedido p
+                join p.lineasPedido as lp
+                where p.cliente.id = ?1
             """)
-    List<Pedido> getHistorialByClienteID(String clienteId);
+    List<GetHistorialDTO> getHistorialByClienteID(String clienteId);
+
+*/
+
+// Consulta 2 del historial.
+
+    /*
+    @Query("""
+    select new com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetHistorialDTO(
+    (select c.nombre from Cliente c where c.id = p.cliente), p.fecha,
+    (lp.precioUnitario * lp.cantidad), p.estadoPedido)
+    from Pedido p
+    join p.lineasPedido as lp
+    where p.cliente = :clienteId
+    """)
+    List<GetHistorialDTO> getHistorialByClienteID(@Param("clienteId") UUID clienteId);
+     */
 
     @Query("""
             SELECT p
