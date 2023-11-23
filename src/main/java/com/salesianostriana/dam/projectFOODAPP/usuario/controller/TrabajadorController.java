@@ -58,10 +58,8 @@ private final TrabajadorRepository trabajadorRepository;
             content = @Content),
     })
     @GetMapping("/")
-    public ResponseEntity <Page<GetTrabajadorDto>> getAllTrabajadores (@PageableDefault(page = 0, size = 5)Pageable pageable){
-        Page<Trabajador> trabajadorList =  trabajadorService.findAllTrabajadores(pageable);
-        return ResponseEntity.ok(
-                trabajadorList.map(GetTrabajadorDto::of)
-        );
+    public Page<GetTrabajadorDto> getAllTrabajadores(@PageableDefault(page = 0, size = 5) Pageable pageable) {
+        Page<Trabajador> trabajadorList = trabajadorService.findAllTrabajadores(pageable);
+        return trabajadorList.map(GetTrabajadorDto::of);
     }
 }
