@@ -19,9 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categoria")
 @RequiredArgsConstructor
-
 public class CategoriaController {
 
     private final CategoriaService categoriaService;
@@ -43,8 +41,8 @@ public class CategoriaController {
             @ApiResponse(responseCode = "404", description = "Categoría no encontrada", content = @Content)
     })
     @Operation(summary = "getAllCategorias", description = "Obtener una lista de categorías")
-    @GetMapping("/")
-    public List<GetDtoCategoria> getAll(){
+    @GetMapping("/admin/categoria/")
+    public List<GetDtoCategoria> getAllCategoriasByAdmin(){
 
         List<Categoria> categorias = categoriaService.getAllCategorias();
 
