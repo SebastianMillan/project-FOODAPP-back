@@ -5,6 +5,13 @@ import com.salesianostriana.dam.projectFOODAPP.usuario.dto.*;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.ClienteService;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,6 +98,36 @@ public class UsuarioController {
         return ResponseEntity.ok(UserResponse.fromUser(user));
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Obtener Cliente con sus pedidos", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetClienteDtoDetail.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a84001-8c00-1e9f-818c-006ea8f60003",
+                                                "nombre": "Francisco Claro",
+                                                "email": "fran@gmail.com",
+                                                "avatar": null,
+                                                "direccion": "c/Evangelista, 3",
+                                                "codPostal": "41011",
+                                                "poblacion": "Sevilla",
+                                                "puntos": 100,
+                                                "pedidos": [
+                                                    {
+                                                        "id": "c0a84001-8c00-1e9f-818c-006ea9df000c",
+                                                        "fecha": "2023-11-24T09:25:01.658822",
+                                                        "estadoPedido": "CONFIRMADO",
+                                                        "importeTotal": 6.3
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Cliente no encontrado", content = @Content)
+    })
+    @Operation(summary = "getClientDetailsWithOrders", description = "Obtener Cliente por su Id con sus pedidos asociados")
     @GetMapping("/admin/client/{id}")
     public GetClienteDtoDetail getClientDetailsWithOrders(@PathVariable String id){
         return GetClienteDtoDetail.of(clienteService.buscarClienteDetail(id), clienteService.buscarPedidosByClienteId(id));

@@ -28,10 +28,6 @@ public class ClienteService {
     }
 
     public List<Pedido> buscarPedidosByClienteId(String id){
-        List<Pedido> lista = clienteRepository.buscarPedidosByClienteId(id);
-        if(lista.isEmpty()){
-            throw new EmptyClientOrdersException();
-        }
-        return lista;
+        return clienteRepository.buscarPedidosByClienteId(id);
     }
 }
