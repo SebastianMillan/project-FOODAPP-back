@@ -1,5 +1,4 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.model;
-
 import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

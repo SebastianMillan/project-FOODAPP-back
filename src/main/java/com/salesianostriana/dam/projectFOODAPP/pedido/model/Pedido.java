@@ -45,6 +45,7 @@ public class Pedido {
     private String repartidor;
     private String cocinero;
 
+
     @ToString.Exclude
     @Builder.Default
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
