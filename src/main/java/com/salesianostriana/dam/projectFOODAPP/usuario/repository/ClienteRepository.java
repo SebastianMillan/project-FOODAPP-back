@@ -24,7 +24,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
      */
 
     @Query("""
-            select c 
+            select c
             from Cliente c
             where c.id = ?1
             """)

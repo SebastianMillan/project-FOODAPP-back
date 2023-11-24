@@ -23,19 +23,6 @@ public class PedidoService {
         return pedidoRepository.getAllPedidosConLineas();
     }
 
-    /*
-    public List<GetHistorialDTO> getHistorialCliente (String clienteId){
-
-        List<GetHistorialDTO> pedidos = pedidoRepository.getHistorialByClienteID(clienteId);
-
-        if (pedidos.isEmpty())
-            throw new EmptyHistorialException();
-
-        return pedidos;
-    }
-
-     */
-    /*
     public double calcularImporteTotal (Pedido ped){
 
         List<LineaPedido> lineas = ped.getLineasPedido();
@@ -45,6 +32,6 @@ public class PedidoService {
 
         return importeTotal;
     }
-    */
+
 
 }
