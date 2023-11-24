@@ -68,8 +68,8 @@ public class InitData {
                 .username("fran")
                 .password(passwordEncoder.encode("1234"))
                 .nombre("Francisco Claro")
-                .roles(Set.of(RolUsuario.CLIENTE))
                 .email("fran@gmail.com")
+                .roles(Set.of(RolUsuario.CLIENTE))
                 .telefono("334665121")
                 .pin(1234)
                 .direccion("c/Evangelista, 3")
@@ -135,6 +135,7 @@ public class InitData {
                 .build();
 
         Trabajador t2 = Trabajador.builder()
+
                 .username("fer")
                 .password(passwordEncoder.encode("1234"))
                 .nombre("Fernando Claro")
