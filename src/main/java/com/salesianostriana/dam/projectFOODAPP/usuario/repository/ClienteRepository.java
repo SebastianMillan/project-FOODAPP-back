@@ -2,6 +2,7 @@ package com.salesianostriana.dam.projectFOODAPP.usuario.repository;
 
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetClienteDtoDetail;
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetDtoCliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -36,6 +37,19 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
             where p.cliente = ?1
             """)
     List<Pedido> buscarPedidosByClienteId(String id);
+
+
+    @Query("""
+            select new com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetDtoCliente(
+                cast(c.id as string), c.username, c.nombre, c.puntos, (
+                    select count(p) 
+                    from Pedido p 
+                    where p.cliente = cast(c.id as string)
+                    )
+            )
+            from Cliente c
+            """)
+    List<GetDtoCliente> getAllDtoCliente();
 
 
 }
