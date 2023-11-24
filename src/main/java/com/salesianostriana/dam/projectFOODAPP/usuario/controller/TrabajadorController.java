@@ -30,8 +30,6 @@ public class TrabajadorController {
 
 private final TrabajadorService trabajadorService;
 
-
-
     @Operation(summary = "Obtiene una lista de trabajadores")
     @ApiResponses(value ={
             @ApiResponse(responseCode = "200",

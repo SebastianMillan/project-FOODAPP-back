@@ -7,6 +7,7 @@ import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,10 +29,10 @@ public class ClienteController {
         return clienteService.getAllClientes();
     }
 
-    @GetMapping("/historial/{uuid}")
-    public List<GetHistorialDTO> getHistorialPedidosDeUnCliente (String uuid){
+    @GetMapping("/historial/{id}")
+    public List<GetHistorialDTO> getHistorialPedidosDeUnCliente (@PathVariable String id){
 
-        List<Pedido> pedidos = clienteService.buscarPedidosByClienteId(uuid);
+        List<Pedido> pedidos = clienteService.buscarPedidosByClienteId(id);
 
         List<GetHistorialDTO> pedidosClienteDTO = new ArrayList<>();
         for(Pedido pedido: pedidos){
