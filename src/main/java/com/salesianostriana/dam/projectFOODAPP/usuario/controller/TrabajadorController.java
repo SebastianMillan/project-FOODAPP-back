@@ -84,14 +84,14 @@ public class TrabajadorController {
                 .map(GetProductShortDto::of)
                 .toList();
     }
-        @Operation(summary = "Obtiene una lista de trabajadores")
-        @ApiResponses(value = {
-                @ApiResponse(responseCode = "200",
-                        description = "Se han encontrado trabajadores",
-                        content = {@Content(mediaType = "application/json",
-                                array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
-                                examples = {@ExampleObject(
-                                        value = """
+    @Operation(summary = "Obtiene una lista de trabajadores")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado trabajadores",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
+                            examples = {@ExampleObject(
+                                    value = """
                                                 [
                                                 {
                                                 "nombe":"Pedro",
@@ -103,17 +103,18 @@ public class TrabajadorController {
                                                 }
                                                 ]
                                                 """
-                                )}
-                        )}),
-                @ApiResponse(responseCode = "404",
-                        description = "La lista esta vacía",
-                        content = @Content),
-        })
-        @GetMapping("/admin/trabajador")
-        public Page<GetTrabajadorDto> getAllTrabajadores (@PageableDefault(page = 0, size = 5) Pageable pageable){
-            Page<Trabajador> trabajadorList = trabajadorService.findAllTrabajadores(pageable);
-            return trabajadorList.map(GetTrabajadorDto::of);
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404",
+                    description = "La lista esta vacía",
+                    content = @Content),
+    })
+    @GetMapping("/admin/trabajador")
+    public Page<GetTrabajadorDto> getAllTrabajadores (@PageableDefault(page = 0, size = 5) Pageable pageable){
+        Page<Trabajador> trabajadorList = trabajadorService.findAllTrabajadores(pageable);
+        return trabajadorList.map(GetTrabajadorDto::of);
 
-        }
+    }
+
 
 }

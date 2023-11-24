@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.producto.service;
 
+import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.exception.EmptyProductListException;
 import com.salesianostriana.dam.projectFOODAPP.producto.exception.ProductoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
@@ -43,4 +44,12 @@ public class ProductoService {
         }
         return result;
     }
+
+    public Producto save (EditProductDto nuevo){
+
+        Producto p = new Producto();
+
+        p.setNombre(nuevo.nombre());
+    }
+
 }
