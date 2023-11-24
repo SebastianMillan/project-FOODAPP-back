@@ -66,7 +66,7 @@ public class InitData {
 
         Cliente cl2 = Cliente.builder()
                 .username("fran")
-                .password(passwordEncoder.encode("4321"))
+                .password(passwordEncoder.encode("1234"))
                 .nombre("Francisco Claro")
                 .email("fran@gmail.com")
                 .roles(Set.of(RolUsuario.CLIENTE))
@@ -125,18 +125,19 @@ public class InitData {
 
         Trabajador t1 = Trabajador.builder()
                 .username("pedro")
-                .password(passwordEncoder.encode("5555"))
+                .password(passwordEncoder.encode("1234"))
+                .roles(Set.of(RolUsuario.TRABAJADOR))
                 .nombre("Pedro Franch")
                 .email("pedro@gmail.com")
-                .roles(Set.of(RolUsuario.TRABAJADOR))
                 .telefono("545656767")
                 .fechaNacimiento(LocalDate.parse("26-07-2000", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .tipoTrabajador(TipoTrabajador.REPARTIDOR)
                 .build();
 
         Trabajador t2 = Trabajador.builder()
-                .username("fernando")
-                .password(passwordEncoder.encode("8787"))
+
+                .username("fer")
+                .password(passwordEncoder.encode("1234"))
                 .nombre("Fernando Claro")
                 .roles(Set.of(RolUsuario.ADMIN))
                 .email("fer@gmail.com")
@@ -153,6 +154,12 @@ public class InitData {
                 .producto(p1)
                 .build();
 
+        LineaPedido ln2 = LineaPedido.builder()
+                .cantidad(1)
+                .precioUnitario(p2.getPrecio())
+                .producto(p2)
+                .build();
+
         Pedido ped1 = Pedido.builder()
                 .fecha(LocalDateTime.now())
                 .estadoPedido(EstadoPedido.EN_PREPARACION)
@@ -161,9 +168,18 @@ public class InitData {
                 .cocinero(t2.getId().toString())
                 .build();
 
-        ped1.addLineaPedido(ln1);
+        Pedido ped2 = Pedido.builder()
+                .fecha(LocalDateTime.now())
+                .estadoPedido(EstadoPedido.CONFIRMADO)
+                .cliente(cl2.getId().toString())
+                .repartidor(t1.getId().toString())
+                .cocinero(t2.getId().toString())
+                .build();
 
-        pedidoRepository.save(ped1);
+        ped1.addLineaPedido(ln1);
+        ped2.addLineaPedido(ln2);
+
+        pedidoRepository.saveAll(List.of(ped1,ped2));
 
     }
 }
