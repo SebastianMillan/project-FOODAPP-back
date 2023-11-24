@@ -50,6 +50,13 @@ public class ProductoService {
         Producto p = new Producto();
 
         p.setNombre(nuevo.nombre());
+        p.setImagen(nuevo.imagen());
+        p.setDescripcion(nuevo.descripcion());
+        p.setPrecio(nuevo.precio());
+        p.setPrecioOferta(nuevo.descuento());
+        p.setTags(nuevo.tags());
+
+       return productoRepository.save(p);
     }
 
 }
