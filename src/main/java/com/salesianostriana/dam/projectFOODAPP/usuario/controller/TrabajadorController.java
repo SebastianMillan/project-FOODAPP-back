@@ -17,9 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -61,5 +59,10 @@ private final TrabajadorService trabajadorService;
     public Page<GetTrabajadorDto> getAllTrabajadores(@PageableDefault(page = 0, size = 5) Pageable pageable) {
         Page<Trabajador> trabajadorList = trabajadorService.findAllTrabajadores(pageable);
         return trabajadorList.map(GetTrabajadorDto::of);
+    }
+
+    @PostMapping("/admin/")
+    public ResponseEntity<PostDtoTrabajador> nuevoTrabajador (@RequestBody PostDtoTrabajador trabajadorNuevo){
+
     }
 }
