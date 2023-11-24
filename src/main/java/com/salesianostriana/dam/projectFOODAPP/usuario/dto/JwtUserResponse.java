@@ -6,6 +6,8 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.apache.catalina.User;
 
+import java.util.stream.Collectors;
+
 @Getter
 @Setter
 @ToString
@@ -22,6 +24,7 @@ public class JwtUserResponse extends UserResponse {
         id = userResponse.getId();
         username = userResponse.getUsername();
         fullName = userResponse.getFullName();
+        roles=userResponse.getRoles();
         avatar = userResponse.getAvatar();
         createdAt = userResponse.getCreatedAt();
     }
