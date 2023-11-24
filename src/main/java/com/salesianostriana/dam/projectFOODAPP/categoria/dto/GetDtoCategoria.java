@@ -4,13 +4,21 @@ import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 
 public record GetDtoCategoria(
 
-        String nombre
+        String nombre,
+
+        int cantProductos
 ) {
 
-    public static GetDtoCategoria of(Categoria categoria) {
+    public static GetDtoCategoria of(Categoria categoria, int cantProductos) {
 
         return new GetDtoCategoria(
-                categoria.getNombre()
+                categoria.getNombre(),
+                cantProductos
         );
     }
 }
+/*
+public static GetAlumnoDto of (Alumno a) {
+        return new GetAlumnoDto(a.getId(), a.getNombre() + " " + a.getApellidos(), 0,0 );
+    }
+ */
