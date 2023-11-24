@@ -124,7 +124,7 @@ public class TrabajadorController {
         }
 
 
-         @PostMapping("/admin/")
+         @PostMapping("/admin/trabajador")
     public ResponseEntity<AltaTrabajadorDto> nuevoTrabajador (@RequestBody AltaTrabajadorDto trabajadorNuevo){
         Trabajador trabajador = trabajadorService.save(trabajadorNuevo);
         return ResponseEntity.status(HttpStatus.CREATED).body(AltaTrabajadorDto.of(trabajador));
