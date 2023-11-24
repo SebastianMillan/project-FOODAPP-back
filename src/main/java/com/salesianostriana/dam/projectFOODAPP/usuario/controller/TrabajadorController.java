@@ -61,8 +61,8 @@ private final TrabajadorService trabajadorService;
         return trabajadorList.map(GetTrabajadorDto::of);
     }
 
-    @PostMapping("/admin/")
+    /*@PostMapping("/admin/")
     public ResponseEntity<PostDtoTrabajador> nuevoTrabajador (@RequestBody PostDtoTrabajador trabajadorNuevo){
 
-    }
+    }*/
 }

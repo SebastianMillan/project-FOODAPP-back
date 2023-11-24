@@ -23,9 +23,9 @@ public class TrabajadorService {
         return trabajadorList;
     }
 
-    public Trabajador save (PostDtoTrabajador nuevoTrabajador){
+    /*public Trabajador save (PostDtoTrabajador nuevoTrabajador){
         Trabajador t = new Trabajador();
         t.setTipoTrabajador(nuevoTrabajador);
-    }
+    }*/
 
 }
