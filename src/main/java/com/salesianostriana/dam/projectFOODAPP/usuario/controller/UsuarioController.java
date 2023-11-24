@@ -85,7 +85,6 @@ public class UsuarioController {
         return null;
     }
 
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     public ResponseEntity<UserResponse> getLoggedUser(@AuthenticationPrincipal Usuario user) {
