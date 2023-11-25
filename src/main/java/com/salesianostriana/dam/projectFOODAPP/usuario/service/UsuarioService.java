@@ -6,6 +6,7 @@ import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

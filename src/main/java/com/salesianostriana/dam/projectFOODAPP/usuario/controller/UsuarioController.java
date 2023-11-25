@@ -92,10 +92,33 @@ public class UsuarioController {
         return null;
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Obtener Usuario Logeado", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetUserDetailDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a801c6-8c06-166f-818c-06767a7a0009",
+                                                "username": "fer",
+                                                "nombre": "Fernando Claro",
+                                                "email": "fer@gmail.com",
+                                                "telefono": "121232888",
+                                                "avatar": null,
+                                                "roles": [
+                                                    "ADMIN"
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "401", description = "No se encuentra Usuario loggeado", content = @Content)
+    })
+    @Operation(summary = "getLoggedUser", description = "Obtener el Usuario loggeado")
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/me")
-    public ResponseEntity<UserResponse> getLoggedUser(@AuthenticationPrincipal Usuario user) {
-        return ResponseEntity.ok(UserResponse.fromUser(user));
+    @GetMapping("/profile")
+    public ResponseEntity<GetUserDetailDto> getLoggedUser(@AuthenticationPrincipal Usuario user) {
+            return ResponseEntity.ok(GetUserDetailDto.of(user));
     }
 
     @ApiResponses(value = {

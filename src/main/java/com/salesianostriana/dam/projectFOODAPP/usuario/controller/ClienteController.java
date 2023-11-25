@@ -12,6 +12,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,8 +61,8 @@ public class ClienteController {
     })
     @Operation(summary = "getAllClientsByAdmin", description = "Obtener una lista de Clientes")
     @GetMapping("/admin/client/")
-    public List<GetDtoCliente> getAllClientsByAdmin(){
-        return clienteService.getAllDtoCliente();
+    public Page<GetDtoCliente> getAllClientsByAdmin(@PageableDefault(page = 0, size = 4) Pageable pageable){
+        return clienteService.getAllDtoCliente(pageable);
     }
 
 
