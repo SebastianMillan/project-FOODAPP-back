@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -68,6 +69,15 @@ public class ProductoService {
 
 
        return productoRepository.save(p);
+    }
+
+    public void delete (String id){
+
+        Optional<Producto> p = productoRepository.findId(UUID.fromString(id));
+
+        if (p.isPresent())
+            productoRepository.deleteById(UUID.fromString(id));
+
     }
 
 }

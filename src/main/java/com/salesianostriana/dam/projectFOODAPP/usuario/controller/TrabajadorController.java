@@ -31,6 +31,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 
 import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class TrabajadorController {
@@ -158,6 +160,18 @@ public class TrabajadorController {
         return ResponseEntity
                 .status(201)
                 .body(GetDtoProducto.of(p));
+    }
+
+    @Operation(summary = "Borra un producto por su id")
+    @ApiResponse(responseCode = "204 No Content",
+            description = "Borrado con éxito",
+            content = @Content)
+    @DeleteMapping("/admin/delete/producto/{id}")
+    public ResponseEntity<?> delete (String id){
+
+        productoService.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
