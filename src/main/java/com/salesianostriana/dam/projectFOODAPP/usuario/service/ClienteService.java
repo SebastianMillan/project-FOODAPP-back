@@ -1,11 +1,15 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.service;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetDtoCliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.ClienteNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.EmptyClientOrdersException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.EmptyClientsException;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.EmptyClienteListException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -42,5 +46,13 @@ public class ClienteService {
             throw new EmptyClientOrdersException();
 
         return pedidos;
+    }
+
+    public Page<GetDtoCliente> getAllDtoCliente(Pageable pageable){
+        Page<GetDtoCliente> result= clienteRepository.getAllDtoCliente(pageable);
+        if(result.isEmpty()){
+            throw new EmptyClienteListException();
+        }
+        return result;
     }
 }
