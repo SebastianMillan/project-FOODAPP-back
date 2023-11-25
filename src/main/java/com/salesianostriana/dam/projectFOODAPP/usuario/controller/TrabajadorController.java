@@ -8,11 +8,11 @@ import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetProductShortDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
-<<<<<<< HEAD
+
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
-=======
+
 import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
->>>>>>> main
+
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetTrabajadorDto;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.TrabajadorService;
@@ -27,14 +27,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-<<<<<<< HEAD
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-=======
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
->>>>>>> main
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -100,7 +100,7 @@ public class TrabajadorController {
                 .map(GetProductShortDto::of)
                 .toList();
     }
-<<<<<<< HEAD
+
 
 
         @Operation(summary = "Obtiene una lista de trabajadores")
@@ -111,16 +111,7 @@ public class TrabajadorController {
                                 array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
                                 examples = {@ExampleObject(
                                         value = """
-=======
-    @Operation(summary = "Obtiene una lista de trabajadores")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
-                    description = "Se han encontrado trabajadores",
-                    content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
-                            examples = {@ExampleObject(
-                                    value = """
->>>>>>> main
+
                                                 [
                                                 {
                                                 "nombe":"Pedro",
