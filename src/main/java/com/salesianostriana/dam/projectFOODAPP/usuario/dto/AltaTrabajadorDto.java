@@ -8,21 +8,22 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public record AltaTrabajadorDto(
-        @NotEmpty
+        @NotEmpty(message = "{altaTrabajadorDto.name.notEmpty}")
         String nombre,
 
-        @Email
+        @Email(message = "{altaTrabajdorDto.email.notValid}")
         String email,
         String telefono,
 
-        @NotEmpty
+        @NotEmpty(message = "{altaTrabajadorDto.userName.NotEmpty}")
         String username,
+        @NotEmpty(message = "{altaTrabajdorDto.password.notEmpty}")
         String password,
 
-        @NotEmpty
+        @NotEmpty(message = "{altaTrabajadorDto.puesto.notEmpty}")
         String puesto,
 
-        @NotNull
+        @NotNull(message = "{altaTrabajadorDto.fecha.notNull}")
         LocalDate fechaNacimiento
 
 ) {
