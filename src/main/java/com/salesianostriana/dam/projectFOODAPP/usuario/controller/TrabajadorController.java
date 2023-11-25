@@ -79,9 +79,9 @@ public class TrabajadorController {
                     content = @Content)
     })
     @GetMapping("/admin/producto/{nombreCategoria}")
-    public List<GetProductShortDto> getProductoCategory(@PathVariable String nombreCategoria) {
+    public List<GetProductShortDto> getProductoCategory(@Valid @PathVariable String nombreCategoria) {
 
-        List<Producto> productos = categoriaService.getProductsCategory(nombreCategoria);
+        List<Producto> productos = categoriaService.getProductsCategory(nombreCategoria.toLowerCase());
 
         return productos.stream()
                 .map(GetProductShortDto::of)

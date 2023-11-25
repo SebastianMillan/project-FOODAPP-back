@@ -9,8 +9,8 @@ import java.util.UUID;
 public interface CategoriaRepository extends JpaRepository<Categoria, UUID> {
 
 
-    @Query("SELECT p FROM Producto p WHERE p.categoria.nombre = ?1")
-    List<Producto> productosCategoria(String nombreCategoria);
+    @Query("SELECT p FROM Producto p WHERE LOWER(p.categoria.nombre) = LOWER(?1)")
+    List<Producto> productosCategoriaIgnoreCase(String nombreCategoria);
 
     @Query("""
             SELECT c
