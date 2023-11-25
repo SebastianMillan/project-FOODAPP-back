@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.projectFOODAPP.categoria.controller;
 
-import com.salesianostriana.dam.projectFOODAPP.categoria.dto.EditCategoriaDTO;
 import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaDto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetDtoCategoriaConCantProductos;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
@@ -14,7 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,8 +77,8 @@ public class CategoriaController {
                     )}),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
     })
-    @PostMapping("/admin/add/categoria/")
-    public ResponseEntity<GetCategoriaDto> createCategoria (@Valid @RequestBody EditCategoriaDTO nuevaCategoria){
+    @PostMapping("/admin/add/categoria")
+    public ResponseEntity<GetCategoriaDto> createCategoria (@Valid @RequestBody GetCategoriaDto nuevaCategoria){
         Categoria cat = categoriaService.createCategoria(nuevaCategoria);
 
         return ResponseEntity.status(201).body(GetCategoriaDto.of(cat));
