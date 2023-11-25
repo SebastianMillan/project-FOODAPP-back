@@ -1,7 +1,9 @@
 package com.salesianostriana.dam.projectFOODAPP.categoria.dto;
 
-public record EditCategoriaDTO (
+import jakarta.validation.constraints.NotEmpty;
 
+public record EditCategoriaDTO (
+        @NotEmpty(message = "{productDto.description.notEmpty}")
         String nombre
 ){
 }
