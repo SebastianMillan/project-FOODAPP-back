@@ -79,7 +79,7 @@ public class CategoriaController {
                     )}),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
     })
-    @PostMapping("/admin/categoria/")
+    @PostMapping("/admin/add/categoria/")
     public ResponseEntity<GetCategoriaDto> createCategoria (@Valid @RequestBody EditCategoriaDTO nuevaCategoria){
         Categoria cat = categoriaService.createCategoria(nuevaCategoria);
 
