@@ -4,6 +4,8 @@ import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetClienteDtoDetail;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetDtoCliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -49,7 +51,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
             )
             from Cliente c
             """)
-    List<GetDtoCliente> getAllDtoCliente();
+    Page<GetDtoCliente> getAllDtoCliente(Pageable pageable);
 
 
 }
