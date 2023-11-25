@@ -3,6 +3,7 @@ package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
+import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetProductShortDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
@@ -128,12 +129,19 @@ public class TrabajadorController {
                                     value = """
                                             [
                                                 {
-                                                     "id": "ac19c001-8c06-1f7f-818c-06218fa7000f",
-                                                     "nombre": "Picos",
-                                                     "imagen": "https://st.depositphotos.com/2078351/2100/i/450/depositphotos_21008703-stock-photo-a-bread-peaks-over-white.jpg",
-                                                     "descripcion": "picos",
-                                                     "precio": 0.13
-                                                 }
+                                                      "id": "ac19c001-8c06-178e-818c-0687df90000e",
+                                                      "nombre": "Picos",
+                                                      "imagen": "https://st.depositphotos.com/2078351/2100/i/450/depositphotos_21008703-stock-photo-a-bread-peaks-over-white.jpg",
+                                                      "descripcion": "picos",
+                                                      "precio": 0.13,
+                                                      "tags": [
+                                                          "pan",
+                                                          "integral"
+                                                      ],
+                                                      "categoria": {
+                                                          "nombre": "Tapas"
+                                                      }
+                                                  }
                                             ]
                                             """
                             )}
@@ -144,12 +152,12 @@ public class TrabajadorController {
                     content = @Content)
     })
     @PostMapping("/admin/add/producto")
-    public ResponseEntity<GetProductShortDto> addProduct (@Valid @RequestBody EditProductDto newProduct){
+    public ResponseEntity<GetDtoProducto> addProduct (@Valid @RequestBody EditProductDto newProduct){
         Producto p = productoService.save(newProduct);
 
         return ResponseEntity
                 .status(201)
-                .body(GetProductShortDto.of(p));
+                .body(GetDtoProducto.of(p));
     }
 
 }

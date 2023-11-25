@@ -14,8 +14,6 @@ public record EditProductDto(
         String descripcion,
         @Min(value = 0, message = "{productDto.price.min}")
         double precio,
-        @Min(value = 0, message = "{productDto.price.min}")
-        double descuento,
         String[] tags,
         @NotEmpty(message = "{productDto.description.notEmpty}")
         String categoria

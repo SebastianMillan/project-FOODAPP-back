@@ -57,7 +57,6 @@ public class ProductoService {
         p.setImagen(nuevo.imagen());
         p.setDescripcion(nuevo.descripcion());
         p.setPrecio(nuevo.precio());
-        p.setPrecioOferta(nuevo.descuento());
         p.setTags(nuevo.tags());
 
         Categoria categoria = categoriaRepository.findByNombreIgnoreCase(nuevo.categoria());
