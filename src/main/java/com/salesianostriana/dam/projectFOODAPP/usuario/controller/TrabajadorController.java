@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -125,9 +126,9 @@ public class TrabajadorController {
 
 
          @PostMapping("/admin/trabajador")
-    public ResponseEntity<AltaTrabajadorDto> nuevoTrabajador (@RequestBody AltaTrabajadorDto trabajadorNuevo){
+    public ResponseEntity<GetTrabajadorDto> nuevoTrabajador (@Valid @RequestBody AltaTrabajadorDto trabajadorNuevo){
         Trabajador trabajador = trabajadorService.save(trabajadorNuevo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(AltaTrabajadorDto.of(trabajador));
+        return ResponseEntity.status(HttpStatus.CREATED).body(GetTrabajadorDto.of(trabajador));
     }
 
 }
