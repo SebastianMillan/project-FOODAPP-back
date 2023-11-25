@@ -65,5 +65,4 @@ public class ClienteController {
         return clienteService.getAllDtoCliente(pageable);
     }
 
-
 }

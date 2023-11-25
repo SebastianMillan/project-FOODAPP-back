@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.projectFOODAPP.categoria.service;
 
 
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.EditCategoriaDTO;
 import com.salesianostriana.dam.projectFOODAPP.categoria.error.EmptyCategoryWithProductsException;
 import com.salesianostriana.dam.projectFOODAPP.categoria.exception.EmptyCategoriesException;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
@@ -8,6 +9,7 @@ import com.salesianostriana.dam.projectFOODAPP.categoria.repository.CategoriaRep
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.UUID;
@@ -42,5 +44,14 @@ public class CategoriaService {
 
         return categoriaRepository.contarCantidadProductosDeUnaCategoria(categoriaId);
 
+    }
+
+    public Categoria createCategoria (EditCategoriaDTO nuevaCategoria){
+
+        Categoria cat = new Categoria();
+
+        cat.setNombre(nuevaCategoria.nombre());
+
+        return categoriaRepository.save(cat);
     }
 }
