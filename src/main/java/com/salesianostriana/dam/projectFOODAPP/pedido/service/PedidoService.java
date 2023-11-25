@@ -23,6 +23,7 @@ public class PedidoService {
         return pedidoRepository.getAllPedidosConLineas();
     }
 
+    /*
     public double calcularImporteTotal (Pedido ped){
 
         List<LineaPedido> lineas = ped.getLineasPedido();
@@ -33,5 +34,5 @@ public class PedidoService {
         return importeTotal;
     }
 
-
+    */
 }

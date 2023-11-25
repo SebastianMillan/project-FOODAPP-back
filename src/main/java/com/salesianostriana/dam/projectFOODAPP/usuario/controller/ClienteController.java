@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetHistorialDTO;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnClienteDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.service.PedidoService;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetDtoCliente;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +30,6 @@ import java.util.List;
 public class ClienteController {
 
     private final ClienteService clienteService;
-    private final PedidoService pedidoService;
 
     @GetMapping("/cliente/")
     public List<Cliente> getAllClientes(){
@@ -36,16 +37,32 @@ public class ClienteController {
         return clienteService.getAllClientes();
     }
 
-    @GetMapping("/historial/{id}")
-    public List<GetHistorialDTO> getHistorialPedidosDeUnCliente (@PathVariable String id){
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Obtener historial de pedidos del cliente", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetDtoCliente.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                 {
+                                                         "id": "c0a84001-8c08-1ac5-818c-087acf25000c",
+                                                         "fecha": "2023-11-25T22:55:15.361384",
+                                                         "estadoPedido": "CONFIRMADO",
+                                                         "importeTotal": 6.3
+                                                     }
+                                             ]
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Lista de pedidos vacía", content = @Content)
+    })
+    @Operation(summary = "getHistorialPedidosDelCliente", description = "Obtener el historial de pedidos del cliente.")
+    @GetMapping("cliente/historial/{id}")
+    public List<GetPedidoEnClienteDto> getHistorialPedidosDelCliente (@PathVariable String id){
 
         List<Pedido> pedidos = clienteService.buscarPedidosByClienteId(id);
 
-        List<GetHistorialDTO> pedidosClienteDTO = new ArrayList<>();
-        for(Pedido pedido: pedidos){
-            pedidosClienteDTO.add(GetHistorialDTO.of(pedido,
-                    pedidoService.calcularImporteTotal(pedido)));
-        }
+        List<GetPedidoEnClienteDto> pedidosClienteDTO = pedidos.stream().map(GetPedidoEnClienteDto::of).toList();
 
         return pedidosClienteDTO;
     }
