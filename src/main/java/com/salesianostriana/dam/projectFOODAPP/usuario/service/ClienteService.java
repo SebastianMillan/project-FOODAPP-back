@@ -6,6 +6,8 @@ import com.salesianostriana.dam.projectFOODAPP.usuario.exception.EmptyClienteLis
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -35,8 +37,8 @@ public class ClienteService {
 
     }
 
-    public List<GetDtoCliente> getAllDtoCliente(){
-        List<GetDtoCliente> result= clienteRepository.getAllDtoCliente();
+    public Page<GetDtoCliente> getAllDtoCliente(Pageable pageable){
+        Page<GetDtoCliente> result= clienteRepository.getAllDtoCliente(pageable);
         if(result.isEmpty()){
             throw new EmptyClienteListException();
         }
