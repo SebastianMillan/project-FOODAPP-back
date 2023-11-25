@@ -22,7 +22,7 @@ public class CategoriaService {
 
     public List<Producto> getProductsCategory(String nombreCategoria){
 
-        List<Producto> productos = categoriaRepository.productosCategoria(nombreCategoria);
+        List<Producto> productos = categoriaRepository.productosCategoriaIgnoreCase(nombreCategoria.toLowerCase());
 
         if(productos.isEmpty())
             throw new EmptyCategoryWithProductsException();
