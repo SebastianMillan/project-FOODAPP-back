@@ -28,4 +28,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, UUID> {
             """)
     int contarCantidadProductosDeUnaCategoria (UUID categoriaId);
 
+    Categoria findByNombreIgnoreCase(String nombre);
+
 }

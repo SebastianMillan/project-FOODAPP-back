@@ -2,10 +2,12 @@ package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
+import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetProductShortDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
+import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetTrabajadorDto;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.TrabajadorService;
@@ -17,16 +19,15 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
@@ -35,6 +36,7 @@ public class TrabajadorController {
 
     private final CategoriaService categoriaService;
     private final TrabajadorService trabajadorService;
+    private final ProductoService productoService;
 
     @Operation(summary = "Muestra una lista de los productos de una categoría")
     @ApiResponses(value = {
@@ -116,7 +118,38 @@ public class TrabajadorController {
 
     }
 
-git
+    @Operation(summary = "Añades un un producto a una categoria")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Creación del producto",
+                    content = { @Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                {
+                                                     "id": "ac19c001-8c06-1f7f-818c-06218fa7000f",
+                                                     "nombre": "Picos",
+                                                     "imagen": "https://st.depositphotos.com/2078351/2100/i/450/depositphotos_21008703-stock-photo-a-bread-peaks-over-white.jpg",
+                                                     "descripcion": "picos",
+                                                     "precio": 0.13
+                                                 }
+                                            ]
+                                            """
+                            )}
+                    )}),
 
+            @ApiResponse(responseCode = "400",
+                    description = "Error al crear un producto",
+                    content = @Content)
+    })
+    @PostMapping("/admin/add/producto")
+    public ResponseEntity<GetProductShortDto> addProduct (@Valid @RequestBody EditProductDto newProduct){
+        Producto p = productoService.save(newProduct);
+
+        return ResponseEntity
+                .status(201)
+                .body(GetProductShortDto.of(p));
+    }
 
 }

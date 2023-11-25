@@ -1,5 +1,8 @@
 package com.salesianostriana.dam.projectFOODAPP.producto.service;
 
+import com.salesianostriana.dam.projectFOODAPP.categoria.error.CategoryException;
+import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
+import com.salesianostriana.dam.projectFOODAPP.categoria.repository.CategoriaRepository;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.exception.EmptyProductListException;
 import com.salesianostriana.dam.projectFOODAPP.producto.exception.ProductoNotFoundException;
@@ -17,6 +20,7 @@ import java.util.Random;
 public class ProductoService {
 
     private final ProductoRepository productoRepository;
+    private final CategoriaRepository categoriaRepository;
 
     public Producto getMonthProduct(){
         Optional<Producto> result = productoRepository.getProductMonth();
@@ -55,6 +59,14 @@ public class ProductoService {
         p.setPrecio(nuevo.precio());
         p.setPrecioOferta(nuevo.descuento());
         p.setTags(nuevo.tags());
+
+        Categoria categoria = categoriaRepository.findByNombreIgnoreCase(nuevo.categoria());
+
+        if(categoria == null)
+            throw new CategoryException();
+        else
+            p.setCategoria(categoria);
+
 
        return productoRepository.save(p);
     }
