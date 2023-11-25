@@ -2,11 +2,17 @@ package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
+import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
+import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetProductShortDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
+<<<<<<< HEAD
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
+=======
+import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
+>>>>>>> main
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetTrabajadorDto;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.TrabajadorService;
@@ -21,9 +27,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+=======
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+>>>>>>> main
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,8 +43,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
@@ -41,6 +50,7 @@ public class TrabajadorController {
 
     private final CategoriaService categoriaService;
     private final TrabajadorService trabajadorService;
+    private final ProductoService productoService;
 
     @Operation(summary = "Muestra una lista de los productos de una categoría")
     @ApiResponses(value = {
@@ -82,14 +92,15 @@ public class TrabajadorController {
                     content = @Content)
     })
     @GetMapping("/admin/producto/{nombreCategoria}")
-    public List<GetProductShortDto> getProductoCategory(@PathVariable String nombreCategoria) {
+    public List<GetProductShortDto> getProductoCategory(@Valid @PathVariable String nombreCategoria) {
 
-        List<Producto> productos = categoriaService.getProductsCategory(nombreCategoria);
+        List<Producto> productos = categoriaService.getProductsCategory(nombreCategoria.toLowerCase());
 
         return productos.stream()
                 .map(GetProductShortDto::of)
                 .toList();
     }
+<<<<<<< HEAD
 
 
         @Operation(summary = "Obtiene una lista de trabajadores")
@@ -100,6 +111,16 @@ public class TrabajadorController {
                                 array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
                                 examples = {@ExampleObject(
                                         value = """
+=======
+    @Operation(summary = "Obtiene una lista de trabajadores")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado trabajadores",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+>>>>>>> main
                                                 [
                                                 {
                                                 "nombe":"Pedro",
@@ -111,18 +132,59 @@ public class TrabajadorController {
                                                 }
                                                 ]
                                                 """
-                                )}
-                        )}),
-                @ApiResponse(responseCode = "404",
-                        description = "La lista esta vacía",
-                        content = @Content),
-        })
-        @GetMapping("/admin/trabajador")
-        public Page<GetTrabajadorDto> getAllTrabajadores (@PageableDefault(page = 0, size = 5) Pageable pageable){
-            Page<Trabajador> trabajadorList = trabajadorService.findAllTrabajadores(pageable);
-            return trabajadorList.map(GetTrabajadorDto::of);
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404",
+                    description = "La lista esta vacía",
+                    content = @Content),
+    })
+    @GetMapping("/admin/trabajador")
+    public Page<GetTrabajadorDto> getAllTrabajadores (@PageableDefault(page = 0, size = 5) Pageable pageable){
+        Page<Trabajador> trabajadorList = trabajadorService.findAllTrabajadores(pageable);
+        return trabajadorList.map(GetTrabajadorDto::of);
 
-        }
+    }
+
+    @Operation(summary = "Añades un un producto a una categoria")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Creación del producto",
+                    content = { @Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                {
+                                                      "id": "ac19c001-8c06-178e-818c-0687df90000e",
+                                                      "nombre": "Picos",
+                                                      "imagen": "https://st.depositphotos.com/2078351/2100/i/450/depositphotos_21008703-stock-photo-a-bread-peaks-over-white.jpg",
+                                                      "descripcion": "picos",
+                                                      "precio": 0.13,
+                                                      "tags": [
+                                                          "pan",
+                                                          "integral"
+                                                      ],
+                                                      "categoria": {
+                                                          "nombre": "Tapas"
+                                                      }
+                                                  }
+                                            ]
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "400",
+                    description = "Error al crear un producto",
+                    content = @Content)
+    })
+    @PostMapping("/admin/add/producto")
+    public ResponseEntity<GetDtoProducto> addProduct (@Valid @RequestBody EditProductDto newProduct){
+        Producto p = productoService.save(newProduct);
+
+        return ResponseEntity
+                .status(201)
+                .body(GetDtoProducto.of(p));
+    }
 
 
          @PostMapping("/admin/trabajador")
