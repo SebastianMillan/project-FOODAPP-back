@@ -1,6 +1,8 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.service;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetDtoCliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.ClienteNotFoundException;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.EmptyClienteListException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +33,13 @@ public class ClienteService {
     public List<Pedido> buscarPedidosByClienteId(String id){
         return clienteRepository.buscarPedidosByClienteId(id);
 
+    }
+
+    public List<GetDtoCliente> getAllDtoCliente(){
+        List<GetDtoCliente> result= clienteRepository.getAllDtoCliente();
+        if(result.isEmpty()){
+            throw new EmptyClienteListException();
+        }
+        return result;
     }
 }
