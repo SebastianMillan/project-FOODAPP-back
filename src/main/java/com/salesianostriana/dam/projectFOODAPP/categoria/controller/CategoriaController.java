@@ -14,13 +14,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -82,5 +80,37 @@ public class CategoriaController {
         Categoria cat = categoriaService.createCategoria(nuevaCategoria);
 
         return ResponseEntity.status(201).body(GetCategoriaDto.of(cat));
+    }
+
+    @Operation(summary = "Edita el nombre de una categoría existente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "OK",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
+                            examples = @ExampleObject(
+                                    value = """
+                    [
+                        {
+                            "id": 1,
+                            "nombre": "nombre"
+                         }
+                    ]
+                    """
+                            )
+                    )
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Not Found",
+                    content = @Content
+            )
+    })
+    @PutMapping("/admin/edit/categoria/{idCategoria}")
+    public GetCategoriaDto editCategoria(@Valid @RequestBody GetCategoriaDto categoriaEditada,
+                                         @PathVariable UUID idCategoria){
+
+        Categoria cat = categoriaService.editCategoria(categoriaEditada, idCategoria);
+
+        return GetCategoriaDto.of(cat);
     }
 }

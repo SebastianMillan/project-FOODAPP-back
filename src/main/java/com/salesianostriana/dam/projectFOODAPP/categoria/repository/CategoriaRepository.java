@@ -13,14 +13,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, UUID> {
     List<Producto> productosCategoriaIgnoreCase(String nombreCategoria);
 
     @Query("""
-            SELECT c
-            FROM Categoria c
-            WHERE c.id = ?1
-            """)
-    Categoria buscarCategoriaPorId (UUID categoriaId);
-
-
-    @Query("""
             SELECT COUNT(p)
             FROM Producto p
             JOIN p.categoria as cat
