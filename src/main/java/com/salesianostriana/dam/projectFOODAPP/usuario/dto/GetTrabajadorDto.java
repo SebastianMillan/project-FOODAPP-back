@@ -6,10 +6,6 @@ import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 public record GetTrabajadorDto(
 
         String id,
-<<<<<<< HEAD
-=======
-
->>>>>>> main
         String nombre,
 
         String puesto

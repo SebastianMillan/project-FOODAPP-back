@@ -27,12 +27,12 @@ public class TrabajadorService {
         return trabajadorList;
     }
 
-<<<<<<< HEAD
+
     public void eliminarTrabajador (String id){
         trabajadorRepository.delete(trabajadorRepository.buscarTrabajadorID(UUID.fromString(id)).get());
     }
 
-=======
+
     public Trabajador save (AltaTrabajadorDto nuevoTrabajador){
         Trabajador t = new Trabajador();
         t.setNombre(nuevoTrabajador.nombre());
@@ -44,6 +44,6 @@ public class TrabajadorService {
         t.setFechaNacimiento(nuevoTrabajador.fechaNacimiento());
         return trabajadorRepository.save(t);
     }
->>>>>>> main
+
 
 }

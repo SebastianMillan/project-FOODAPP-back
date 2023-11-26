@@ -205,15 +205,15 @@ public class TrabajadorController {
                 .body(GetDtoProducto.of(p));
     }
 
-<<<<<<< HEAD
+
     @DeleteMapping("/admin/delete/trabajador/{id}")
     public ResponseEntity<?> deleteTranajador(@PathVariable String id){
         trabajadorService.eliminarTrabajador(id);
         return ResponseEntity.noContent().build();
     }
 
-}
-=======
+
+
 
 
 
@@ -252,4 +252,4 @@ public class TrabajadorController {
 
 }
 
->>>>>>> main
+
