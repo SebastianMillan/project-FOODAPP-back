@@ -212,30 +212,21 @@ public class TrabajadorController {
             content = @Content)
     @DeleteMapping("/admin/delete/producto/{id}")
     public ResponseEntity<?> delete (@PathVariable String id){
-
         productoService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
-<<<<<<< HEAD
+
+
+    @Operation(summary = "Borrar un trabajador")
+    @ApiResponse(responseCode = "204 No Content",
+    description = "Borrado correctamente",
+    content = @Content)
     @DeleteMapping("/admin/delete/trabajador/{id}")
     public ResponseEntity<?> deleteTranajador(@PathVariable String id){
         trabajadorService.eliminarTrabajador(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
-
-
-
-
-
-
-
-=======
-        return ResponseEntity.noContent().build();
-    }
->>>>>>> main
 
     @Operation(summary = "Añades un un trabajador")
     @ApiResponses(value = {
