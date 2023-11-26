@@ -6,10 +6,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface TrabajadorRepository extends JpaRepository<Trabajador, UUID> {
 
     @Query("SELECT t FROM Trabajador t")
     Page<Trabajador> trabajadorPage(Pageable pageable);
+
+    @Query("SELECT t from Trabajador t where t.id = ?1")
+    Optional<Trabajador> buscarTrabajadorID(UUID id);
 }
