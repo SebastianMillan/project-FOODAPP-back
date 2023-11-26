@@ -94,6 +94,13 @@ public class ProductoService {
             edit.setPrecio(editProduct.precio());
             edit.setTags(editProduct.tags());
 
+            Categoria categoria = categoriaRepository.findByNombreIgnoreCase(editProduct.categoria());
+
+            if(categoria == null)
+                throw new CategoryException();
+            else
+                edit.setCategoria(categoria);
+
             return productoRepository.save(edit);
         }
 

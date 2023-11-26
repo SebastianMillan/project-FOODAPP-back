@@ -18,6 +18,7 @@ public record GetDtoProducto(
         double precio,
         @JsonView({ProductView.editProduct.class})
         String[] tags,
+        @JsonView({ProductView.editProduct.class})
         GetCategoriaDto categoria
 
 ) {
