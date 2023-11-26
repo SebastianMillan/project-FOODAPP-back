@@ -1,6 +1,8 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
@@ -243,6 +245,43 @@ public class TrabajadorController {
     public ResponseEntity<GetTrabajadorDto> nuevoTrabajador (@Valid @RequestBody AltaTrabajadorDto trabajadorNuevo){
         Trabajador trabajador = trabajadorService.save(trabajadorNuevo);
         return ResponseEntity.status(HttpStatus.CREATED).body(GetTrabajadorDto.of(trabajador));
+    }
+
+    @Operation(summary = "Editar producto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Editar un producto",
+                    content = { @Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "nombre": "Ensaladilla",
+                                                "imagen": "https://upload.jpg",
+                                                "descripcion": "Una buena ensaladilla para los dolores de rodilla",
+                                                "precio": 1.3,
+                                                "tags": [
+                                                    "sano",
+                                                    "rico"
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "500",
+                    description = "Error al encontrar el producto para editar",
+                    content = @Content)
+    })
+    @JsonView(ProductView.editProduct.class)
+    @PutMapping("/admin/edit/product/{id}")
+    public ResponseEntity<GetDtoProducto> edit (@PathVariable String id, @RequestBody EditProductDto editProduct){
+
+
+        return ResponseEntity.ok(
+                GetDtoProducto.of(
+                        productoService.edit(editProduct, id)));
+
     }
 
 }

@@ -82,4 +82,22 @@ public class ProductoService {
             throw new ProductNotDeleteException();
     }
 
+    public Producto edit (EditProductDto editProduct, String id){
+        Optional <Producto> p = productoRepository.findById(UUID.fromString(id));
+
+        if (p.isPresent()){
+            Producto edit = p.get();
+
+            edit.setNombre(editProduct.nombre());
+            edit.setImagen(editProduct.imagen());
+            edit.setDescripcion(editProduct.descripcion());
+            edit.setPrecio(editProduct.precio());
+            edit.setTags(editProduct.tags());
+
+            return productoRepository.save(edit);
+        }
+
+         throw new ProductoNotFoundException();
+    }
+
 }
