@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.projectFOODAPP.producto.dto;
 
-import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetDtoCategoria;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;

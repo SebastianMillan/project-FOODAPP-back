@@ -1,8 +1,5 @@
 package com.salesianostriana.dam.projectFOODAPP.producto.dto;
-
 import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaDto;
-import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetDtoCategoria;
-import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
 import java.util.UUID;

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 public record GetCategoriaDto(
 
-        @NotEmpty(message = "{productDto.description.notEmpty}")
+        @NotEmpty(message = "GetCategoriaDto.nombre.notEmpty}")
         String nombre
 ) {
 
