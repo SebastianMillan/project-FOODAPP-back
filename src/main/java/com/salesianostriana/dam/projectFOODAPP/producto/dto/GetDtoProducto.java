@@ -5,7 +5,7 @@ import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import java.util.UUID;
 
 public record GetDtoProducto(
-        UUID id,
+        String id,
         String nombre,
         String imagen,
         String descripcion,
@@ -17,7 +17,7 @@ public record GetDtoProducto(
 
     public static GetDtoProducto of(Producto p){
         return new GetDtoProducto(
-                p.getId(),
+                p.getId().toString(),
                 p.getNombre(),
                 p.getImagen(),
                 p.getDescripcion(),
