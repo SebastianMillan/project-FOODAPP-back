@@ -2,6 +2,7 @@ package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
 import com.salesianostriana.dam.projectFOODAPP.security.jwt.access.JwtProvider;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.*;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.ClienteService;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.UsuarioService;
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -99,14 +101,21 @@ public class UsuarioController {
                             examples = {@ExampleObject(
                                     value = """
                                             {
-                                                "id": "c0a801c6-8c06-166f-818c-06767a7a0009",
-                                                "username": "fer",
-                                                "nombre": "Fernando Claro",
-                                                "email": "fer@gmail.com",
-                                                "telefono": "121232888",
+                                                "id": "c0a801b2-8c0d-1503-818c-0d250f870003",
+                                                "nombre": "Francisco Claro",
+                                                "email": "fran@gmail.com",
                                                 "avatar": null,
-                                                "roles": [
-                                                    "ADMIN"
+                                                "direccion": "c/Evangelista, 3",
+                                                "codPostal": "41011",
+                                                "poblacion": "Sevilla",
+                                                "puntos": 100,
+                                                "pedidos": [
+                                                    {
+                                                        "id": "c0a801b2-8c0d-1503-818c-0d25106b000c",
+                                                        "fecha": "2023-11-26T20:39:42.053019",
+                                                        "estadoPedido": "CONFIRMADO",
+                                                        "importeTotal": 6.3
+                                                    }
                                                 ]
                                             }
                                             """
@@ -117,8 +126,8 @@ public class UsuarioController {
     @Operation(summary = "getLoggedUser", description = "Obtener el Usuario loggeado")
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile")
-    public ResponseEntity<GetUserDetailDto> getLoggedUser(@AuthenticationPrincipal Usuario user) {
-            return ResponseEntity.ok(GetUserDetailDto.of(user));
+    public ResponseEntity<GetClienteDtoDetail> getLoggedUser(@AuthenticationPrincipal Cliente user) {
+            return ResponseEntity.ok(GetClienteDtoDetail.of(user, clienteService.buscarPedidosByClienteId(user.getId().toString())));
     }
 
     @ApiResponses(value = {
@@ -154,6 +163,41 @@ public class UsuarioController {
     @GetMapping("/admin/client/{id}")
     public GetClienteDtoDetail getClientDetailsWithOrders(@PathVariable String id){
         return GetClienteDtoDetail.of(clienteService.buscarClienteDetail(id), clienteService.buscarPedidosByClienteId(id));
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Editar datos del Cliente loggeado", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetClienteDtoDetail.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a801b2-8c0d-1417-818c-0d4421110003",
+                                                "nombre": "pepe",
+                                                "email": "pepe@gmail.com",
+                                                "avatar": "https://noticiasdelaciencia.com/upload/images/12_2021/6754_ciencia-en-imagenes-este-murcielago-da-la-cara.jpg",
+                                                "direccion": "C/Montaña nº3",
+                                                "codPostal": "33133",
+                                                "poblacion": "Valencia",
+                                                "puntos": 100,
+                                                "pedidos": [
+                                                    {
+                                                        "id": "c0a801b2-8c0d-1417-818c-0d4421e0000c",
+                                                        "fecha": "2023-11-26T21:13:38.144181",
+                                                        "estadoPedido": "CONFIRMADO",
+                                                        "importeTotal": 6.3
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Dato introducido inválido", content = @Content)
+    })
+    @Operation(summary = "editLoggedUser", description = "Editar datos del Cliente loggeado")
+    @PutMapping("/profile/edit")
+    public GetClienteDtoDetail editLoggedUser(@Valid @RequestBody EditLoggedUserDto editado, @AuthenticationPrincipal Cliente c){
+        return GetClienteDtoDetail.of(clienteService.editLoggedUser(editado,c), clienteService.buscarPedidosByClienteId(c.getId().toString()));
     }
 
 
