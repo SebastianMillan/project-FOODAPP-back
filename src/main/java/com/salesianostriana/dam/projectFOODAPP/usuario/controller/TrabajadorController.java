@@ -256,6 +256,23 @@ public class TrabajadorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(GetTrabajadorDto.of(trabajador));
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Trabajador editado correctamente", content = {
+                    @Content(mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = GetTrabajadorDto.class)),
+                    examples = {@ExampleObject(
+                            value = """
+                                    {
+                                        "id": "c0a8000b-8c0a-1df7-818c-0ab12744000e",
+                                        "nombre": "pedrola",
+                                        "puesto": "COCINERO"
+                                    }
+                                    """
+                    )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Error en los datos", content = @Content),
+            @ApiResponse(responseCode = "500", description = "El trabajador con id {id} no ha sido encontrado", content = @Content)
+    })
     @PutMapping("/admin/trabajador/{id}")
     public ResponseEntity<GetTrabajadorDto> editarTrabajador (@PathVariable String id, @RequestBody PutTrabajadorDto trabajadorDto){
         return ResponseEntity.ok(GetTrabajadorDto.of(trabajadorService.edit(id, trabajadorDto)));
