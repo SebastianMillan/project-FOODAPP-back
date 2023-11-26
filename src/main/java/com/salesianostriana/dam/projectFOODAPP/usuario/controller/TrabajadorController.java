@@ -14,6 +14,7 @@ import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
 
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetTrabajadorDto;
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.PutTrabajadorDto;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.TrabajadorService;
 
@@ -253,6 +254,11 @@ public class TrabajadorController {
     public ResponseEntity<GetTrabajadorDto> nuevoTrabajador (@Valid @RequestBody AltaTrabajadorDto trabajadorNuevo){
         Trabajador trabajador = trabajadorService.save(trabajadorNuevo);
         return ResponseEntity.status(HttpStatus.CREATED).body(GetTrabajadorDto.of(trabajador));
+    }
+
+    @PutMapping("/admin/trabajador/{id}")
+    public ResponseEntity<GetTrabajadorDto> editarTrabajador (@PathVariable String id, @RequestBody PutTrabajadorDto trabajadorDto){
+        return ResponseEntity.ok(GetTrabajadorDto.of(trabajadorService.edit(id, trabajadorDto)));
     }
 
 }
