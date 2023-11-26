@@ -3,8 +3,10 @@ package com.salesianostriana.dam.projectFOODAPP.producto.service;
 import com.salesianostriana.dam.projectFOODAPP.categoria.error.CategoryException;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.categoria.repository.CategoriaRepository;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.exception.EmptyProductListException;
+import com.salesianostriana.dam.projectFOODAPP.producto.exception.ProductNotDeleteException;
 import com.salesianostriana.dam.projectFOODAPP.producto.exception.ProductoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -68,6 +71,15 @@ public class ProductoService {
 
 
        return productoRepository.save(p);
+    }
+
+    public void delete (String id){
+
+        int num = productoRepository.comprobarProductoEnLineaPedido(UUID.fromString(id));
+        if(num == 0)
+            productoRepository.deleteById(UUID.fromString(id));
+        else
+            throw new ProductNotDeleteException();
     }
 
 }
