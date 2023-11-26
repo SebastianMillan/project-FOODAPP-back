@@ -274,7 +274,7 @@ public class TrabajadorController {
                     content = @Content)
     })
     @JsonView(ProductView.editProduct.class)
-    @PutMapping("/admin/edit/product/{id}")
+    @PutMapping
     public ResponseEntity<GetDtoProducto> edit (@PathVariable String id, @RequestBody EditProductDto editProduct){
 
 
