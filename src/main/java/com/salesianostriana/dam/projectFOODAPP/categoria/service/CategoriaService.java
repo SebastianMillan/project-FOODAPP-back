@@ -3,6 +3,7 @@ package com.salesianostriana.dam.projectFOODAPP.categoria.service;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaDto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.error.EmptyCategoryWithProductsException;
+import com.salesianostriana.dam.projectFOODAPP.categoria.exception.CategoriaNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.categoria.exception.EmptyCategoriesException;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.categoria.repository.CategoriaRepository;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -52,5 +54,16 @@ public class CategoriaService {
         cat.setNombre(nuevaCategoria.nombre());
 
         return categoriaRepository.save(cat);
+    }
+
+    public Categoria editCategoria (GetCategoriaDto editCategoria, String nombreCategoria){
+
+        Categoria cat = categoriaRepository.buscarCategoriaPorNombre(nombreCategoria)
+                .orElseThrow(() -> new CategoriaNotFoundException(nombreCategoria));
+
+        cat.setNombre(editCategoria.nombre());
+
+        return categoriaRepository.save(cat);
+
     }
 }
