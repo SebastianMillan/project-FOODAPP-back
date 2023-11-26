@@ -19,5 +19,4 @@ public interface ProductoRepository extends JpaRepository<Producto, UUID> {
     @Query("select p from Producto p where p.id = ?1")
     Optional<Producto> findId(UUID id);
 
-
 }

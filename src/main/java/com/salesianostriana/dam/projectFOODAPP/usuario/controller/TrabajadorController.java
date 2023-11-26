@@ -167,7 +167,7 @@ public class TrabajadorController {
             description = "Borrado con éxito",
             content = @Content)
     @DeleteMapping("/admin/delete/producto/{id}")
-    public ResponseEntity<?> delete (String id){
+    public ResponseEntity<?> delete (UUID id){
 
         productoService.delete(id);
 

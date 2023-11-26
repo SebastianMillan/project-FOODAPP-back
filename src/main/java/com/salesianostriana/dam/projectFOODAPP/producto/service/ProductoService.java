@@ -71,12 +71,16 @@ public class ProductoService {
        return productoRepository.save(p);
     }
 
-    public void delete (String id){
+    public void delete (UUID id){
 
-        Optional<Producto> p = productoRepository.findId(UUID.fromString(id));
+//        Optional<Producto> p = productoRepository.findId(UUID.fromString(id));
+//        if (p.isPresent())
+//            productoRepository.deleteById(UUID.fromString(id));
 
-        if (p.isPresent())
-            productoRepository.deleteById(UUID.fromString(id));
+        if(id != null)
+            productoRepository.deleteById(id);
+        else
+            throw new ProductoNotFoundException();
 
     }
 
