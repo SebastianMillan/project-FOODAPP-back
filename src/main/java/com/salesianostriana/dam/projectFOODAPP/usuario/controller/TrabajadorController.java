@@ -111,17 +111,45 @@ public class TrabajadorController {
                                 array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
                                 examples = {@ExampleObject(
                                         value = """
-
-                                                [
-                                                {
-                                                "nombe":"Pedro",
-                                                "puesto":"Cocinero"
-                                                }
-                                                {
-                                                "nombre":"Francisco",
-                                                "puesto":"Repartidor"
-                                                }
-                                                ]
+                                                    {
+                                                        "content": [
+                                                            {
+                                                                "id": "c0a8000b-8c0a-1df7-818c-0aae00f80008",
+                                                                "nombre": "Pedro Franch",
+                                                                "puesto": "REPARTIDOR"
+                                                            },
+                                                            {
+                                                                "id": "c0a8000b-8c0a-1df7-818c-0aae00f80009",
+                                                                "nombre": "Fernando Claro",
+                                                                "puesto": "COCINERO"
+                                                            }
+                                                        ],
+                                                        "pageable": {
+                                                            "pageNumber": 0,
+                                                            "pageSize": 5,
+                                                            "sort": {
+                                                                "empty": true,
+                                                                "sorted": false,
+                                                                "unsorted": true
+                                                            },
+                                                            "offset": 0,
+                                                            "unpaged": false,
+                                                            "paged": true
+                                                        },
+                                                        "last": true,
+                                                        "totalPages": 1,
+                                                        "totalElements": 2,
+                                                        "size": 5,
+                                                        "number": 0,
+                                                        "sort": {
+                                                            "empty": true,
+                                                            "sorted": false,
+                                                            "unsorted": true
+                                                        },
+                                                        "first": true,
+                                                        "numberOfElements": 2,
+                                                        "empty": false
+                                                    }
                                                 """
                             )}
                     )}),
@@ -178,6 +206,35 @@ public class TrabajadorController {
     }
 
 
+
+
+
+
+
+
+
+
+    @Operation(summary = "Añades un un trabajador")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Alta del trabajador",
+                    content = { @Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Trabajador.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                 "id": "c0a8000b-8c0a-1df7-818c-0ab12744000e",
+                                                 "nombre": "pedrola",
+                                                 "puesto": "COCINERO"
+                                             }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "400",
+                    description = "Error al dal de alta un trabajador",
+                    content = @Content)
+    })
          @PostMapping("/admin/trabajador")
     public ResponseEntity<GetTrabajadorDto> nuevoTrabajador (@Valid @RequestBody AltaTrabajadorDto trabajadorNuevo){
         Trabajador trabajador = trabajadorService.save(trabajadorNuevo);
