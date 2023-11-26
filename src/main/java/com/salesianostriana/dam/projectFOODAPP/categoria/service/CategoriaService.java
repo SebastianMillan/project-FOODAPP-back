@@ -53,4 +53,10 @@ public class CategoriaService {
 
         return categoriaRepository.save(cat);
     }
+
+    public void deleteCategoria (String nombreCategoria){
+
+        Categoria cat = categoriaRepository.findByNombreIgnoreCase(nombreCategoria);
+
+    }
 }
