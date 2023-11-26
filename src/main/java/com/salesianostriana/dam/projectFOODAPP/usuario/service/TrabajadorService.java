@@ -1,6 +1,8 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.service;
 
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.PutTrabajadorDto;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.TrabajadorNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.TrabajadoresListEmptyException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.TipoTrabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -45,5 +48,14 @@ public class TrabajadorService {
         return trabajadorRepository.save(t);
     }
 
+    public Trabajador edit (String id, PutTrabajadorDto trabajadorEditado) {
+        Optional<Trabajador> t = trabajadorRepository.buscarTrabajadorID(UUID.fromString(id));
+        if (t.isEmpty()) {
+            throw new TrabajadorNotFoundException();
+        }
+        Trabajador toSave = PutTrabajadorDto.from(trabajadorEditado);
+        return toSave;
+
+    }
 
 }
