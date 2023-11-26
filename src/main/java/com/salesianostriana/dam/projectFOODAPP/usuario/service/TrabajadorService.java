@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class TrabajadorService {
@@ -21,6 +23,10 @@ public class TrabajadorService {
             throw new TrabajadoresListEmptyException();
         }
         return trabajadorList;
+    }
+
+    public void eliminarTrabajador (String id){
+        trabajadorRepository.delete(trabajadorRepository.buscarTrabajadorID(UUID.fromString(id)).get());
     }
 
 
