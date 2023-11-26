@@ -15,4 +15,9 @@ public interface ProductoRepository extends JpaRepository<Producto, UUID> {
 
     @Query("select p from Producto p order by function('RAND') limit 6")
     List<Producto> getProductNews();
+
+    @Query("SELECT COUNT(lp) FROM LineaPedido lp WHERE lp.producto.id = ?1")
+    int comprobarProductoEnLineaPedido(UUID productId);
+
+
 }
