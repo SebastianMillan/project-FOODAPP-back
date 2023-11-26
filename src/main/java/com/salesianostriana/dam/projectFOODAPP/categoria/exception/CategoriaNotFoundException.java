@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 public class CategoriaNotFoundException extends EntityNotFoundException {
 
-    public CategoriaNotFoundException(String id){
-        super("No se ha encontrado la categoría con el id: "+id);
+    public CategoriaNotFoundException(String nombreCategoria){
+        super("No se ha encontrado la categoría con el nombre: "+nombreCategoria);
     }
 }

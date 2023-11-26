@@ -105,11 +105,11 @@ public class CategoriaController {
                     content = @Content
             )
     })
-    @PutMapping("/admin/edit/categoria/{idCategoria}")
+    @PutMapping("/admin/edit/categoria/{nombreCategoria}")
     public GetCategoriaDto editCategoria(@Valid @RequestBody GetCategoriaDto categoriaEditada,
-                                         @PathVariable UUID idCategoria){
+                                         @PathVariable String nombreCategoria){
 
-        Categoria cat = categoriaService.editCategoria(categoriaEditada, idCategoria);
+        Categoria cat = categoriaService.editCategoria(categoriaEditada, nombreCategoria);
 
         return GetCategoriaDto.of(cat);
     }

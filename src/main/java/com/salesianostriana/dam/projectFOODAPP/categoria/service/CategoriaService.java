@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -55,10 +56,10 @@ public class CategoriaService {
         return categoriaRepository.save(cat);
     }
 
-    public Categoria editCategoria (GetCategoriaDto editCategoria, UUID idCategoria){
+    public Categoria editCategoria (GetCategoriaDto editCategoria, String nombreCategoria){
 
-        Categoria cat = categoriaRepository.findById(idCategoria).
-                orElseThrow(() -> new CategoriaNotFoundException(idCategoria.toString()));
+        Categoria cat = categoriaRepository.buscarCategoriaPorNombre(nombreCategoria)
+                .orElseThrow(() -> new CategoriaNotFoundException(nombreCategoria));
 
         cat.setNombre(editCategoria.nombre());
 
