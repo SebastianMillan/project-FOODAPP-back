@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.projectFOODAPP.categoria.service;
 
 
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaDto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.error.EmptyCategoryWithProductsException;
 import com.salesianostriana.dam.projectFOODAPP.categoria.exception.EmptyCategoriesException;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
@@ -42,5 +43,14 @@ public class CategoriaService {
 
         return categoriaRepository.contarCantidadProductosDeUnaCategoria(categoriaId);
 
+    }
+
+    public Categoria createCategoria (GetCategoriaDto nuevaCategoria){
+
+        Categoria cat = new Categoria();
+
+        cat.setNombre(nuevaCategoria.nombre());
+
+        return categoriaRepository.save(cat);
     }
 }
