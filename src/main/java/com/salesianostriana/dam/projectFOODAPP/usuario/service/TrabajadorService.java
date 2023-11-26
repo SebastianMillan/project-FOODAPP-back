@@ -1,6 +1,8 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.service;
 
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.TrabajadoresListEmptyException;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.TipoTrabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 
 
@@ -23,5 +25,16 @@ public class TrabajadorService {
         return trabajadorList;
     }
 
+    public Trabajador save (AltaTrabajadorDto nuevoTrabajador){
+        Trabajador t = new Trabajador();
+        t.setNombre(nuevoTrabajador.nombre());
+        t.setEmail(nuevoTrabajador.email());
+        t.setTelefono(nuevoTrabajador.telefono());
+        t.setUsername(nuevoTrabajador.username());
+        t.setPassword(nuevoTrabajador.password());
+        t.setTipoTrabajador(TipoTrabajador.valueOf(nuevoTrabajador.puesto()));
+        t.setFechaNacimiento(nuevoTrabajador.fechaNacimiento());
+        return trabajadorRepository.save(t);
+    }
 
 }

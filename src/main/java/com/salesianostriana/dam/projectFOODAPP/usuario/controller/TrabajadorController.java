@@ -8,7 +8,11 @@ import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetProductShortDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
+
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
+
 import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
+
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetTrabajadorDto;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.TrabajadorService;
@@ -23,12 +27,21 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -89,24 +102,56 @@ public class TrabajadorController {
                 .map(GetProductShortDto::of)
                 .toList();
     }
-    @Operation(summary = "Obtiene una lista de trabajadores")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
-                    description = "Se han encontrado trabajadores",
-                    content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                [
-                                                {
-                                                "nombe":"Pedro",
-                                                "puesto":"Cocinero"
-                                                }
-                                                {
-                                                "nombre":"Francisco",
-                                                "puesto":"Repartidor"
-                                                }
-                                                ]
+
+
+
+        @Operation(summary = "Obtiene una lista de trabajadores")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200",
+                        description = "Se han encontrado trabajadores",
+                        content = {@Content(mediaType = "application/json",
+                                array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
+                                examples = {@ExampleObject(
+                                        value = """
+                                                    {
+                                                        "content": [
+                                                            {
+                                                                "id": "c0a8000b-8c0a-1df7-818c-0aae00f80008",
+                                                                "nombre": "Pedro Franch",
+                                                                "puesto": "REPARTIDOR"
+                                                            },
+                                                            {
+                                                                "id": "c0a8000b-8c0a-1df7-818c-0aae00f80009",
+                                                                "nombre": "Fernando Claro",
+                                                                "puesto": "COCINERO"
+                                                            }
+                                                        ],
+                                                        "pageable": {
+                                                            "pageNumber": 0,
+                                                            "pageSize": 5,
+                                                            "sort": {
+                                                                "empty": true,
+                                                                "sorted": false,
+                                                                "unsorted": true
+                                                            },
+                                                            "offset": 0,
+                                                            "unpaged": false,
+                                                            "paged": true
+                                                        },
+                                                        "last": true,
+                                                        "totalPages": 1,
+                                                        "totalElements": 2,
+                                                        "size": 5,
+                                                        "number": 0,
+                                                        "sort": {
+                                                            "empty": true,
+                                                            "sorted": false,
+                                                            "unsorted": true
+                                                        },
+                                                        "first": true,
+                                                        "numberOfElements": 2,
+                                                        "empty": false
+                                                    }
                                                 """
                             )}
                     )}),
@@ -161,7 +206,6 @@ public class TrabajadorController {
                 .status(201)
                 .body(GetDtoProducto.of(p));
     }
-
     @Operation(summary = "Borra un producto por su id")
     @ApiResponse(responseCode = "204 No Content",
             description = "Borrado con éxito",
@@ -174,4 +218,32 @@ public class TrabajadorController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Añades un un trabajador")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Alta del trabajador",
+                    content = { @Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Trabajador.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                 "id": "c0a8000b-8c0a-1df7-818c-0ab12744000e",
+                                                 "nombre": "pedrola",
+                                                 "puesto": "COCINERO"
+                                             }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "400",
+                    description = "Error al dal de alta un trabajador",
+                    content = @Content)
+    })
+         @PostMapping("/admin/trabajador")
+    public ResponseEntity<GetTrabajadorDto> nuevoTrabajador (@Valid @RequestBody AltaTrabajadorDto trabajadorNuevo){
+        Trabajador trabajador = trabajadorService.save(trabajadorNuevo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(GetTrabajadorDto.of(trabajador));
+    }
+
 }
+

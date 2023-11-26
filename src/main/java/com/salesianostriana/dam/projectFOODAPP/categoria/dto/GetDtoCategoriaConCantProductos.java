@@ -2,16 +2,16 @@ package com.salesianostriana.dam.projectFOODAPP.categoria.dto;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 
-public record GetDtoCategoria(
+public record GetDtoCategoriaConCantProductos(
 
         String nombre,
 
         int cantProductos
 ) {
 
-    public static GetDtoCategoria of(Categoria categoria, int cantProductos) {
+    public static GetDtoCategoriaConCantProductos of(Categoria categoria, int cantProductos) {
 
-        return new GetDtoCategoria(
+        return new GetDtoCategoriaConCantProductos(
                 categoria.getNombre(),
                 cantProductos
         );
