@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -81,8 +82,44 @@ public class CategoriaController {
         return ResponseEntity.status(201).body(GetCategoriaDto.of(cat));
     }
 
+    @Operation(summary = "Edita el nombre de una categoría existente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "OK",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
+                            examples = @ExampleObject(
+                                    value = """
+                    [
+                        {
+                            "id": 1,
+                            "nombre": "nombre"
+                         }
+                    ]
+                    """
+                            )
+                    )
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Not Found",
+                    content = @Content
+            )
+    })
+    @PutMapping("/admin/edit/categoria/{nombreCategoria}")
+    public GetCategoriaDto editCategoria(@Valid @RequestBody GetCategoriaDto categoriaEditada,
+                                         @PathVariable String nombreCategoria){
+
+        Categoria cat = categoriaService.editCategoria(categoriaEditada, nombreCategoria);
+
+        return GetCategoriaDto.of(cat);
+
+    }
+
     @DeleteMapping("/admin/delete/categoria/{nombreCategoria}")
     public ResponseEntity<?> deleteCategoria(@PathVariable String nombreCategoria){
 
+        categoriaService.deleteCategoria(nombreCategoria);
+
+        return ResponseEntity.noContent().build();
     }
 }
