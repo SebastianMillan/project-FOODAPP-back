@@ -3,8 +3,10 @@ package com.salesianostriana.dam.projectFOODAPP.producto.service;
 import com.salesianostriana.dam.projectFOODAPP.categoria.error.CategoryException;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.categoria.repository.CategoriaRepository;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.exception.EmptyProductListException;
+import com.salesianostriana.dam.projectFOODAPP.producto.exception.ProductNotDeleteException;
 import com.salesianostriana.dam.projectFOODAPP.producto.exception.ProductoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
@@ -71,17 +73,13 @@ public class ProductoService {
        return productoRepository.save(p);
     }
 
-    public void delete (UUID id){
+    public void delete (String id){
 
-//        Optional<Producto> p = productoRepository.findId(UUID.fromString(id));
-//        if (p.isPresent())
-//            productoRepository.deleteById(UUID.fromString(id));
-
-        if(id != null)
-            productoRepository.deleteById(id);
+        int num = productoRepository.comprobarProductoEnLineaPedido(UUID.fromString(id));
+        if(num == 0)
+            productoRepository.deleteById(UUID.fromString(id));
         else
-            throw new ProductoNotFoundException();
-
+            throw new ProductNotDeleteException();
     }
 
 }
