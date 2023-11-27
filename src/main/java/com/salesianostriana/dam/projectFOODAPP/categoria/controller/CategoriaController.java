@@ -112,5 +112,14 @@ public class CategoriaController {
         Categoria cat = categoriaService.editCategoria(categoriaEditada, nombreCategoria);
 
         return GetCategoriaDto.of(cat);
+
+    }
+
+    @DeleteMapping("/admin/delete/categoria/{nombreCategoria}")
+    public ResponseEntity<?> deleteCategoria(@PathVariable String nombreCategoria){
+
+        categoriaService.deleteCategoria(nombreCategoria);
+
+        return ResponseEntity.noContent().build();
     }
 }
