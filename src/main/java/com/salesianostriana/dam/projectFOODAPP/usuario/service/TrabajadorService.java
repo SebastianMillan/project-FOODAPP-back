@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class TrabajadorService {
@@ -25,6 +27,12 @@ public class TrabajadorService {
         return trabajadorList;
     }
 
+
+    public void eliminarTrabajador (String id){
+        trabajadorRepository.delete(trabajadorRepository.buscarTrabajadorID(UUID.fromString(id)).get());
+    }
+
+
     public Trabajador save (AltaTrabajadorDto nuevoTrabajador){
         Trabajador t = new Trabajador();
         t.setNombre(nuevoTrabajador.nombre());
@@ -36,5 +44,6 @@ public class TrabajadorService {
         t.setFechaNacimiento(nuevoTrabajador.fechaNacimiento());
         return trabajadorRepository.save(t);
     }
+
 
 }
