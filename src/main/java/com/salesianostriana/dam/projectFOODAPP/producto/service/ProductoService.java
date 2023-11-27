@@ -82,4 +82,15 @@ public class ProductoService {
             throw new ProductNotDeleteException();
     }
 
+    public Producto details (String id){
+
+        Optional<Producto> p = productoRepository.findById(UUID.fromString(id));
+
+        if(p.isPresent())
+            return p.get();
+
+        throw new ProductoNotFoundException();
+
+    }
+
 }
