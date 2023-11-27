@@ -255,6 +255,15 @@ public class TrabajadorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(GetTrabajadorDto.of(trabajador));
     }
 
+    @GetMapping("/admin/product/details/{id}")
+    public GetDtoProducto details (@Valid @PathVariable String id){
+
+        Producto p = productoService.details(id);
+
+        return GetDtoProducto.of(p);
+    }
+
+
 }
 
 
