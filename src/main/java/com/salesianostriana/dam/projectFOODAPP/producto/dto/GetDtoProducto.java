@@ -2,6 +2,7 @@ package com.salesianostriana.dam.projectFOODAPP.producto.dto;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
 import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaDto;
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaProductsDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
 import java.util.UUID;
@@ -32,6 +33,7 @@ public record GetDtoProducto(
                 p.getPrecioOferta()!=0?p.getPrecioOferta():p.getPrecio(),
                 p.getTags(),
                 GetCategoriaDto.of(p.getCategoria())
+
         );
     }
 }

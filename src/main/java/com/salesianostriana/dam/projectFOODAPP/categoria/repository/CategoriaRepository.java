@@ -1,4 +1,5 @@
 package com.salesianostriana.dam.projectFOODAPP.categoria.repository;
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaProductsDto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;

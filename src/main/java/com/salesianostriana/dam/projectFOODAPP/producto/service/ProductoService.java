@@ -108,14 +108,18 @@ public class ProductoService {
 
     }
 
-        public Producto details (String id){
+    public Producto details (String id){
 
-            Optional<Producto> p = productoRepository.findById(UUID.fromString(id));
+        Optional<Producto> p = productoRepository.findById(UUID.fromString(id));
 
-            if (p.isPresent())
-                return p.get();
+        if (p.isPresent())
+            return p.get();
 
-            throw new ProductoNotFoundException();
+        throw new ProductoNotFoundException();
 
         }
+
+    public List<Producto> getProductGruopByCategory() {
+        return productoRepository.findAllGroupByCategoria();
     }
+}
