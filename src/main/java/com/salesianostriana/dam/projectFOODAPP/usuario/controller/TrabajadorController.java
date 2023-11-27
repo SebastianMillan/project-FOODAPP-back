@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoEnPedidoDto;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDto;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
+import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepository;
+import com.salesianostriana.dam.projectFOODAPP.pedido.service.PedidoService;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetProductShortDto;
@@ -56,6 +61,7 @@ public class TrabajadorController {
     private final CategoriaService categoriaService;
     private final TrabajadorService trabajadorService;
     private final ProductoService productoService;
+    private final PedidoService pedidoService;
 
     @Operation(summary = "Muestra una lista de los productos de una categoría")
     @ApiResponses(value = {
@@ -327,6 +333,16 @@ public class TrabajadorController {
     public GetTrabajadorDto obtenerTrabajador(@PathVariable String id){
         Trabajador t = trabajadorService.bucarUIID(id);
         return GetTrabajadorDto.of(t);
+    }
+
+    @GetMapping("/admin/pedido")
+    public List<GetPedidoDto> getPedidos(){
+
+        List<Pedido> p = pedidoService.getAllPedidos();
+
+        return p.stream()
+                .map(GetPedidoDto::of)
+                .toList();
     }
 
 }
