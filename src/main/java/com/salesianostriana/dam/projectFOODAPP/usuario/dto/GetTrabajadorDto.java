@@ -31,7 +31,7 @@ public record GetTrabajadorDto(
                 trabajador.getNombre(),
                 trabajador.getEmail(),
                 trabajador.getTelefono(),
-                trabajador.getUsername(), 
+                trabajador.getUsername(),
                 trabajador.getPassword(),
                 trabajador.getTipoTrabajador().toString(),
                 trabajador.getFechaNacimiento()
