@@ -37,6 +37,8 @@ public class Pedido {
     private UUID id;
 
     private LocalDateTime fecha;
+
+    @Enumerated(value = EnumType.STRING)
     private EstadoPedido estadoPedido;
 
     @CreatedBy
