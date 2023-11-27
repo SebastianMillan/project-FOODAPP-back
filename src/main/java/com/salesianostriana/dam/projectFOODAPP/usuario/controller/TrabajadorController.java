@@ -1,5 +1,8 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
+
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
@@ -255,6 +258,41 @@ public class TrabajadorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(GetTrabajadorDto.of(trabajador));
     }
 
+    @Operation(summary = "Editar producto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Editar un producto",
+                    content = { @Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "nombre": "Ensaladilla",
+                                                "imagen": "https://upload.jpg",
+                                                "descripcion": "Una buena ensaladilla para los dolores de rodilla",
+                                                "precio": 1.3,
+                                                "tags": [
+                                                    "sano",
+                                                    "rico"
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "500",
+                    description = "Error al encontrar el producto para editar",
+                    content = @Content)
+    })
+    @JsonView(ProductView.editProduct.class)
+    @PutMapping("/admin/edit/product/{id}")
+    public GetDtoProducto edit (@Valid @PathVariable String id, @RequestBody EditProductDto editProduct){
+
+        Producto p = productoService.edit(editProduct, id);
+
+        return GetDtoProducto.of(p);
+
+    }
     @GetMapping("/admin/product/details/{id}")
     public GetDtoProducto details (@Valid @PathVariable String id){
 
