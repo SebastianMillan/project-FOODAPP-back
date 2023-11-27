@@ -63,4 +63,13 @@ public class TrabajadorService {
             return trabajadorRepository.save(trabajador);
         }
     }
+
+    public Trabajador bucarUIID(String id){
+        Optional <Trabajador>t = trabajadorRepository.buscarTrabajadorID(UUID.fromString(id));
+
+        if(t.isEmpty()){
+            throw new TrabajadorNotFoundException(id);
+        }
+        return  t.get();
+    }
 }

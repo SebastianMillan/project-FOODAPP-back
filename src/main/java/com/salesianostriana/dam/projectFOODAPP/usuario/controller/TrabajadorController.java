@@ -278,6 +278,17 @@ public class TrabajadorController {
         return ResponseEntity.ok(GetTrabajadorDto.of(trabajadorService.edit(id, trabajadorDto)));
     }
 
+    @GetMapping("/admin/trabajador/{id}")
+    public GetTrabajadorDto obtenerTrabajador(@PathVariable String id){
+        Trabajador t = trabajadorService.bucarUIID(id);
+        return GetTrabajadorDto.of(t);
+    }
+
 }
+
+
+
+
+
 
 
