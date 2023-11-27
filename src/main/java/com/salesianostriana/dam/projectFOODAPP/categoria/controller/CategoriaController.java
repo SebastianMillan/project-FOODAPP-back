@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.projectFOODAPP.categoria.controller;
 
-import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetDtoCategoria;
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaDto;
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetDtoCategoriaConCantProductos;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,13 +11,14 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class CategoriaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Obtener Categorías", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetDtoCategoria.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetDtoCategoriaConCantProductos.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -42,18 +44,73 @@ public class CategoriaController {
     })
     @Operation(summary = "getAllCategorias", description = "Obtener una lista de categorías")
     @GetMapping("/admin/categoria/")
-    public List<GetDtoCategoria> getAllCategoriasByAdmin(){
+    public List<GetDtoCategoriaConCantProductos> getAllCategoriasByAdmin(){
 
         List<Categoria> categorias = categoriaService.getAllCategorias();
 
-        List<GetDtoCategoria> categoriasDTO = new ArrayList<>();
+        List<GetDtoCategoriaConCantProductos> categoriasDTO = new ArrayList<>();
         for(Categoria categoria: categorias){
-            categoriasDTO.add(GetDtoCategoria.of
+            categoriasDTO.add(GetDtoCategoriaConCantProductos.of
                     (categoria,
                             categoriaService.contarCantidadProductosDeUnaCategoria(categoria.getId()))
                     );
         }
 
         return categoriasDTO;
+    }
+
+
+    @Operation(summary = "createCategoria", description = "Crea una categoría.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Obtener Categorías", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetCategoriaDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "nombre": "Bebidas",                                               
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
+    })
+    @PostMapping("/admin/add/categoria")
+    public ResponseEntity<GetCategoriaDto> createCategoria (@Valid @RequestBody GetCategoriaDto nuevaCategoria){
+        Categoria cat = categoriaService.createCategoria(nuevaCategoria);
+
+        return ResponseEntity.status(201).body(GetCategoriaDto.of(cat));
+    }
+
+    @Operation(summary = "Edita el nombre de una categoría existente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "OK",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
+                            examples = @ExampleObject(
+                                    value = """
+                    [
+                        {
+                            "id": 1,
+                            "nombre": "nombre"
+                         }
+                    ]
+                    """
+                            )
+                    )
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Not Found",
+                    content = @Content
+            )
+    })
+    @PutMapping("/admin/edit/categoria/{nombreCategoria}")
+    public GetCategoriaDto editCategoria(@Valid @RequestBody GetCategoriaDto categoriaEditada,
+                                         @PathVariable String nombreCategoria){
+
+        Categoria cat = categoriaService.editCategoria(categoriaEditada, nombreCategoria);
+
+        return GetCategoriaDto.of(cat);
     }
 }
