@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
-
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
@@ -254,6 +253,14 @@ public class TrabajadorController {
     public ResponseEntity<GetTrabajadorDto> nuevoTrabajador (@Valid @RequestBody AltaTrabajadorDto trabajadorNuevo){
         Trabajador trabajador = trabajadorService.save(trabajadorNuevo);
         return ResponseEntity.status(HttpStatus.CREATED).body(GetTrabajadorDto.of(trabajador));
+    }
+
+    @GetMapping("/admin/product/details/{id}")
+    public GetDtoProducto details (@Valid @PathVariable String id){
+
+        Producto p = productoService.details(id);
+
+        return GetDtoProducto.of(p);
     }
 
     @ApiResponses(value = {
