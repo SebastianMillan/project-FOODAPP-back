@@ -1,4 +1,29 @@
 package com.salesianostriana.dam.projectFOODAPP.producto.dto;
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaDto;
+import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
-public record GetDtoProducto() {
+import java.util.UUID;
+
+public record GetDtoProducto(
+        String id,
+        String nombre,
+        String imagen,
+        String descripcion,
+        double precio,
+        String[] tags,
+        GetCategoriaDto categoria
+
+) {
+
+    public static GetDtoProducto of(Producto p){
+        return new GetDtoProducto(
+                p.getId().toString(),
+                p.getNombre(),
+                p.getImagen(),
+                p.getDescripcion(),
+                p.getPrecioOferta()!=0?p.getPrecioOferta():p.getPrecio(),
+                p.getTags(),
+                GetCategoriaDto.of(p.getCategoria())
+        );
+    }
 }

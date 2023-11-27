@@ -93,7 +93,8 @@ public class InitData {
 
         Producto p2 = Producto.builder()
                 .nombre("Plato de Jamón Ibérico")
-                .imagen("https://phantom-expansion.unidadeditorial.es/4a18f7865539ab348461b2ff7fc87fe4/crop/0x455/1197x1253/f/jpg/assets/multimedia/imagenes/2022/02/24/16457011092381.jpg")
+                //.imagen("https://phantom-expansion.unidadeditorial.es/4a18f7865539ab348461b2ff7fc87fe4/crop/0x455/1197x1253/f/jpg/assets/multimedia/imagenes/2022/02/24/16457011092381.jpg")
+                .imagen("https://m.media-amazon.com/images/I/417q8379TmL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_PIStarRatingFIVE%2CBottomLeft%2C360%2C-6_SR600%2C315_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg")
                 .descripcion("Plato de Jamón 100% Ibérico y curado")
                 .precio(6.30)
                 .precioOferta(0)
