@@ -281,8 +281,6 @@ public class TrabajadorController {
 
         return GetDtoProducto.of(p);
 
-
     }
-
 }
 
