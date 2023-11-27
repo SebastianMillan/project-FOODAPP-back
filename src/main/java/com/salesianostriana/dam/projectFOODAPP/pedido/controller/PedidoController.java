@@ -1,14 +1,11 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.controller;
 
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.EditEstadoPedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetHistorialDTO;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetDetallePedidoDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.service.PedidoService;
-import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetDtoCliente;
-import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
-import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,13 +18,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -134,12 +129,20 @@ public class PedidoController {
                                             """
                             )}
                     )}),
-            @ApiResponse(responseCode = "500", description = "Pedido no encontrado", content = @Content),
-            @ApiResponse(responseCode = "500", description = "El Estado del Pedido introducido no es válido", content = @Content)
+            @ApiResponse(responseCode = "500", description = "Pedido no encontrado", content = @Content)
     })
     @Operation(summary = "getAllPedidosDelCocinero", description = "Modificar el estado del pedido")
     @PutMapping("/cocinero/pedido/{id}")
     public GetPedidoEnCocinero changeEstadoPedidoCocinero(@PathVariable String id, @Valid @RequestBody EditEstadoPedidoDto editEstadoPedidoDto){
         return GetPedidoEnCocinero.of(pedidoService.changeEstadoPedidoCocinero(id, editEstadoPedidoDto));
     }
+
+    @GetMapping("/pedido/{idPedido}")
+    public GetDetallePedidoDto getHistorialPedidosDeUnCliente(@Valid @PathVariable UUID idPedido){
+
+        Pedido pedido = pedidoService.getPedidoDetails(idPedido);
+
+        return GetDetallePedidoDto.of(pedido, )
+    }
+
 }

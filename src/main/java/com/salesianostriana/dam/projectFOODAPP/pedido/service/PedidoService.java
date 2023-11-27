@@ -1,12 +1,9 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.service;
 
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.EditEstadoPedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetHistorialDTO;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
-import com.salesianostriana.dam.projectFOODAPP.pedido.exception.EmptyHistorialException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.exception.PedidoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.EstadoPedido;
-import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,28 +40,12 @@ public class PedidoService {
         return pedidoRepository.save(result.get());
     }
 
-    /*
-    public List<GetHistorialDTO> getHistorialCliente (String clienteId){
+    public Pedido getPedidoDetails(UUID idPedido){
 
-        List<GetHistorialDTO> pedidos = pedidoRepository.getHistorialByClienteID(clienteId);
+        Pedido pedido = pedidoRepository.buscarPedidoPorId(idPedido)
+                .orElseThrow(() -> new PedidoNotFoundException(idPedido.toString()));
 
-        if (pedidos.isEmpty())
-            throw new EmptyHistorialException();
-
-        return pedidos;
+        return pedido;
     }
-
-     */
-    /*
-    public double calcularImporteTotal (Pedido ped){
-
-        List<LineaPedido> lineas = ped.getLineasPedido();
-        double importeTotal = 0.0;
-        for (LineaPedido lp : lineas)
-            importeTotal += lp.getCantidad() * lp.getPrecioUnitario();
-
-        return importeTotal;
-    }
-    */
 
 }
