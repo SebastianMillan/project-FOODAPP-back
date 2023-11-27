@@ -275,12 +275,12 @@ public class TrabajadorController {
     })
     @JsonView(ProductView.editProduct.class)
     @PutMapping
-    public ResponseEntity<GetDtoProducto> edit (@PathVariable String id, @RequestBody EditProductDto editProduct){
+    public GetDtoProducto edit (@Valid @PathVariable String id, @RequestBody EditProductDto editProduct){
 
+        Producto p = productoService.edit(editProduct, id);
+        
+        return GetDtoProducto.of(p);
 
-        return ResponseEntity.ok(
-                GetDtoProducto.of(
-                        productoService.edit(editProduct, id)));
 
     }
 
