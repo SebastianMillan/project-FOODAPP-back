@@ -4,6 +4,8 @@ import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 
 public record GetDtoCategoriaConCantProductos(
 
+        String id,
+
         String nombre,
 
         int cantProductos
@@ -12,13 +14,9 @@ public record GetDtoCategoriaConCantProductos(
     public static GetDtoCategoriaConCantProductos of(Categoria categoria, int cantProductos) {
 
         return new GetDtoCategoriaConCantProductos(
+                categoria.getId().toString(),
                 categoria.getNombre(),
                 cantProductos
         );
     }
 }
-/*
-public static GetAlumnoDto of (Alumno a) {
-        return new GetAlumnoDto(a.getId(), a.getNombre() + " " + a.getApellidos(), 0,0 );
-    }
- */
