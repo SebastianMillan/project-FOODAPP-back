@@ -274,11 +274,11 @@ public class TrabajadorController {
                     content = @Content)
     })
     @JsonView(ProductView.editProduct.class)
-    @PutMapping
+    @PutMapping("/admin/edit/product/{id}")
     public GetDtoProducto edit (@Valid @PathVariable String id, @RequestBody EditProductDto editProduct){
 
         Producto p = productoService.edit(editProduct, id);
-        
+
         return GetDtoProducto.of(p);
 
 
