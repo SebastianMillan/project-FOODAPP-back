@@ -17,10 +17,6 @@ public class WebConfig
                 registry.addMapping("/**")
                         .allowedMethods("*")
                         .allowedOrigins("*");
-<<<<<<< HEAD
-
-=======
->>>>>>> d29a956b05f82908c2ff8e1d7d93db479bf8bce5
             }
         };
     }

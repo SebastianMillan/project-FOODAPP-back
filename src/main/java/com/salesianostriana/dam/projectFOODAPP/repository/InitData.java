@@ -139,7 +139,7 @@ public class InitData {
                 .username("fer")
                 .password(passwordEncoder.encode("1234"))
                 .nombre("Fernando Claro")
-                .roles(Set.of(RolUsuario.ADMIN))
+                .roles(Set.of(RolUsuario.TRABAJADOR, RolUsuario.ADMIN))
                 .email("fer@gmail.com")
                 .telefono("121232888")
                 .fechaNacimiento(LocalDate.parse("13-11-2002", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
