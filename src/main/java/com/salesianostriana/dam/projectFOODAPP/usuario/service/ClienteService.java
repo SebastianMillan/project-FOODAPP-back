@@ -25,6 +25,12 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    public Cliente buscarClientePorId (String idCliente){
+
+        return clienteRepository.buscarClientePorIdString(idCliente)
+                .orElseThrow(() -> new ClienteNotFoundException(idCliente));
+    }
+
     public Cliente buscarClienteDetail(String id){
         Optional<Cliente> result = clienteRepository.buscarClienteDetail(UUID.fromString(id));
         if(result.isEmpty()){
