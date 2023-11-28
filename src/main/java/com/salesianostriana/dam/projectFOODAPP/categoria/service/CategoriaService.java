@@ -9,6 +9,7 @@ import com.salesianostriana.dam.projectFOODAPP.categoria.exception.EmptyCategori
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.categoria.repository.CategoriaRepository;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.ClienteNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -57,28 +58,14 @@ public class CategoriaService {
         return categoriaRepository.save(cat);
     }
 
-    public Categoria editCategoria (GetCategoriaDto editCategoria, String nombreCategoria){
+    public Categoria editCategoria (GetCategoriaDto editCategoria, UUID idCategoria) {
 
-        Categoria cat = categoriaRepository.buscarCategoriaPorNombre(nombreCategoria)
-                .orElseThrow(() -> new CategoriaNotFoundException(nombreCategoria));
+        Categoria cat = categoriaRepository.findById(idCategoria)
+                .orElseThrow(() -> new CategoriaNotFoundException(idCategoria.toString()));
 
         cat.setNombre(editCategoria.nombre());
 
         return categoriaRepository.save(cat);
 
-    }
-
-    public void deleteCategoria (String nombreCategoria) {
-
-        Categoria cat = categoriaRepository.findByNombreIgnoreCase(nombreCategoria);
-        int cantProductos = categoriaRepository.contarCantidadProductosDeUnaCategoriaByNombre(nombreCategoria);
-
-        if (cat == null)
-            throw new CategoriaNotFoundException(nombreCategoria);
-
-        if (cantProductos == 0)
-            categoriaRepository.delete(cat);
-        else
-            throw new CategoriaConProductosException(nombreCategoria);
     }
 }
