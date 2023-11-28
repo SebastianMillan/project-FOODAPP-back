@@ -106,6 +106,7 @@ public class CategoriaController {
             )
     })
     @PutMapping("/admin/edit/categoria/{nombreCategoria}")
+
     public GetCategoriaDto editCategoria(@Valid @RequestBody GetCategoriaDto categoriaEditada,
                                          @PathVariable String nombreCategoria){
 
