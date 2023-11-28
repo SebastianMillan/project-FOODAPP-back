@@ -1,14 +1,14 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.controller;
-
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.EditEstadoPedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetHistorialDTO;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDetallesDTO;
+import com.salesianostriana.dam.projectFOODAPP.pedido.exception.PedidoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.service.PedidoService;
-import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetDtoCliente;
-import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.ClienteNotFoundException;
+import com.salesianostriana.dam.projectFOODAPP.usuario.service.ClienteService;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.EditEstadoPedidoDto;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetDetallePedidoDto;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
-import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,34 +21,26 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 public class PedidoController {
 
     private final PedidoService pedidoService;
+    private final ClienteService clienteService;
 
     @GetMapping("/pedido/")
     public List<Pedido> getAllPedidos() {
         return pedidoService.getAllPedidos();
     }
-
-
-    /*
-    @GetMapping("/historial/{cliente}")
-    public List<GetHistorialDTO> getHistorialPedidosDeUnCliente(@AuthenticationPrincipal Cliente cliente){
-
-        return pedidoService.getHistorialCliente(cliente.getId().toString());
-
-    }
-    */
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Obtener lista de Pedidos del cocinero", content = {
@@ -134,12 +126,18 @@ public class PedidoController {
                                             """
                             )}
                     )}),
-            @ApiResponse(responseCode = "500", description = "Pedido no encontrado", content = @Content),
-            @ApiResponse(responseCode = "500", description = "El Estado del Pedido introducido no es válido", content = @Content)
+            @ApiResponse(responseCode = "500", description = "Pedido no encontrado", content = @Content)
     })
-    @Operation(summary = "getAllPedidosDelCocinero", description = "Modificar el estado del pedido")
+    @Operation(summary = "changeEstadoPedidoCocinero", description = "Modificar el estado del pedido")
     @PutMapping("/cocinero/pedido/{id}")
     public GetPedidoEnCocinero changeEstadoPedidoCocinero(@PathVariable String id, @Valid @RequestBody EditEstadoPedidoDto editEstadoPedidoDto){
         return GetPedidoEnCocinero.of(pedidoService.changeEstadoPedidoCocinero(id, editEstadoPedidoDto));
     }
+
+    @GetMapping("/pedido/{idPedido}")
+    public GetDetallePedidoDto getDetallesDeUnPedido(@PathVariable UUID idPedido){
+
+        return pedidoService.getPedidoDetailsDto(idPedido);
+    }
+
 }

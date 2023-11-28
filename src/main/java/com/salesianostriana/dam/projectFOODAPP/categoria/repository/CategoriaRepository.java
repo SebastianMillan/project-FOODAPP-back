@@ -1,4 +1,5 @@
 package com.salesianostriana.dam.projectFOODAPP.categoria.repository;
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaProductsDto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,14 +22,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, UUID> {
             """)
     int contarCantidadProductosDeUnaCategoria (UUID categoriaId);
 
-    @Query("""
-            SELECT COUNT(p)
-            FROM Producto p
-            JOIN p.categoria as cat
-            WHERE cat.nombre = ?1
-            """)
-    int contarCantidadProductosDeUnaCategoriaByNombre (String nombreCategoria);
-
 
     Categoria findByNombreIgnoreCase(String nombre);
 
@@ -38,4 +31,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, UUID> {
             WHERE c.nombre = ?1
             """)
     Optional<Categoria> buscarCategoriaPorNombre(String nombreCategoria);
+
+
 }
