@@ -1,4 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.producto.dto;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
 import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
@@ -6,11 +8,17 @@ import java.util.UUID;
 
 public record GetDtoProducto(
         String id,
+        @JsonView({ProductView.editProduct.class})
         String nombre,
+        @JsonView({ProductView.editProduct.class})
         String imagen,
+        @JsonView({ProductView.editProduct.class})
         String descripcion,
+        @JsonView({ProductView.editProduct.class})
         double precio,
+        @JsonView({ProductView.editProduct.class})
         String[] tags,
+        @JsonView({ProductView.editProduct.class})
         GetCategoriaDto categoria
 
 ) {
