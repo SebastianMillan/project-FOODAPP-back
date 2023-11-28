@@ -137,7 +137,7 @@ public class PedidoController {
             @ApiResponse(responseCode = "500", description = "Pedido no encontrado", content = @Content),
             @ApiResponse(responseCode = "500", description = "El Estado del Pedido introducido no es válido", content = @Content)
     })
-    @Operation(summary = "getAllPedidosDelCocinero", description = "Modificar el estado del pedido")
+    @Operation(summary = "changeEstadoPedidoCocinero", description = "Modificar el estado del pedido")
     @PutMapping("/cocinero/pedido/{id}")
     public GetPedidoEnCocinero changeEstadoPedidoCocinero(@PathVariable String id, @Valid @RequestBody EditEstadoPedidoDto editEstadoPedidoDto){
         return GetPedidoEnCocinero.of(pedidoService.changeEstadoPedidoCocinero(id, editEstadoPedidoDto));
