@@ -24,5 +24,5 @@ public interface ProductoRepository extends JpaRepository<Producto, UUID> {
     @Query("SELECT p FROM Producto p GROUP BY p.categoria, p.id")
     List<Producto> findAllGroupByCategoria();
 
-
+    List<Producto> findByCategoriaId(UUID categoriaId);
 }

@@ -10,6 +10,7 @@ import com.salesianostriana.dam.projectFOODAPP.categoria.exception.EmptyCategori
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 import com.salesianostriana.dam.projectFOODAPP.categoria.repository.CategoriaRepository;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
+import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetProductShortDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
@@ -97,10 +98,33 @@ public class CategoriaService {
 //        return productosByCategoria;
 //    }
 
+//    public List<GetCategoriaProductsDto> categoryWithProducts(){
+//
+//        List<GetCategoriaProductsDto> getProductDtos = categoriaRepository.categoryWithProducts();
+//
+//        return getProductDtos;
+//
+//    }
 
+    public List<GetCategoriaProductsDto> categoryWithProductsV2() {
+        List<GetCategoriaProductsDto> getProductDtos = new ArrayList<>();
 
+        List<Categoria> categorias = categoriaRepository.findAll();
+        for (Categoria categoria : categorias) {
+            List<Producto> productos = productoRepository.findByCategoriaId(categoria.getId());
+            List<GetDtoProducto> dtoProductos = new ArrayList<>();
 
+            for (Producto producto : productos) {
+                GetDtoProducto dtoProducto = GetDtoProducto.of(producto);
+                dtoProductos.add(dtoProducto);
+            }
 
+            GetCategoriaProductsDto dto = new GetCategoriaProductsDto(categoria.getNombre(), dtoProductos);
+            getProductDtos.add(dto);
+        }
+
+        return getProductDtos;
+    }
 
 
 

@@ -453,6 +453,14 @@ public class TrabajadorController {
                 .toList();
     }
 
+    @GetMapping("/admin/menu2")
+    public List<GetCategoriaProductsDto> categoriaProductsDtoList (){
+
+        return categoriaService.categoryWithProductsV2();
+
+
+    }
+
 }
 
 
