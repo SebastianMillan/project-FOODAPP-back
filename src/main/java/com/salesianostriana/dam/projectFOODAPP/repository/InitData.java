@@ -166,6 +166,12 @@ public class InitData {
                 .producto(p2)
                 .build();
 
+        LineaPedido ln4 = LineaPedido.builder()
+                .cantidad(2)
+                .precioUnitario(p1.getPrecio())
+                .producto(p1)
+                .build();
+
         Pedido ped1 = Pedido.builder()
                 .fecha(LocalDateTime.now())
                 .estadoPedido(EstadoPedido.EN_PREPARACION)
@@ -193,6 +199,7 @@ public class InitData {
         ped1.addLineaPedido(ln1);
         ped2.addLineaPedido(ln2);
         ped3.addLineaPedido(ln3);
+        ped2.addLineaPedido(ln4);
 
         pedidoRepository.saveAll(List.of(ped1,ped2, ped3));
 
