@@ -20,4 +20,11 @@ INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69
 
 INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbed99', 'angel01','1234', 'Angel', 'angel@gmail.com','333223311', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
 INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbed99','1995-11-11',0);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbed99');
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbed98');
+
+INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e044d', 'Hamburguesa');
+INSERT INTO CATEGORIA(id, nombre) VALUE ('1a730d09-2667-411b-9f8d-c5cd965e044e', 'Entrante');
+INSERT INTO CATEGORIA(id, nombre) VALUE ('1a730d09-2667-411b-9f8d-c5cd965e0445', 'Bebida');
+INSERT INTO CATEGORIA(id, nombre) VALUE ('1a730d09-2667-411b-9f8d-c5cd965e0445', 'Postres');
+
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precioOferta, tags) VALUES ()
