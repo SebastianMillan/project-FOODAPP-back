@@ -1,9 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.service;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.*;
 import com.salesianostriana.dam.projectFOODAPP.pedido.exception.PedidoNotFoundException;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.EditEstadoPedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetDetallePedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoEnDetalle;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.EstadoPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepository;
@@ -14,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -73,5 +71,14 @@ public class PedidoService {
                 pedido.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() *
                         x.getCantidad()).sum());
 
+    }
+
+    public List<GetPedidoDto> pedidoDetails(UUID id){
+        List<GetPedidoDto> getPedidoDtos = new ArrayList<>();
+
+        List<Pedido> pedidos = pedidoRepository.findAll();
+        for(Pedido pedido : pedidos){
+//            List<Cliente> clientes = clienteService
+        }
     }
 }
