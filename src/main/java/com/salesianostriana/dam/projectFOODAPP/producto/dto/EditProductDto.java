@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.projectFOODAPP.producto.dto;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;

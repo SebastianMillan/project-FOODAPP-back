@@ -25,34 +25,34 @@ public class ProductoService {
     private final ProductoRepository productoRepository;
     private final CategoriaRepository categoriaRepository;
 
-    public Producto getMonthProduct(){
+    public Producto getMonthProduct() {
         Optional<Producto> result = productoRepository.getProductMonth();
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new ProductoNotFoundException();
         }
         return result.get();
     }
 
-    public List<Producto> getProductsOnOffer(){
+    public List<Producto> getProductsOnOffer() {
         List<Producto> result = productoRepository.findAll()
                 .stream()
-                .filter(p -> p.getPrecioOferta()!=0)
+                .filter(p -> p.getPrecioOferta() != 0)
                 .toList();
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new EmptyProductListException();
         }
         return result;
     }
 
-    public List<Producto> getProductNews(){
+    public List<Producto> getProductNews() {
         List<Producto> result = productoRepository.getProductNews();
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new EmptyProductListException();
         }
         return result;
     }
 
-    public Producto save (EditProductDto nuevo){
+    public Producto save(EditProductDto nuevo) {
 
         Producto p = new Producto();
 
@@ -64,22 +64,58 @@ public class ProductoService {
 
         Categoria categoria = categoriaRepository.findByNombreIgnoreCase(nuevo.categoria());
 
-        if(categoria == null)
+        if (categoria == null)
             throw new CategoryException();
         else
             p.setCategoria(categoria);
 
 
-       return productoRepository.save(p);
+        return productoRepository.save(p);
     }
 
-    public void delete (String id){
+    public void delete(String id) {
 
         int num = productoRepository.comprobarProductoEnLineaPedido(UUID.fromString(id));
-        if(num == 0)
+        if (num == 0)
             productoRepository.deleteById(UUID.fromString(id));
         else
             throw new ProductNotDeleteException();
     }
 
-}
+    public Producto edit(EditProductDto editProduct, String id) {
+        Optional<Producto> p = productoRepository.findById(UUID.fromString(id));
+
+        if (p.isPresent()) {
+            Producto edit = p.get();
+
+            edit.setNombre(editProduct.nombre());
+            edit.setImagen(editProduct.imagen());
+            edit.setDescripcion(editProduct.descripcion());
+            edit.setPrecio(editProduct.precio());
+            edit.setTags(editProduct.tags());
+
+            Categoria categoria = categoriaRepository.findByNombreIgnoreCase(editProduct.categoria());
+
+            if (categoria == null)
+                throw new CategoryException();
+            else
+                edit.setCategoria(categoria);
+
+            return productoRepository.save(edit);
+        }
+
+        throw new ProductoNotFoundException();
+
+    }
+
+        public Producto details (String id){
+
+            Optional<Producto> p = productoRepository.findById(UUID.fromString(id));
+
+            if (p.isPresent())
+                return p.get();
+
+            throw new ProductoNotFoundException();
+
+        }
+    }
