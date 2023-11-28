@@ -13,6 +13,7 @@ import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetProductShortDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.ClienteNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -61,10 +62,10 @@ public class CategoriaService {
         return categoriaRepository.save(cat);
     }
 
-    public Categoria editCategoria (GetCategoriaDto editCategoria, String nombreCategoria){
+    public Categoria editCategoria (GetCategoriaDto editCategoria, UUID idCategoria) {
 
-        Categoria cat = categoriaRepository.buscarCategoriaPorNombre(nombreCategoria)
-                .orElseThrow(() -> new CategoriaNotFoundException(nombreCategoria));
+        Categoria cat = categoriaRepository.findById(idCategoria)
+                .orElseThrow(() -> new CategoriaNotFoundException(idCategoria.toString()));
 
         cat.setNombre(editCategoria.nombre());
 
@@ -72,18 +73,17 @@ public class CategoriaService {
 
     }
 
-    public void deleteCategoria (String nombreCategoria) {
+    public void deleteCategoria (UUID idCategoria) {
 
-        Categoria cat = categoriaRepository.findByNombreIgnoreCase(nombreCategoria);
-        int cantProductos = categoriaRepository.contarCantidadProductosDeUnaCategoriaByNombre(nombreCategoria);
+        Categoria cat = categoriaRepository.findById(idCategoria).
+                orElseThrow(() -> new ClienteNotFoundException(idCategoria.toString()));
 
-        if (cat == null)
-            throw new CategoriaNotFoundException(nombreCategoria);
+        int cantProductos = categoriaRepository.contarCantidadProductosDeUnaCategoria(idCategoria);
 
         if (cantProductos == 0)
             categoriaRepository.delete(cat);
         else
-            throw new CategoriaConProductosException(nombreCategoria);
+            throw new CategoriaConProductosException(idCategoria.toString());
     }
 
 //    public Map<Categoria, List<Producto>> getProductosByCategoria() {
