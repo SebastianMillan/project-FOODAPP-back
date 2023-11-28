@@ -36,4 +36,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
             """)
     Optional<Pedido> buscarPedidoPorId(UUID id);
 
+
 }

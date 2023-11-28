@@ -11,6 +11,7 @@ public record GetLineaPedidoEnDetalle (
         double precioUnit,
 
         double subtotal
+
 ){
 
     public static GetLineaPedidoEnDetalle of (LineaPedido ln){

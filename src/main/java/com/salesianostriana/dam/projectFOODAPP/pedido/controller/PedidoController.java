@@ -138,11 +138,9 @@ public class PedidoController {
     }
 
     @GetMapping("/pedido/{idPedido}")
-    public GetDetallePedidoDto getHistorialPedidosDeUnCliente(@Valid @PathVariable UUID idPedido){
+    public GetDetallePedidoDto getDetallesDeUnPedido(@PathVariable UUID idPedido){
 
-        Pedido pedido = pedidoService.getPedidoDetails(idPedido);
-
-        return GetDetallePedidoDto.of(pedido, )
+        return pedidoService.getPedidoDetailsDto(idPedido);
     }
 
 }

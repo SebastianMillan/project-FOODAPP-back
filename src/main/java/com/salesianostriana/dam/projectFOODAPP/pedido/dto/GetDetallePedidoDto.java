@@ -3,7 +3,9 @@ package com.salesianostriana.dam.projectFOODAPP.pedido.dto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public record GetDetallePedidoDto(
@@ -16,23 +18,27 @@ public record GetDetallePedidoDto(
 
         String estadoPedido,
 
-        LocalTime horaLlegada,
+        String horaLlegada,
 
         List<GetLineaPedidoEnDetalle> lineasPedido,
 
         double total
 ) {
-
-    public static GetDetallePedidoDto of (Pedido p, double total){
+/*
+    public static GetDetallePedidoDto of (Pedido p){
 
         return new GetDetallePedidoDto(
                 p.getId().toString(),
-                p.getCliente(),
-                p.getCliente(),
+                //p.getCliente(),
+                //p.getCliente(),
+                null,
+                null,
                 p.getEstadoPedido().toString(),
-                p.getFecha().toLocalTime().plusMinutes(30),
+                p.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
                 p.getLineasPedido().stream().map(GetLineaPedidoEnDetalle::of).toList(),
-                total
+                p.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() * x.getCantidad()).sum()
+
         );
     }
+    */
 }
