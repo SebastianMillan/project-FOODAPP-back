@@ -84,7 +84,7 @@ public class CategoriaController {
 
     @Operation(summary = "Edita el nombre de una categoría existente")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
+            @ApiResponse(responseCode = "201",
                     description = "OK",
                     content = @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
@@ -105,21 +105,14 @@ public class CategoriaController {
                     content = @Content
             )
     })
-    @PutMapping("/admin/edit/categoria/{nombreCategoria}")
+    @PutMapping("/admin/edit/categoria/{idCategoria}")
     public GetCategoriaDto editCategoria(@Valid @RequestBody GetCategoriaDto categoriaEditada,
-                                         @PathVariable String nombreCategoria){
+                                         @PathVariable UUID idCategoria){
 
-        Categoria cat = categoriaService.editCategoria(categoriaEditada, nombreCategoria);
+        Categoria cat = categoriaService.editCategoria(categoriaEditada, idCategoria);
 
         return GetCategoriaDto.of(cat);
 
     }
 
-    @DeleteMapping("/admin/delete/categoria/{nombreCategoria}")
-    public ResponseEntity<?> deleteCategoria(@PathVariable String nombreCategoria){
-
-        categoriaService.deleteCategoria(nombreCategoria);
-
-        return ResponseEntity.noContent().build();
-    }
 }
