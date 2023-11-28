@@ -91,8 +91,7 @@ public class CategoriaController {
                             examples = @ExampleObject(
                                     value = """
                     [
-                        {
-                            "id": 1,
+                         {
                             "nombre": "nombre"
                          }
                     ]
@@ -105,21 +104,25 @@ public class CategoriaController {
                     content = @Content
             )
     })
-    @PutMapping("/admin/edit/categoria/{nombreCategoria}")
-
+    @PutMapping("/admin/edit/categoria/{idCategoria}")
     public GetCategoriaDto editCategoria(@Valid @RequestBody GetCategoriaDto categoriaEditada,
-                                         @PathVariable String nombreCategoria){
+                                         @PathVariable UUID idCategoria){
 
-        Categoria cat = categoriaService.editCategoria(categoriaEditada, nombreCategoria);
+        Categoria cat = categoriaService.editCategoria(categoriaEditada, idCategoria);
 
         return GetCategoriaDto.of(cat);
 
     }
 
-    @DeleteMapping("/admin/delete/categoria/{nombreCategoria}")
-    public ResponseEntity<?> deleteCategoria(@PathVariable String nombreCategoria){
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Categoría eliminada con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Categoría no encontrada", content = @Content)
+    })
+    @Operation(summary = "deleteCategoria", description = "Eliminar Categoría por UUID")
+    @DeleteMapping("/admin/delete/categoria/{idCategoria}")
+    public ResponseEntity<?> deleteCategoria(@PathVariable UUID idCategoria){
 
-        categoriaService.deleteCategoria(nombreCategoria);
+        categoriaService.deleteCategoria(idCategoria);
 
         return ResponseEntity.noContent().build();
     }
