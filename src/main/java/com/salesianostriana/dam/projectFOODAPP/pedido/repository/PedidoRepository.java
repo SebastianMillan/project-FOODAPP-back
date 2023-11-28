@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.repository;
 
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoRepartidorDTO;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,4 +53,11 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
             """)
     Optional<Pedido> buscarPedidoPorId(UUID id);
 
+    @Query("""
+            SELECT p
+            FROM Pedido p
+            JOIN FETCH p.lineasPedido
+            WHERE p.repartidor = ?2
+            """)
+    Page<GetPedidoRepartidorDTO> getPedidosDelRepartidor(Pageable pageable, String idRepartidor);
 }

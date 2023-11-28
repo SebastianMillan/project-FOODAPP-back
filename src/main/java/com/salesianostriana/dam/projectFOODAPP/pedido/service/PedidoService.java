@@ -1,9 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.service;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.*;
 import com.salesianostriana.dam.projectFOODAPP.pedido.exception.PedidoNotFoundException;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.EditEstadoPedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetDetallePedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoEnDetalle;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.EstadoPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepository;
@@ -73,5 +70,9 @@ public class PedidoService {
                 pedido.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() *
                         x.getCantidad()).sum());
 
+    }
+
+    public Page<GetPedidoRepartidorDTO> getPedidosDelRepartidor (Pageable pageable, String idPedido){
+        return pedidoRepository.getPedidosDelRepartidor(pageable, idPedido);
     }
 }
