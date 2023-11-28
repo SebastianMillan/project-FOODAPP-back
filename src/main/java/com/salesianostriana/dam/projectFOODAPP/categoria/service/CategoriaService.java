@@ -68,4 +68,17 @@ public class CategoriaService {
         return categoriaRepository.save(cat);
 
     }
+
+    public void deleteCategoria (UUID idCategoria) {
+
+        Categoria cat = categoriaRepository.findById(idCategoria).
+                orElseThrow(() -> new ClienteNotFoundException(idCategoria.toString()));
+
+        int cantProductos = categoriaRepository.contarCantidadProductosDeUnaCategoria(idCategoria);
+
+        if (cantProductos == 0)
+            categoriaRepository.delete(cat);
+        else
+            throw new CategoriaConProductosException(idCategoria.toString());
+    }
 }
