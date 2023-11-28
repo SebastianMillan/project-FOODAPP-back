@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.dto;
 
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
+
 public record GetPedidoRepartidorDTO (
 
         String idCliente,
@@ -17,4 +19,15 @@ public record GetPedidoRepartidorDTO (
         double importe
 ){
 
+    public static GetPedidoRepartidorDTO of (Pedido p){
+        return new GetPedidoRepartidorDTO(
+                p.getCliente().toString(),
+                null,
+                p.getFecha().toString(),
+                p.getEstadoPedido().toString(),
+                null,
+                null,
+                p.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() * x.getPrecioUnitario()).sum()
+        );
+    }
 }

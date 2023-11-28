@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -72,7 +73,19 @@ public class PedidoService {
 
     }
 
-    public Page<GetPedidoRepartidorDTO> getPedidosDelRepartidor (Pageable pageable, String idPedido){
-        return pedidoRepository.getPedidosDelRepartidor(pageable, idPedido);
+    public Page<GetPedidoRepartidorDTO> getPedidosDelRepartidor (Pageable pageable, String idRepartidor){
+
+        return pedidoRepository.getPedidosDelRepartidor(pageable, idRepartidor);
     }
 }
+/*
+List<GetPedidoDTO> pedidosDto = new ArrayList<>();
+        for (Pedido pedido : pedidos) {
+            pedidosDto.add(GetPedidoDTO.of(pedido,
+                    pedidoServicio.calcularImporteTotal(pedido),
+                    pedidoServicio.obtenerProductosDiferentes(pedido),
+                    pedidoServicio.obtenerTotalProductos(pedido)));
+        }
+        return ResponseEntity.ok(pedidosDto);
+    }
+ */

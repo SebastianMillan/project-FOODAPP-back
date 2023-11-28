@@ -137,69 +137,6 @@ public class PedidoController {
         return pedidoService.getPedidoDetailsDto(idPedido);
     }
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Obtener lista de Pedidos del repartidor", content = {
-                    @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetPedidoEnCocinero.class)),
-                            examples = {@ExampleObject(
-                                    value = """
-                                            {
-                                                "content": [
-                                                    {
-                                                        "id": "ac1b0662-8c10-134a-818c-10e355b1000a",
-                                                        "fecha": "2023-11-27T14:06:23.280957",
-                                                        "estadoPedido": "EN_PREPARACION",
-                                                        "lineasPedido": [
-                                                            {
-                                                                "producto": "Patatas Bravas",
-                                                                "cantidad": 1
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "ac1b0662-8c10-134a-818c-10e355b5000c",
-                                                        "fecha": "2023-11-27T14:06:23.280957",
-                                                        "estadoPedido": "CONFIRMADO",
-                                                        "lineasPedido": [
-                                                            {
-                                                                "producto": "Plato de Jamón Ibérico",
-                                                                "cantidad": 1
-                                                            }
-                                                        ]
-                                                    }
-                                                ],
-                                                "pageable": {
-                                                    "pageNumber": 0,
-                                                    "pageSize": 4,
-                                                    "sort": {
-                                                        "empty": true,
-                                                        "unsorted": true,
-                                                        "sorted": false
-                                                    },
-                                                    "offset": 0,
-                                                    "paged": true,
-                                                    "unpaged": false
-                                                },
-                                                "last": true,
-                                                "totalPages": 1,
-                                                "totalElements": 2,
-                                                "size": 4,
-                                                "number": 0,
-                                                "sort": {
-                                                    "empty": true,
-                                                    "unsorted": true,
-                                                    "sorted": false
-                                                },
-                                                "first": true,
-                                                "numberOfElements": 2,
-                                                "empty": false
-                                            }
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "500", description = "Lista de clientes vacia", content = @Content)
-    })
-    @Operation(summary = "getAllPedidosDelRepartidor", description = "Obtener lista de Pedidos del repartidor")
     @GetMapping("/repartidor/pedido")
     public Page<GetPedidoRepartidorDTO> getAllPedidosDelRepartidor(@PageableDefault(page=0, size =4)Pageable pageable,
                                                                    @AuthenticationPrincipal Trabajador repartidor){
@@ -207,5 +144,4 @@ public class PedidoController {
         return pedidoService.getPedidosDelRepartidor(pageable, repartidor.getId().toString());
 
     }
-
 }
