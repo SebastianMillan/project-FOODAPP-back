@@ -29,6 +29,11 @@ public class PedidoService {
         return pedidoRepository.getAllPedidosConLineas();
     }
 
+//    public List<GetPedidoDto> getAllPedidosv2() {
+//
+//        return pedidoRepository.pedidosWithClientes();
+//    }
+
     public Optional<Pedido> getPedidoDeClienteById(String idCliente){
 
         Optional<Pedido> pedido = pedidoRepository.getPedidoDeClienteById(idCliente);
@@ -71,14 +76,5 @@ public class PedidoService {
                 pedido.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() *
                         x.getCantidad()).sum());
 
-    }
-
-    public List<GetPedidoDto> pedidoDetails(UUID id){
-        List<GetPedidoDto> getPedidoDtos = new ArrayList<>();
-
-        List<Pedido> pedidos = pedidoRepository.findAll();
-        for(Pedido pedido : pedidos){
-//            List<Cliente> clientes = clienteService
-        }
     }
 }

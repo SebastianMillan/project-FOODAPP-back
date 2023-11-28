@@ -372,6 +372,35 @@ public class TrabajadorController {
         return GetTrabajadorDto.of(t);
     }
 
+    @Operation(summary = "Detalles pedido")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Detalles un pedido",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Pedido.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                  "id": "ac19c001-8c17-10bb-818c-17f0c7e8000a",
+                                                  "fecha": "28-11-2023 22:58",
+                                                  "cliente": "ac19c001-8c17-10bb-818c-17f0c6dd0002",
+                                                  "estadoPedido": "EN_PREPARACION",
+                                                  "ln": [
+                                                      {
+                                                          "producto": "Patatas Bravas",
+                                                          "cantidad": 1
+                                                      }
+                                                  ],
+                                                  "importe": 2.3
+                                              }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "500",
+                    description = "Error al encontrar el pedido para mostrar los detalles",
+                    content = @Content)
+    })
     @GetMapping("/admin/pedido")
     public List<GetPedidoDto> getPedidos() {
 
@@ -381,6 +410,21 @@ public class TrabajadorController {
                 .map(GetPedidoDto::of)
                 .toList();
     }
+
+
+    @GetMapping("/admin/pedido/{id}")
+    public GetPedidoDto pedidoId (@PathVariable String id){
+
+        Pedido p = pedidoService.getPedidoDetails(UUID.fromString(id));
+
+        return GetPedidoDto.of(p);
+    }
+
+//    @GetMapping("/admin/pedido")
+//    public List<GetPedidoDto> getPedidos() {
+//
+//        return pedidoService.getAllPedidosv2();
+//    }
 
 //    @Operation(summary = "Menú de un restaurante")
 //    @ApiResponses(value = {
@@ -459,13 +503,13 @@ public class TrabajadorController {
 //                    description = "Error al cargar el menú",
 //                    content = @Content)
 //    })
-        @JsonView(MenuProductosView.menu.class)
-        @GetMapping("/admin/menu2")
-        public List<GetCategoriaProductsDto> categoriaProductsDtoList () {
-
-            return categoriaService.categoryWithProductsV2();
-
-        }
+//        @JsonView(MenuProductosView.menu.class)
+//        @GetMapping("/admin/menu2")
+//        public List<GetCategoriaProductsDto> categoriaProductsDtoList () {
+//
+//            return categoriaService.categoryWithProductsV2();
+//
+//        }
 }
 
 

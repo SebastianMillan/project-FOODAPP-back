@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.repository;
 
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import org.springframework.data.domain.Page;
@@ -52,4 +53,14 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
             """)
     Optional<Pedido> buscarPedidoPorId(UUID id);
 
+//    @Query("""
+//            select new com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDto(ln,
+//                (select c.nombre
+//                 from Cliente c
+//                 where c.id = p.cliente.id))
+//            from Pedido p
+//            join fetch p.lineasPedido ln
+//            where p.id = ln.pedido.id
+//            """)
+//    List<GetPedidoDto> pedidosWithClientes ();
 }

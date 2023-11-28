@@ -12,7 +12,8 @@ public record GetPedidoDto(
         String fecha,
         String cliente,
         String estadoPedido,
-        List<GetLineaPedidoEnPedidoDto> ln
+        List<GetLineaPedidoEnPedidoDto> ln,
+        double importe
 ) {
 
     public static GetPedidoDto of (Pedido p){
@@ -25,7 +26,8 @@ public record GetPedidoDto(
                 p.getLineasPedido()
                         .stream()
                         .map(GetLineaPedidoEnPedidoDto::of)
-                        .toList()
+                        .toList(),
+                p.getLineasPedido().stream().mapToDouble(a -> a.getPrecioUnitario() * a.getCantidad()).sum()
         );
     }
 }
