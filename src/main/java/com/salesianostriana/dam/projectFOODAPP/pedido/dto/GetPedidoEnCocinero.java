@@ -12,7 +12,7 @@ public record GetPedidoEnCocinero(String id, String fecha, String estadoPedido, 
     public static GetPedidoEnCocinero of(Pedido p){
         return new GetPedidoEnCocinero(
                 p.getId().toString(),
-                p.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyy HH:mm")),
+                p.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
                 p.getEstadoPedido().name(),
                 p.getLineasPedido().stream()
                         .map(GetLineaPedidoEnPedidoDto::of)

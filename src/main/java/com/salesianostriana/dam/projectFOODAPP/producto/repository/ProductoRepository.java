@@ -19,5 +19,12 @@ public interface ProductoRepository extends JpaRepository<Producto, UUID> {
     @Query("SELECT COUNT(lp) FROM LineaPedido lp WHERE lp.producto.id = ?1")
     int comprobarProductoEnLineaPedido(UUID productId);
 
+    @Query("""
+            select p
+            from Producto p
+            where cast(p.id as string) = ?1
+            """)
+    Optional<Producto> encontrarProductoPorId(String id);
+
 
 }
