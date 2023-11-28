@@ -86,26 +86,6 @@ public class CategoriaService {
             throw new CategoriaConProductosException(idCategoria.toString());
     }
 
-//    public Map<Categoria, List<Producto>> getProductosByCategoria() {
-//        List<Categoria> categorias = getAllCategorias();
-//        Map<Categoria, List<Producto>> productosByCategoria = new HashMap<>();
-//
-//        for (Categoria categoria : categorias) {
-//            List<Producto> productos = productoRepository.findByCategoria(categoria);
-//            productosByCategoria.put(categoria, productos);
-//        }
-//
-//        return productosByCategoria;
-//    }
-
-//    public List<GetCategoriaProductsDto> categoryWithProducts(){
-//
-//        List<GetCategoriaProductsDto> getProductDtos = categoriaRepository.categoryWithProducts();
-//
-//        return getProductDtos;
-//
-//    }
-
     public List<GetCategoriaProductsDto> categoryWithProductsV2() {
         List<GetCategoriaProductsDto> getProductDtos = new ArrayList<>();
 

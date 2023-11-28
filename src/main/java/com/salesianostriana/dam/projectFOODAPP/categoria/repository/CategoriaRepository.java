@@ -22,15 +22,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, UUID> {
             """)
     int contarCantidadProductosDeUnaCategoria (UUID categoriaId);
 
-    /*
-    @Query("""
-            SELECT COUNT(p)
-            FROM Producto p
-            JOIN p.categoria as cat
-            WHERE cat.nombre = ?1
-            """)
-    int contarCantidadProductosDeUnaCategoriaByNombre (String idCategoria);
-    */
 
     Categoria findByNombreIgnoreCase(String nombre);
 
@@ -41,13 +32,5 @@ public interface CategoriaRepository extends JpaRepository<Categoria, UUID> {
             """)
     Optional<Categoria> buscarCategoriaPorNombre(String nombreCategoria);
 
-//    @Query("""
-//            select new com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaProductsDto (c.nombre,
-//                (select p
-//                 from Producto p
-//                 where p.categoria.id = c.id))
-//            where Categoria c
-//            """)
-//    List<GetCategoriaProductsDto> categoryWithProducts();
 
 }
