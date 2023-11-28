@@ -139,7 +139,7 @@ public class InitData {
                 .username("fer")
                 .password(passwordEncoder.encode("1234"))
                 .nombre("Fernando Claro")
-                .roles(Set.of(RolUsuario.ADMIN))
+                .roles(Set.of(RolUsuario.TRABAJADOR, RolUsuario.ADMIN))
                 .email("fer@gmail.com")
                 .telefono("121232888")
                 .fechaNacimiento(LocalDate.parse("13-11-2002", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
@@ -160,6 +160,12 @@ public class InitData {
                 .producto(p2)
                 .build();
 
+        LineaPedido ln3 = LineaPedido.builder()
+                .cantidad(2)
+                .precioUnitario(p2.getPrecio())
+                .producto(p2)
+                .build();
+
         Pedido ped1 = Pedido.builder()
                 .fecha(LocalDateTime.now())
                 .estadoPedido(EstadoPedido.EN_PREPARACION)
@@ -176,10 +182,19 @@ public class InitData {
                 .cocinero(t2.getId().toString())
                 .build();
 
+        Pedido ped3 = Pedido.builder()
+                .fecha(LocalDateTime.now())
+                .estadoPedido(EstadoPedido.CONFIRMADO)
+                .cliente(cl2.getId().toString())
+                .repartidor(t1.getId().toString())
+                .cocinero(t2.getId().toString())
+                .build();
+
         ped1.addLineaPedido(ln1);
         ped2.addLineaPedido(ln2);
+        ped3.addLineaPedido(ln3);
 
-        pedidoRepository.saveAll(List.of(ped1,ped2));
+        pedidoRepository.saveAll(List.of(ped1,ped2, ped3));
 
     }
 }

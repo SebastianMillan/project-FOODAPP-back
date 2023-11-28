@@ -1,33 +1,35 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.dto;
 
-import com.salesianostriana.dam.projectFOODAPP.usuario.model.TipoTrabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-public record GetTrabajadorDto(
-
-        String id,
+public record AltaTrabajadorDto(
+        @NotEmpty(message = "{altaTrabajadorDto.name.notEmpty}")
         String nombre,
 
+        @Email(message = "{altaTrabajdorDto.email.notValid}")
         String email,
-
         String telefono,
 
+        @NotEmpty(message = "{altaTrabajadorDto.userName.NotEmpty}")
         String username,
-
+        @NotEmpty(message = "{altaTrabajdorDto.password.notEmpty}")
         String password,
 
+        @NotEmpty(message = "{altaTrabajadorDto.puesto.notEmpty}")
         String puesto,
 
+        @NotNull(message = "{altaTrabajadorDto.fecha.notNull}")
         LocalDate fechaNacimiento
 
 ) {
 
-    public static GetTrabajadorDto of (Trabajador trabajador){
-        return  new GetTrabajadorDto(
-                trabajador.getId().toString(),
+    public static AltaTrabajadorDto of (Trabajador trabajador){
+        return new AltaTrabajadorDto(
                 trabajador.getNombre(),
                 trabajador.getEmail(),
                 trabajador.getTelefono(),
@@ -37,4 +39,5 @@ public record GetTrabajadorDto(
                 trabajador.getFechaNacimiento()
         );
     }
+
 }
