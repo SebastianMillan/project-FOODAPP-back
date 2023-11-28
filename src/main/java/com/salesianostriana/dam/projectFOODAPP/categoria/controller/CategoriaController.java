@@ -84,15 +84,14 @@ public class CategoriaController {
 
     @Operation(summary = "Edita el nombre de una categoría existente")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201",
+            @ApiResponse(responseCode = "200",
                     description = "OK",
                     content = @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
                             examples = @ExampleObject(
                                     value = """
                     [
-                        {
-                            "id": 1,
+                         {
                             "nombre": "nombre"
                          }
                     ]
@@ -115,4 +114,16 @@ public class CategoriaController {
 
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Categoría eliminada con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Categoría no encontrada", content = @Content)
+    })
+    @Operation(summary = "deleteCategoria", description = "Eliminar Categoría por UUID")
+    @DeleteMapping("/admin/delete/categoria/{idCategoria}")
+    public ResponseEntity<?> deleteCategoria(@PathVariable UUID idCategoria){
+
+        categoriaService.deleteCategoria(idCategoria);
+
+        return ResponseEntity.noContent().build();
+    }
 }
