@@ -1,8 +1,12 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.service;
 
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.CreateClientDto;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.CreateUserRequest;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.PasswordNotValidException;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.RolUsuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
+import com.salesianostriana.dam.projectFOODAPP.usuario.repository.ClienteRepository;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,10 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -22,28 +23,31 @@ public class UsuarioService {
 
     private final PasswordEncoder passwordEncoder;
     private final UsuarioRepository userRepository;
+    private final ClienteRepository clienteRepository;
 
-    public Usuario createUser(CreateUserRequest createUserRequest, EnumSet<RolUsuario> roles) {
+    public Cliente createUser(CreateClientDto created, EnumSet<RolUsuario> roles) {
 
-        if (userRepository.existsByUsernameIgnoreCase(createUserRequest.getUsername()))
+        if (userRepository.existsByUsernameIgnoreCase(created.username()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El nombre de usuario ya existe");
 
-        Usuario user =  Usuario.builder()
-                .username(createUserRequest.getUsername())
-                .password(passwordEncoder.encode(createUserRequest.getPassword()))
-                .nombre((createUserRequest.getFullName()))
-                .roles(roles)
+        if(!created.password().equalsIgnoreCase(created.verifyPassword())){
+            throw new PasswordNotValidException();
+        }
+
+        Cliente c = Cliente.builder()
+                .username(created.username())
+                .password(passwordEncoder.encode(created.password()))
+                .avatar(created.avatar())
+                .nombre(created.nombre())
+                .email(created.email())
+                .roles(Set.of(RolUsuario.CLIENTE))
                 .build();
 
-        return userRepository.save(user);
+        return clienteRepository.save(c);
     }
 
-    public Usuario createUserWithUserRole(CreateUserRequest createUserRequest) {
-        return createUser(createUserRequest, EnumSet.of(RolUsuario.CLIENTE));
-    }
-
-    public Usuario createUserWithAdminRole(CreateUserRequest createUserRequest) {
-        return createUser(createUserRequest, EnumSet.of(RolUsuario.ADMIN));
+    public Cliente createUserWithUserRole(CreateClientDto created) {
+        return createUser(created, EnumSet.of(RolUsuario.CLIENTE));
     }
 
     public List<Usuario> findAll() {
