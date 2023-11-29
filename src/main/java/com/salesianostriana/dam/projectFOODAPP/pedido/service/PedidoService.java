@@ -1,9 +1,5 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.service;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.*;
-<<<<<<< HEAD
-=======
-import com.salesianostriana.dam.projectFOODAPP.pedido.exception.LineaPedidoNotFoundException;
->>>>>>> main
 import com.salesianostriana.dam.projectFOODAPP.pedido.exception.PedidoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.EstadoPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
