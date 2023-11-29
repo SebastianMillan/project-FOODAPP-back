@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,6 +43,11 @@ public class PedidoService {
     public List<Pedido> getAllPedidos() {
 
         return pedidoRepository.getAllPedidosConLineas();
+    }
+
+    public List<GetPedidoDto> getAllPedidosv2() {
+
+        return pedidoRepository.pedidosWithClientes();
     }
 
     public Optional<Pedido> getPedidoDeClienteById(String idCliente){
@@ -86,6 +92,12 @@ public class PedidoService {
                 pedido.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() *
                         x.getCantidad()).sum());
 
+    }
+
+
+    public List<GetLineaPedidoClienteDto> lineasPedidos (String idPedido){
+
+        return pedidoRepository.lineaPedido(idPedido);
     }
 
 
