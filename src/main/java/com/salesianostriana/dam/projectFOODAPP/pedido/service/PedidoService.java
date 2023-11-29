@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.service;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.*;
-import com.salesianostriana.dam.projectFOODAPP.pedido.exception.LineaPedidoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.exception.PedidoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.EstadoPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
@@ -94,14 +93,32 @@ public class PedidoService {
 
     }
 
+    public Page<GetPedidoRepartidorDTO> getPedidosDelRepartidor (Pageable pageable, String idRepartidor){
+
+        return pedidoRepository.getPedidosDelRepartidor(idRepartidor, pageable);
+
+    }
+/*
+    public GetPedidoRepartidorDTO cambiarEstadoPedidoRepartidor (String idPedido, EditEstadoPedidoDto nuevoEstado){
+
+        Cliente cliente = clienteService.buscarClientePorId(pedido.getCliente());
+
+        return new GetPedidoRepartidorDTO(
+                pedido.getId().toString(),
+                cliente.getNombre(),
+                pedido.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+                nuevoEstado.estadoPedido(),
+                cliente.getDireccion(),
+                cliente.getTelefono(),
+                pedido.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() *
+                        x.getCantidad()).sum());
+        }
+*/
 
     public List<GetLineaPedidoClienteDto> lineasPedidos (String idPedido){
 
         return pedidoRepository.lineaPedido(idPedido);
     }
-
-
-
 
     public Pedido addProductoToPedidoOpen (String idProducto, Cliente c){
         Optional<Pedido> pedidoOpen = pedidoRepository.buscarPedidoAbiertoByClienteId(c.getId().toString());
@@ -165,3 +182,4 @@ public class PedidoService {
     }
 
 }
+

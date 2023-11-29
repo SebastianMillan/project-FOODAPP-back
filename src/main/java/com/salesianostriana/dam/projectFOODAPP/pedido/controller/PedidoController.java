@@ -1,14 +1,11 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.controller;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDetallesDTO;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.*;
 import com.salesianostriana.dam.projectFOODAPP.pedido.exception.PedidoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.service.PedidoService;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.ClienteNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.ClienteService;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.EditEstadoPedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetDetallePedidoDto;
-import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -111,8 +108,6 @@ public class PedidoController {
         return pedidoService.getAllPedidosDelCocinero(pageable, cocinero.getId().toString());
     }
 
-
-
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Modificar el estado del pedido", content = {
                     @Content(mediaType = "application/json",
@@ -140,6 +135,22 @@ public class PedidoController {
 
         return pedidoService.getPedidoDetailsDto(idPedido);
     }
+
+    @GetMapping("/repartidor/pedidos")
+    public Page<GetPedidoRepartidorDTO> getAllPedidosDelRepartidor(@PageableDefault(page=0, size =4)Pageable pageable,
+                                                                   @AuthenticationPrincipal Trabajador repartidor){
+
+        return pedidoService.getPedidosDelRepartidor(pageable, repartidor.getId().toString());
+
+    }
+/*
+    @PutMapping("/repartidor/pedido/{idPedido}")
+    public GetPedidoRepartidorDTO cambiarEstadoPedidoRepartidor(@PathVariable String idPedido,
+                                                                @Valid @RequestBody  EditEstadoPedidoDto estado){
+
+        return pedidoService.cambiarEstadoPedidoRepartidor(idPedido, estado);
+    }
+ */
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Añadir producto al carrito", content = {
@@ -231,5 +242,4 @@ public class PedidoController {
     public GetDetallePedidoDto getOpenPedido(@AuthenticationPrincipal Cliente c){
         return pedidoService.getPedidoDetailsDto(pedidoService.getOpenPedido(c).getId());
     }
-
 }
