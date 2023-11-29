@@ -1,8 +1,10 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.salesianostriana.dam.projectFOODAPP.View.MenuProductosView;
 import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
 
+import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaProductsDto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.EditProductDto;
 import com.salesianostriana.dam.projectFOODAPP.producto.dto.GetDtoProducto;
@@ -11,6 +13,7 @@ import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 
+import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
 
 import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
@@ -46,7 +49,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -56,6 +61,7 @@ public class TrabajadorController {
     private final CategoriaService categoriaService;
     private final TrabajadorService trabajadorService;
     private final ProductoService productoService;
+    private final ProductoRepository productoRepository;
 
     @Operation(summary = "Muestra una lista de los productos de una categoría")
     @ApiResponses(value = {
@@ -293,6 +299,37 @@ public class TrabajadorController {
         return GetDtoProducto.of(p);
 
     }
+
+    @Operation(summary = "Detalles producto")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Detalles un producto",
+                    content = { @Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "ac19c001-8c11-176c-818c-11a777a80004",
+                                                "nombre": "Patatas Bravas",
+                                                "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Patatas_bravas_madrid.jpg/640px-Patatas_bravas_madrid.jpg",
+                                                "descripcion": "Patatas fritas acompañadas con una salsa picante de tomate Goya.",
+                                                "precio": 2.3,
+                                                "tags": [
+                                                    "patatas",
+                                                    "bravas"
+                                                ],
+                                                "categoria": {
+                                                    "nombre": "Tapas"
+                                                }
+                                            }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "500",
+                    description = "Error al encontrar el producto para mostrar los detalles",
+                    content = @Content)
+    })
     @GetMapping("/admin/product/details/{id}")
     public GetDtoProducto details (@Valid @PathVariable String id){
 
@@ -327,6 +364,103 @@ public class TrabajadorController {
     public GetTrabajadorDto obtenerTrabajador(@PathVariable String id){
         Trabajador t = trabajadorService.bucarUIID(id);
         return GetTrabajadorDto.of(t);
+    }
+
+//
+//    @Operation(summary = "Menú de un restaurante")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200",
+//                    description = "Menú del Restaurante",
+//                    content = { @Content(mediaType = "aplication/json",
+//                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+//                            examples = {@ExampleObject(
+//                                    value = """
+//                                            [
+//                                                 {
+//                                                     "id": "ac19c001-8c11-176c-818c-11a777a80004",
+//                                                     "nombre": "Patatas Bravas",
+//                                                     "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Patatas_bravas_madrid.jpg/640px-Patatas_bravas_madrid.jpg",
+//                                                     "descripcion": "Patatas fritas acompañadas con una salsa picante de tomate Goya.",
+//                                                     "precio": 2.3,
+//                                                     "tags": [
+//                                                         "patatas",
+//                                                         "bravas"
+//                                                     ],
+//                                                     "categoria": {
+//                                                         "nombre": "Tapas"
+//                                                     }
+//                                                 },
+//                                                 {
+//                                                     "id": "ac19c001-8c11-176c-818c-11a777a90005",
+//                                                     "nombre": "Plato de Jamón Ibérico",
+//                                                     "imagen": "https://phantom-expansion.unidadeditorial.es/4a18f7865539ab348461b2ff7fc87fe4/crop/0x455/1197x1253/f/jpg/assets/multimedia/imagenes/2022/02/24/16457011092381.jpg",
+//                                                     "descripcion": "Plato de Jamón 100% Ibérico y curado",
+//                                                     "precio": 6.3,
+//                                                     "tags": [
+//                                                         "Jamón",
+//                                                         "Ibérico",
+//                                                         "De Bellota"
+//                                                     ],
+//                                                     "categoria": {
+//                                                         "nombre": "Tapas"
+//                                                     }
+//                                                 },
+//                                                 {
+//                                                     "id": "ac19c001-8c11-176c-818c-11a777a90007",
+//                                                     "nombre": "Hamburguesa Queso",
+//                                                     "imagen": "https://i.blogs.es/75907e/tarta_queso_philadelphia-min/1366_2000.jpeg",
+//                                                     "descripcion": "Hamburguesa de Buey con queso de cabra",
+//                                                     "precio": 2.4,
+//                                                     "tags": [
+//                                                         "Queso",
+//                                                         "Hamburguesa",
+//                                                         "Buey"
+//                                                     ],
+//                                                     "categoria": {
+//                                                         "nombre": "Tapas"
+//                                                     }
+//                                                 },
+//                                                 {
+//                                                     "id": "ac19c001-8c11-176c-818c-11a777a90006",
+//                                                     "nombre": "Tarta de queso",
+//                                                     "imagen": "https://i.blogs.es/75907e/tarta_queso_philadelphia-min/1366_2000.jpeg",
+//                                                     "descripcion": "Tarta de queso philadelphia super cremosa.",
+//                                                     "precio": 3.0,
+//                                                     "tags": [
+//                                                         "Tarta",
+//                                                         "Queso",
+//                                                         "Cremosa"
+//                                                     ],
+//                                                     "categoria": {
+//                                                         "nombre": "Postres"
+//                                                     }
+//                                                 }
+//                                             ]
+//                                            """
+//                            )}
+//                    )}),
+//
+//            @ApiResponse(responseCode = "500",
+//                    description = "Error al cargar el menú",
+//                    content = @Content)
+//    })
+//    @GetMapping("/admin/menu")
+//    public List<GetDtoProducto> productsGroupByCategory(){
+//
+//        List<Producto> p = productoService.getProductGruopByCategory();
+//
+//        return p.stream()
+//                .map(GetDtoProducto::of)
+//                .toList();
+//    }
+
+    @JsonView(MenuProductosView.menu.class)
+    @GetMapping("/admin/menu2")
+    public List<GetCategoriaProductsDto> categoriaProductsDtoList (){
+
+        return categoriaService.categoryWithProductsV2();
+
+
     }
 
 }

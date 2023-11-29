@@ -160,6 +160,18 @@ public class InitData {
                 .producto(p2)
                 .build();
 
+        LineaPedido ln3 = LineaPedido.builder()
+                .cantidad(2)
+                .precioUnitario(p2.getPrecio())
+                .producto(p2)
+                .build();
+
+        LineaPedido ln4 = LineaPedido.builder()
+                .cantidad(2)
+                .precioUnitario(p1.getPrecio())
+                .producto(p1)
+                .build();
+
         Pedido ped1 = Pedido.builder()
                 .fecha(LocalDateTime.now())
                 .estadoPedido(EstadoPedido.EN_PREPARACION)
@@ -176,10 +188,20 @@ public class InitData {
                 .cocinero(t2.getId().toString())
                 .build();
 
+        Pedido ped3 = Pedido.builder()
+                .fecha(LocalDateTime.now())
+                .estadoPedido(EstadoPedido.CONFIRMADO)
+                .cliente(cl2.getId().toString())
+                .repartidor(t1.getId().toString())
+                .cocinero(t2.getId().toString())
+                .build();
+
         ped1.addLineaPedido(ln1);
         ped2.addLineaPedido(ln2);
+        ped3.addLineaPedido(ln3);
+        ped2.addLineaPedido(ln4);
 
-        pedidoRepository.saveAll(List.of(ped1,ped2));
+        pedidoRepository.saveAll(List.of(ped1,ped2, ped3));
 
     }
 

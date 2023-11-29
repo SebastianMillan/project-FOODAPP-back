@@ -10,6 +10,7 @@ import org.springframework.data.annotation.CreatedBy;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -61,5 +62,18 @@ public class Pedido {
     public void removeLineaPedido(LineaPedido lineaPedido) {
         lineasPedido.remove(lineaPedido);
         lineaPedido.setPedido(null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pedido pedido = (Pedido) o;
+        return Objects.equals(id, pedido.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
