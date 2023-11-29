@@ -15,6 +15,8 @@ import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.ClienteNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,9 +29,9 @@ public class CategoriaService {
     private final CategoriaRepository categoriaRepository;
     private final ProductoRepository productoRepository;
 
-    public List<Producto> getProductsCategory(String nombreCategoria){
+    public Page<Producto> getProductsCategory(String nombreCategoria, Pageable pageable){
 
-        List<Producto> productos = categoriaRepository.productosCategoriaIgnoreCase(nombreCategoria.toLowerCase());
+        Page<Producto> productos = categoriaRepository.productosCategoriaIgnoreCase(nombreCategoria.toLowerCase(), pageable);
 
         if(productos.isEmpty())
             throw new EmptyCategoryWithProductsException();
