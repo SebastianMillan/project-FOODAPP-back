@@ -14,12 +14,11 @@ import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
-import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.*;
 
 import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
 
-import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetTrabajadorDto;
-import com.salesianostriana.dam.projectFOODAPP.usuario.dto.PutTrabajadorDto;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.TrabajadorService;
 
@@ -35,6 +34,7 @@ import lombok.RequiredArgsConstructor;
 
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -360,11 +360,40 @@ public class TrabajadorController {
         return ResponseEntity.ok(GetTrabajadorDto.of(trabajadorService.edit(id, trabajadorDto)));
     }
 
+
+
+
+
+    @Operation(summary = "Obtiene un trabajador por su UUID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Trabajdor",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                
+                                            ]
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "404",
+                    description = "Not found",
+                    content = @Content)
+    })
     @GetMapping("/admin/trabajador/{id}")
     public GetTrabajadorDto obtenerTrabajador(@PathVariable String id){
         Trabajador t = trabajadorService.bucarUIID(id);
         return GetTrabajadorDto.of(t);
     }
+
+//    @GetMapping("/trabajador/{id}")
+//    public GetTrabajadorDto obtenerTrabajador(@PathVariable String id){
+//        Trabajador t = trabajadorService.bucarUIID(id);
+//        return GetTrabajadorDto.of(t);
+//    }
 
 //
 //    @Operation(summary = "Menú de un restaurante")
@@ -463,6 +492,16 @@ public class TrabajadorController {
 
     }
 
+//    @GetMapping("/trabajador/profile")
+//    public TrabajadorLoggedDto getLoggedUser(@AuthenticationPrincipal Trabajador trabajador) {
+//        return TrabajadorLoggedDto.of(trabajador);
+//    }
+
+    @GetMapping("/trabajador/puesto/{id}")
+    public PuestoTrabajador obtenerPuesto(@PathVariable String id){
+        Trabajador t = trabajadorService.bucarUIID(id);
+        return PuestoTrabajador.of(t);
+    }
 }
 
 
