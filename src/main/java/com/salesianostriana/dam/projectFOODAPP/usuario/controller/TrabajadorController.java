@@ -492,10 +492,10 @@ public class TrabajadorController {
 
     }
 
-//    @GetMapping("/trabajador/profile")
-//    public TrabajadorLoggedDto getLoggedUser(@AuthenticationPrincipal Trabajador trabajador) {
-//        return TrabajadorLoggedDto.of(trabajador);
-//    }
+    @GetMapping("/trabajador/profile")
+    public TrabajadorLoggedDto getLoggedUser(@AuthenticationPrincipal Trabajador trabajador) {
+        return TrabajadorLoggedDto.of(trabajador);
+    }
 
     @GetMapping("/trabajador/puesto/{id}")
     public PuestoTrabajador obtenerPuesto(@PathVariable String id){
