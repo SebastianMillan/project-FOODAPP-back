@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.repository;
 
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoClienteDto;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
@@ -54,6 +56,28 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
     Optional<Pedido> buscarPedidoPorId(UUID id);
 
     @Query("""
+            select new com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDto(
+                cast(p.id as string), p.fecha, (select c.nombre from Usuario c where cast(c.id as string) = p.cliente), cast(p.estadoPedido as string), (select sum(l.precioUnitario * l.cantidad) from LineaPedido l where l.pedido.id = p.id)                
+                )
+            from Pedido p
+            """)
+    List<GetPedidoDto> pedidosWithClientes ();
+
+
+    @Query("""
+            SELECT NEW com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoClienteDto(
+                        lp.pedido.id.toString(),
+                        lp.producto.nombre,
+                        lp.precioUnitario,
+                        lp.cantidad,
+                        lp.precioUnitario * lp.cantidad
+                        )
+            FROM LineaPedido lp
+            WHERE lp.codId.toString() = ?1
+            """)
+    List<GetLineaPedidoClienteDto> lineaPedido (String idPedido);
+
+    @Query("""
             select p
             from Pedido p
             join fetch p.lineasPedido
@@ -72,5 +96,4 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
              limit 1
             """)
     Optional<LineaPedido> buscarLineaPedidoPorProductoyPedido(UUID idProducto, UUID idPedido);
-
 }
