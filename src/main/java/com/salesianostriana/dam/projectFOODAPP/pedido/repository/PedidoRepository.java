@@ -76,4 +76,24 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
             WHERE lp.codId.toString() = ?1
             """)
     List<GetLineaPedidoClienteDto> lineaPedido (String idPedido);
+
+    @Query("""
+            select p
+            from Pedido p
+            join fetch p.lineasPedido
+            where p.cliente = ?1
+            and p.estadoPedido = 'ABIERTO'
+            """)
+    Optional<Pedido> buscarPedidoAbiertoByClienteId(String id);
+
+
+    @Query("""
+            select l
+             from LineaPedido l
+             where l.producto.id = ?1
+             and l.pedido.id = ?2
+             order by l.producto.id asc
+             limit 1
+            """)
+    Optional<LineaPedido> buscarLineaPedidoPorProductoyPedido(UUID idProducto, UUID idPedido);
 }
