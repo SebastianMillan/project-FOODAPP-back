@@ -25,12 +25,14 @@ localhost:8080/swagger-ui.html
 También se adjunta una colección de Postman para probar los endpoints de la API REST.
 
 ## Funcionamiento
-Para el entendimiento de la API REST se dispondrá de pautas a seguir en Postman para que los endpoints nos respondan correctamente, los usuarios tienen todos la contraseña 1234.
+Para el entendimiento de la API REST se dispondrá de pautas a seguir en Postman para que los endpoints nos respondan correctamente.
 - Usuarios:
-  - "fer" -> Admin y Cocinero
-  - "fran" -> Cliente
-  - "pedro" -> Repartidor
-  - "sebas" -> Cliente
+  - "sebas01" -> Cliente
+  - "luisma01" -> Cocinero
+  - "miguel02" -> Repartidor
+  - "angel02" -> Administrador
+ 
+    los usuarios tienen todos la contraseña 1234.
 
 - Es necesario logearte o registrarte para poder acceder a todos los endpoints de la api.
   
@@ -39,7 +41,7 @@ Para el entendimiento de la API REST se dispondrá de pautas a seguir en Postman
 - Para añadir un Producto al carrito se podría primero conseguir el UUID de un producto con el endpoint que nos devuelve los productos en oferta y a partir de ahí añadir uno de esos productos al carrito.
 
   CATEGORÍAS:
-  - Para poder usar los métodos de las categorías es necesario ir a loginUsuario y logearte como "fer" que es el usuario admin, y la contraseña "1234".
+  - Para poder usar los métodos de las categorías es necesario ir a loginUsuario y logearte como un usuario administrador.
 
   PEDIDOS:
   - Para acceder a los pedidos que tiene el cocinero asignado se deberá de logear como Trabajador y que a su vez sea Cocinero.

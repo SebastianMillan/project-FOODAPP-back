@@ -3,8 +3,13 @@
 		"_postman_id": "48baa5b1-1b59-481d-8158-485945108bd5",
 		"name": "FOODAPP",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+<<<<<<< HEAD
+		"_exporter_id": "30052631",
+		"_collection_link": "https://cloudy-trinity-627233.postman.co/workspace/FoodApi~34b63544-a0e5-428f-b21a-1b1a07b55743/collection/31232720-48baa5b1-1b59-481d-8158-485945108bd5?action=share&source=collection_link&creator=30052631"
+=======
 		"_exporter_id": "31232720",
 		"_collection_link": "https://cloudy-trinity-627233.postman.co/workspace/FoodApi~34b63544-a0e5-428f-b21a-1b1a07b55743/collection/31232720-48baa5b1-1b59-481d-8158-485945108bd5?action=share&source=collection_link&creator=31232720"
+>>>>>>> e5d74681fe0a8565b115e7aabe5ae82a729f4e3c
 	},
 	"item": [
 		{
@@ -491,14 +496,22 @@
 								"method": "GET",
 								"header": [],
 								"url": {
+<<<<<<< HEAD
+									"raw": "{{base_url}}/admin/trabajador/c0a8000b-8c1c-1bc7-818c-1c8bd1a40008",
+=======
 									"raw": "{{base_url}}/admin/trabajador/c0a8000b-8c1c-1f4b-818c-1c5f56400008",
+>>>>>>> e5d74681fe0a8565b115e7aabe5ae82a729f4e3c
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"admin",
 										"trabajador",
+<<<<<<< HEAD
+										"c0a8000b-8c1c-1bc7-818c-1c8bd1a40008"
+=======
 										"c0a8000b-8c1c-1f4b-818c-1c5f56400008"
+>>>>>>> e5d74681fe0a8565b115e7aabe5ae82a729f4e3c
 									]
 								}
 							},
@@ -540,6 +553,47 @@
 								}
 							},
 							"response": []
+<<<<<<< HEAD
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDAwYi04YzFjLTFiYzctODE4Yy0xYzhiZDFhNDAwMDkiLCJpYXQiOjE3MDEyODY1MDEsImV4cCI6MTcwMTM3MjkwMX0.TUO-eM3B9_yQC3osiGBC28pagADuh-ybE3aFW0RoOO7ZRLrYyo0NExa6iTWiJO686o7Q9Ht9wVdkkn9VsSmjhA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\":\"Luis\",\r\n    \"email\":\"luis@luis.com\",\r\n    \"telefono\":\"666066874\",\r\n    \"puesto\":\"COCINERO\",\r\n    \"fechaNacimiento\":\"1991-04-06\"        \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/trabajador/c0a8000b-8c1c-1bc7-818c-1c8bd1a40008",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"trabajador",
+										"c0a8000b-8c1c-1bc7-818c-1c8bd1a40008"
+									]
+								}
+							},
+							"response": []
+=======
+>>>>>>> e5d74681fe0a8565b115e7aabe5ae82a729f4e3c
 						}
 					]
 				},
