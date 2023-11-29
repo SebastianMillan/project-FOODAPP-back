@@ -71,3 +71,8 @@ INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, produc
 
 
 
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('b7fa6846-8eb1-11ee-b9d1-0242ac120008', 'Huevos rellenos', 'https://www.annarecetasfaciles.com/files/huevos-con-bechamel-500x281.jpg', 'Huevos rellenos bechamel', '12', '0', '{healthy}', '1a730d09-2667-411b-9f8d-c5cd965e044e');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('b7fa6846-8eb1-11ee-b9d1-0242ac120009', 'Orejas rebozadas', 'https://www.annarecetasfaciles.com/files/maxresdefault-25-500x281.jpg', 'No son orejas de verdad xD', '12', '0', '{ricolin}', '1a730d09-2667-411b-9f8d-c5cd965e044e');
+
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id) VALUES ('545de668-8eb7-11ee-b9d1-0242ac120010', 'Cruzcampo', 'https://5sentidos.es/wp-content/uploads/2020/10/Cruzcampo_Cerveza_de_25_CL.jpg', 'La rubia que nunca falla', '2.5', '0', '{Sana, Elixir}', '1a730d09-2667-411b-9f8d-c5cd965e0445');
+
