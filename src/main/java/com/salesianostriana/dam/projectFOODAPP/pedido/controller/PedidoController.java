@@ -135,7 +135,7 @@ public class PedidoController {
         return pedidoService.getPedidoDetailsDto(idPedido);
     }
 
-    @GetMapping("/repartidor/pedido")
+    @GetMapping("/repartidor/pedidos")
     public Page<GetPedidoRepartidorDTO> getAllPedidosDelRepartidor(@PageableDefault(page=0, size =4)Pageable pageable,
                                                                    @AuthenticationPrincipal Trabajador repartidor){
 
