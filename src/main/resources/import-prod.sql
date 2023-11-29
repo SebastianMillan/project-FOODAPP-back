@@ -194,11 +194,11 @@ INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tag
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0458', 'Petisui', 'https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202201/25/00118821000306____29__600x600.jpg', 'Petisui de toda la vida', '1', '0.50', '{Para que crezca el niño}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0459', 'Tortitas', 'https://imag.bonviveur.com/tortitas-americanas-caseras-o-pancakes.jpg', 'Tortitas buenísimas', '2', '1', '{tortitas, leche}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
 
-INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0421', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed22', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'ENTREGADO', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456');
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0616', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed22', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'ENTREGADO', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456');
 INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0472', '1a730d09-2667-411b-9f8d-c5cd965e0421', 1, 8.0, '1a730d09-2667-411b-9f8d-c5cd965e0454');
 INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0473', '1a730d09-2667-411b-9f8d-c5cd965e0421', 2, 1.0, '1a730d09-2667-411b-9f8d-c5cd965e0458');
 
-INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0422', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed61', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'EN_PREPARACION', null);
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0932', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed61', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'EN_PREPARACION', null);
 INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0474', '1a730d09-2667-411b-9f8d-c5cd965e0422', 1, 2.0, '1a730d09-2667-411b-9f8d-c5cd965e0457');
 
 INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e0447', 'Carnes');
