@@ -81,3 +81,5 @@ INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tag
 
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id) VALUES ('545de668-8eb7-11ee-b9d1-0242ac120010', 'Cruzcampo', 'https://5sentidos.es/wp-content/uploads/2020/10/Cruzcampo_Cerveza_de_25_CL.jpg', 'La rubia que nunca falla', '2.5', '0', '{Sana, Elixir}', '1a730d09-2667-411b-9f8d-c5cd965e0445');
 
+INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e0447', 'Carnes');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0453', 'Carrillada Ibérica', 'https://www.aceitesdeolivadeespana.com/wp-content/uploads/2020/12/receta-carrillera-cerdo-iberico.jpg', 'La de Casa Oliva está increible', '4,50', '3,30', '{Carne}', '1a730d09-2667-411b-9f8d-c5cd965e0447');

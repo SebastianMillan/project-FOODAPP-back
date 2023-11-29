@@ -49,7 +49,11 @@ Para el entendimiento de la API REST se dispondrá de pautas a seguir en Postman
     
   - Para acceder a los pedidos del repartidor, te tienes que logear como "pedro" que es el repartidor, y una vez logeado ir a la carpeta Pedido, al método getPedidosDelRepartidor, donde obtendras un Page de los
     pedidos del repartidor.
-  
+
+  PRODUCTO:
+
+  - Para acceder a los detalles de un producto tienes que loguearte como admin y al endpoint de GetProductsCategoryByAdmin y copiar el ID de un producto para luego irte al endpoint de productDetailsByAdmin
+    y copiar en la ruta el ID. Esto es así tan lioso porque este endpoint es una ayuda para el front.
 
   
   
