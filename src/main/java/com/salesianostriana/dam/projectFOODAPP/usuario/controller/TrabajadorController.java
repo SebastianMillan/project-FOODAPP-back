@@ -375,10 +375,10 @@ public class TrabajadorController {
         return GetTrabajadorDto.of(t);
     }
 
-    @Operation(summary = "Detalles pedido")
+    @Operation(summary = "Todos los pedido")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "Detalles un pedido",
+                    description = "Todos los pedido",
                     content = {@Content(mediaType = "aplication/json",
                             array = @ArraySchema(schema = @Schema(implementation = Pedido.class)),
                             examples = {@ExampleObject(
@@ -411,13 +411,13 @@ public class TrabajadorController {
                     )}),
 
             @ApiResponse(responseCode = "500",
-                    description = "Error al encontrar el pedido para mostrar los detalles",
+                    description = "Error al encontrar el pedido para mostrar la lista",
                     content = @Content)
     })
     @GetMapping("/admin/pedido")
-    public List<GetPedidoDto> getPedidos() {
+    public Page<GetPedidoDto> getPedidos(@PageableDefault(page = 0, size = 5) Pageable pageable) {
 
-        return pedidoService.getAllPedidosv2();
+        return pedidoService.getAllPedidosv2(pageable);
     }
 
 
