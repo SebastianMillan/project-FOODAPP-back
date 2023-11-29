@@ -61,6 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -113,13 +114,12 @@ public class TrabajadorController {
                     content = @Content)
     })
     @GetMapping("/admin/producto/{nombreCategoria}")
-    public List<GetProductShortDto> getProductoCategory(@Valid @PathVariable String nombreCategoria) {
+    public Page<GetProductShortDto> getProductoCategory(@Valid @PathVariable String nombreCategoria, @PageableDefault(page = 0, size = 4) Pageable pageable) {
 
-        List<Producto> productos = categoriaService.getProductsCategory(nombreCategoria.toLowerCase());
+        Page<Producto> productos = categoriaService.getProductsCategory(nombreCategoria.toLowerCase(), pageable);
 
-        return productos.stream()
-                .map(GetProductShortDto::of)
-                .toList();
+        return productos.map(GetProductShortDto::of);
+
     }
 
 
@@ -406,10 +406,11 @@ public class TrabajadorController {
     }
 
 
-    @Operation(summary = "Detalles pedido")
+    @Operation(summary = "Todos los pedido")
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                    description = "Detalles un pedido",
+                    description = "Todos los pedido",
                     content = {@Content(mediaType = "aplication/json",
                             array = @ArraySchema(schema = @Schema(implementation = Pedido.class)),
                             examples = {@ExampleObject(
@@ -442,27 +443,50 @@ public class TrabajadorController {
                     )}),
 
             @ApiResponse(responseCode = "500",
-                    description = "Error al encontrar el pedido para mostrar los detalles",
+                    description = "Error al encontrar el pedido para mostrar la lista",
                     content = @Content)
     })
     @GetMapping("/admin/pedido")
-    public List<GetPedidoDto> getPedidos() {
+    public Page<GetPedidoDto> getPedidos(@PageableDefault(page = 0, size = 5) Pageable pageable) {
 
-        return pedidoService.getAllPedidosv2();
+        return pedidoService.getAllPedidosv2(pageable);
     }
 
+    @Operation(summary = "Detalle de un pedido")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Detalle de un pedido",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Pedido.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                        "id": "ac19c001-8c1c-16c9-818c-1c36d7a4000a",
+                                                        "direccion": "c/Condes de Bustillo, 17",
+                                                        "telefono": "987654111",
+                                                        "estadoPedido": "EN_PREPARACION",
+                                                        "horaLlegada": "29-11-2023 18:53",
+                                                        "lineasPedido": [
+                                                        {
+                                                        "nombreProducto": "Patatas Bravas",
+                                                        "cantidadProductos": 1,
+                                                        "precioUnit": 2.3,
+                                                        "subtotal": 2.3
+                                                        }
+                                                        ],
+                                                        "total": 2.3
+                                                        }
+                                                
+                                            """
+                            )}
+                    )}),
 
-//    @GetMapping("/admin/pedido/{id}")
-//    public GetPedidoDto pedidoId (@Valid @PathVariable String id){
-
-//
-//        Pedido p = pedidoService.getPedidoDetails(UUID.fromString(id));
-//
-//        return GetPedidoDto.of(p);
-//    }
-
+            @ApiResponse(responseCode = "500",
+                    description = "Error al encontrar el pedido para mostrar la lista",
+                    content = @Content)
+    })
     @GetMapping("/admin/pedido/{idPedido}")
-    public GetDetallePedidoDto getDetallesDeUnPedido(@PathVariable UUID idPedido){
+    public GetDetallePedidoDto getDetallesDeUnPedido(@PathVariable UUID idPedido) {
 
         return pedidoService.getPedidoDetailsDto(idPedido);
     }
@@ -525,7 +549,6 @@ public class TrabajadorController {
         return PuestoTrabajador.of(t);
     }
 }
-
 
 
 

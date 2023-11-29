@@ -44,9 +44,9 @@ public class PedidoService {
         return pedidoRepository.getAllPedidosConLineas();
     }
 
-    public List<GetPedidoDto> getAllPedidosv2() {
+    public Page<GetPedidoDto> getAllPedidosv2(Pageable pageable) {
 
-        return pedidoRepository.pedidosWithClientes();
+        return pedidoRepository.pedidosWithClientes(pageable);
     }
 
     public Optional<Pedido> getPedidoDeClienteById(String idCliente){

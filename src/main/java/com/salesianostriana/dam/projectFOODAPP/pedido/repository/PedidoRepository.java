@@ -74,7 +74,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
                 )
             from Pedido p
             """)
-    List<GetPedidoDto> pedidosWithClientes ();
+    Page<GetPedidoDto> pedidosWithClientes (Pageable pageable);
 
 
     @Query("""
