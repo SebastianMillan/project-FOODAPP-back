@@ -104,148 +104,12 @@ INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'1ce9c1c7-7a02-4c7f-bf69
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e044d', 'Hamburguesa');
 INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e044e', 'Entrante');
 INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e0445', 'Bebida');
 INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e0446', 'Postres');
+INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e0447', 'Carnes');
+INSERT INTO CATEGORIA(id, nombre) VALUES ('1a730d09-2667-411b-9f8d-c5cd965e0448', 'Montaditos');
 
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0447', 'Cuarto de libra con queso', 'https://www.cnature.es/wp-content/uploads/elementor/thumbs/hamburguesa-con-guacamole-qatb9dfxztr5an44q7dowb74i3r76ru30c25o10ymw.jpg', 'Jugosa carne de ternera ahumada a la plancha con queso gouda', '12', '0', '{Gocha}', '1a730d09-2667-411b-9f8d-c5cd965e044d');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0448', 'Retinta al tinto', 'https://www.cnature.es/wp-content/uploads/elementor/thumbs/hamburguesa-con-guacamole-qatb9dfxztr5an44q7dowb74i3r76ru30c25o10ymw.jpg', 'Deliciosa carne madurada de vaca retinta con salsa de reducción de vino tinto', '12', '0', '{Gocha, De la tierra}', '1a730d09-2667-411b-9f8d-c5cd965e044d');
@@ -290,6 +154,12 @@ INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUE
 INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0470', '1a730d09-2667-411b-9f8d-c5cd965e0420', 3, 12.0, '1a730d09-2667-411b-9f8d-c5cd965e0447')
 INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0471', '1a730d09-2667-411b-9f8d-c5cd965e0420', 2, 1.5, '1a730d09-2667-411b-9f8d-c5cd965e0464')
 
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0421', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed22', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'ENTREGADO', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0472', '1a730d09-2667-411b-9f8d-c5cd965e0421', 1, 8.0, '1a730d09-2667-411b-9f8d-c5cd965e0454');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0473', '1a730d09-2667-411b-9f8d-c5cd965e0421', 2, 1.0, '1a730d09-2667-411b-9f8d-c5cd965e0458');
+
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0422', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed61', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'EN_PREPARACION', null);
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0474', '1a730d09-2667-411b-9f8d-c5cd965e0422', 1, 2.0, '1a730d09-2667-411b-9f8d-c5cd965e0457');
 
 
 
@@ -309,3 +179,10 @@ INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tag
 
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id) VALUES ('03be55ac-8eb8-11ee-b9d1-0242ac120012', 'Vasitos de crema', 'https://content-cocina.lecturas.com/medio/2018/07/19/vasitos-de-crema-de-queso-y-mermelada-de-tomate_3df5e88a_360x360.jpg', 'Queso y mermelada de tomate', '5', '0', '{tarta, queso, mermelada}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id) VALUES ('03be55ac-8eb8-11ee-b9d1-0242ac120013', 'Postre fresco', 'https://content-cocina.lecturas.com/medio/2023/07/21/postre-de-sandia-con-bolitas-de-queso-fresco_28c41bf7_360x360.jpg', 'Sandía y bolitas de queso', '5', '0', '{sandía, queso}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
+
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0453', 'Carrillada Ibérica', 'https://www.aceitesdeolivadeespana.com/wp-content/uploads/2020/12/receta-carrillera-cerdo-iberico.jpg', 'La de Casa Oliva está increible', '4,50', '3,30', '{Carne}', '1a730d09-2667-411b-9f8d-c5cd965e0447');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0454', 'Cachopo', 'https://imag.bonviveur.com/churrasco-de-ternera-a-la-parrilla-listo-para-degustar.jpg', 'El del nuevo Casa pepe de atrás de mi casa está increible', '7', '5.50', '{Carne}', '1a730d09-2667-411b-9f8d-c5cd965e0447');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0456', 'Montadito de gambas alioli', 'https://media-cdn.tripadvisor.com/media/photo-s/0d/1a/9c/e5/montadito-de-gambas-alioli.jpg', 'El de Casa Oliva es un escándalo', '4', '2.50', '{Alioli exquisito}', '1a730d09-2667-411b-9f8d-c5cd965e0448');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0457', 'Montadito de lomo', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFwv3EPH4AYZesLIy3DHcP_vnmHfhHA09WTQ&usqp=CAU', 'El mondadito más mítico', '3.50', '2.50', '{Mítico del 100 montaditos}', '1a730d09-2667-411b-9f8d-c5cd965e0448');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0458', 'Petisui', 'https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202201/25/00118821000306____29__600x600.jpg', 'Petisui de toda la vida', '1', '0.50', '{Para que crezca el niño}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0459', 'Tortitas', 'https://imag.bonviveur.com/tortitas-americanas-caseras-o-pancakes.jpg', 'Tortitas buenísimas', '2', '1', '{tortitas, leche}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
