@@ -35,7 +35,7 @@ public class InitData {
     private final TrabajadorRepository trabajadorRepository;
     private final PedidoRepository pedidoRepository;
     private final PasswordEncoder passwordEncoder;
-
+    /*
     @PostConstruct
     public void initData(){
 
@@ -216,5 +216,9 @@ public class InitData {
         pedidoRepository.saveAll(List.of(ped1,ped2, ped3));
 
     }
+
+
+     */
+
 }
  
