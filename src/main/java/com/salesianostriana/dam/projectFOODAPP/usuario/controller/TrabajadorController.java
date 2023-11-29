@@ -114,7 +114,7 @@ public class TrabajadorController {
                     content = @Content)
     })
     @GetMapping("/admin/producto/{nombreCategoria}")
-    public Page<GetProductShortDto> getProductoCategory(@Valid @PathVariable String nombreCategoria, @PageableDefault(page=0, size =4)Pageable pageable) {
+    public Page<GetProductShortDto> getProductoCategory(@Valid @PathVariable String nombreCategoria, @PageableDefault(page = 0, size = 4) Pageable pageable) {
 
         Page<Producto> productos = categoriaService.getProductsCategory(nombreCategoria.toLowerCase(), pageable);
 
@@ -421,22 +421,46 @@ public class TrabajadorController {
     }
 
 
-//    @GetMapping("/admin/pedido/{id}")
-//    public GetPedidoDto pedidoId (@Valid @PathVariable String id){
-//
-//        Pedido p = pedidoService.getPedidoDetails(UUID.fromString(id));
-//
-//        return GetPedidoDto.of(p);
-//    }
+    @Operation(summary = "Detalle de un pedido")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Detalle de un pedido",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Pedido.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                        "id": "ac19c001-8c1c-16c9-818c-1c36d7a4000a",
+                                                        "direccion": "c/Condes de Bustillo, 17",
+                                                        "telefono": "987654111",
+                                                        "estadoPedido": "EN_PREPARACION",
+                                                        "horaLlegada": "29-11-2023 18:53",
+                                                        "lineasPedido": [
+                                                        {
+                                                        "nombreProducto": "Patatas Bravas",
+                                                        "cantidadProductos": 1,
+                                                        "precioUnit": 2.3,
+                                                        "subtotal": 2.3
+                                                        }
+                                                        ],
+                                                        "total": 2.3
+                                                        }
+                                                
+                                            """
+                            )}
+                    )}),
 
+            @ApiResponse(responseCode = "500",
+                    description = "Error al encontrar el pedido para mostrar la lista",
+                    content = @Content)
+    })
     @GetMapping("/admin/pedido/{idPedido}")
-    public GetDetallePedidoDto getDetallesDeUnPedido(@PathVariable UUID idPedido){
+    public GetDetallePedidoDto getDetallesDeUnPedido(@PathVariable UUID idPedido) {
 
         return pedidoService.getPedidoDetailsDto(idPedido);
     }
 
 }
-
 
 
 
