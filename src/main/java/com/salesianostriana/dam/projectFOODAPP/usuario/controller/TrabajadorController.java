@@ -381,9 +381,16 @@ public class TrabajadorController {
                             array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
                             examples = {@ExampleObject(
                                     value = """
-                                            [
-                                                
-                                            ]
+                                            {
+                                                "id": "c0a8000b-8c1c-1f4b-818c-1c5f56400008",
+                                                "nombre": "Pedro Franch",
+                                                "email": "pedro@gmail.com",
+                                                "telefono": "545656767",
+                                                "username": "pedro",
+                                                "password": "{bcrypt}$2a$10$hEWDj3xWwKuFu4htt1omeecHjgPM.KGLAXwHwCWzwQJuQaqt0YTe2",
+                                                "puesto": "REPARTIDOR",
+                                                "fechaNacimiento": "2000-07-26"
+                                            }
                                             """
                             )}
                     )}),
