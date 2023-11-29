@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class UserResponse {
 
     protected String id;
-    protected String username, avatar, fullName;
+    protected String username, avatar, fullName, puesto;
     protected Set<String> roles;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")

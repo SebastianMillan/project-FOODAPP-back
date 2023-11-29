@@ -146,7 +146,19 @@ public class InitData {
                 .tipoTrabajador(TipoTrabajador.COCINERO)
                 .build();
 
-        trabajadorRepository.saveAll(List.of(t1,t2));
+        Trabajador t3 = Trabajador.builder()
+
+                .username("ped")
+                .password(passwordEncoder.encode("1234"))
+                .nombre("Fernando Claro")
+                .roles(Set.of(RolUsuario.TRABAJADOR))
+                .email("fer@gmail.com")
+                .telefono("121232888")
+                .fechaNacimiento(LocalDate.parse("13-11-2002", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
+                .tipoTrabajador(TipoTrabajador.COCINERO)
+                .build();
+
+        trabajadorRepository.saveAll(List.of(t1,t2,t3));
 
         LineaPedido ln1 = LineaPedido.builder()
                 .cantidad(1)
@@ -193,7 +205,7 @@ public class InitData {
                 .estadoPedido(EstadoPedido.CONFIRMADO)
                 .cliente(cl2.getId().toString())
                 .repartidor(t1.getId().toString())
-                .cocinero(t2.getId().toString())
+                .cocinero(t3.getId().toString())
                 .build();
 
         ped1.addLineaPedido(ln1);

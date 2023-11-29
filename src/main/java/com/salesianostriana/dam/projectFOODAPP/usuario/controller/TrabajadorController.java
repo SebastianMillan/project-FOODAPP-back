@@ -22,12 +22,11 @@ import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.model.Categoria;
 
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
-import com.salesianostriana.dam.projectFOODAPP.usuario.dto.AltaTrabajadorDto;
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.*;
 
 import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
 
-import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetTrabajadorDto;
-import com.salesianostriana.dam.projectFOODAPP.usuario.dto.PutTrabajadorDto;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.TrabajadorService;
 
@@ -43,6 +42,7 @@ import lombok.RequiredArgsConstructor;
 
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -246,7 +246,7 @@ public class TrabajadorController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Añades un un trabajador")
+    @Operation(summary = "Añadeir un un trabajador")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Alta del trabajador",
@@ -369,13 +369,45 @@ public class TrabajadorController {
         return ResponseEntity.ok(GetTrabajadorDto.of(trabajadorService.edit(id, trabajadorDto)));
     }
 
+
+
+
+
+    @Operation(summary = "Obtiene un trabajador por su UUID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Trabajdor",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a8000b-8c1c-1f4b-818c-1c5f56400008",
+                                                "nombre": "Pedro Franch",
+                                                "email": "pedro@gmail.com",
+                                                "telefono": "545656767",
+                                                "username": "pedro",
+                                                "password": "{bcrypt}$2a$10$hEWDj3xWwKuFu4htt1omeecHjgPM.KGLAXwHwCWzwQJuQaqt0YTe2",
+                                                "puesto": "REPARTIDOR",
+                                                "fechaNacimiento": "2000-07-26"
+                                            }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "404",
+                    description = "Not found",
+                    content = @Content)
+    })
     @GetMapping("/admin/trabajador/{id}")
     public GetTrabajadorDto obtenerTrabajador(@PathVariable String id) {
         Trabajador t = trabajadorService.bucarUIID(id);
         return GetTrabajadorDto.of(t);
     }
 
+
     @Operation(summary = "Todos los pedido")
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Todos los pedido",
@@ -420,7 +452,6 @@ public class TrabajadorController {
         return pedidoService.getAllPedidosv2(pageable);
     }
 
-
     @Operation(summary = "Detalle de un pedido")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -460,6 +491,63 @@ public class TrabajadorController {
         return pedidoService.getPedidoDetailsDto(idPedido);
     }
 
+    @Operation(summary = "Devueve el trabajador logueado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Trabajdor",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a8000b-8c1b-11da-818c-1b91e44b0009",
+                                                "nombre": "Fernando Claro",
+                                                "email": "fer@gmail.com",
+                                                "telefono": "121232888",
+                                                "username": "fer",
+                                                "puesto": "COCINERO",
+                                                "rol": "[ADMIN, TRABAJADOR]",
+                                                "fechaNacimiento": "2002-11-13" 
+                                            }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "404",
+                    description = "Not found",
+                    content = @Content)
+    })
+    @GetMapping("/trabajador/profile")
+    public TrabajadorLoggedDto getLoggedUser(@AuthenticationPrincipal Trabajador trabajador) {
+        return TrabajadorLoggedDto.of(trabajador);
+    }
+
+
+    @Operation(summary = "Devueve el puesto de un trabajador")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Trabajdor",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a8000b-8c1b-1ba7-818c-1b9bafe40008",
+                                                "puesto": "REPARTIDOR"
+                                            }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "404",
+                    description = "Not found",
+                    content = @Content)
+    })
+    @GetMapping("/trabajador/puesto/{id}")
+    public PuestoTrabajador obtenerPuesto(@PathVariable String id){
+        Trabajador t = trabajadorService.bucarUIID(id);
+        return PuestoTrabajador.of(t);
+    }
 }
 
 
