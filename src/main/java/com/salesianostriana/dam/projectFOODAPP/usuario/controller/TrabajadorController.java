@@ -237,7 +237,7 @@ public class TrabajadorController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "Añades un un trabajador")
+    @Operation(summary = "Añadeir un un trabajador")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Alta del trabajador",
@@ -492,11 +492,58 @@ public class TrabajadorController {
 
     }
 
+    @Operation(summary = "Devueve el trabajador logueado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Trabajdor",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a8000b-8c1b-11da-818c-1b91e44b0009",
+                                                "nombre": "Fernando Claro",
+                                                "email": "fer@gmail.com",
+                                                "telefono": "121232888",
+                                                "username": "fer",
+                                                "puesto": "COCINERO",
+                                                "rol": "[ADMIN, TRABAJADOR]",
+                                                "fechaNacimiento": "2002-11-13" 
+                                            }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "404",
+                    description = "Not found",
+                    content = @Content)
+    })
     @GetMapping("/trabajador/profile")
     public TrabajadorLoggedDto getLoggedUser(@AuthenticationPrincipal Trabajador trabajador) {
         return TrabajadorLoggedDto.of(trabajador);
     }
 
+
+    @Operation(summary = "Devueve el puesto de un trabajador")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Trabajdor",
+                    content = {@Content(mediaType = "aplication/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a8000b-8c1b-1ba7-818c-1b9bafe40008",
+                                                "puesto": "REPARTIDOR"
+                                            }
+                                            """
+                            )}
+                    )}),
+
+            @ApiResponse(responseCode = "404",
+                    description = "Not found",
+                    content = @Content)
+    })
     @GetMapping("/trabajador/puesto/{id}")
     public PuestoTrabajador obtenerPuesto(@PathVariable String id){
         Trabajador t = trabajadorService.bucarUIID(id);
