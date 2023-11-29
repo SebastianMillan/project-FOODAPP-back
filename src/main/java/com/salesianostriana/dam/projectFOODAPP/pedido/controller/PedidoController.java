@@ -141,9 +141,95 @@ public class PedidoController {
         return pedidoService.getPedidoDetailsDto(idPedido);
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Añadir producto al carrito", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetPedidoEnCocinero.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a84001-8c1a-1778-818c-1a47b92a0011",
+                                                "direccion": "c/Evangelista, 3",
+                                                "telefono": "334665121",
+                                                "estadoPedido": "ABIERTO",
+                                                "horaLlegada": "29-11-2023 09:52",
+                                                "lineasPedido": [
+                                                    {
+                                                        "nombreProducto": "Patatas Bravas",
+                                                        "cantidadProductos": 2,
+                                                        "precioUnit": 2.3,
+                                                        "subtotal": 4.6
+                                                    },
+                                                    {
+                                                        "nombreProducto": "Tarta de queso",
+                                                        "cantidadProductos": 6,
+                                                        "precioUnit": 4.3,
+                                                        "subtotal": 25.799999999999997
+                                                    },
+                                                    {
+                                                        "nombreProducto": "Hamburguesa Queso",
+                                                        "cantidadProductos": 3,
+                                                        "precioUnit": 3.55,
+                                                        "subtotal": 10.649999999999999
+                                                    }
+                                                ],
+                                                "total": 41.05
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "500", description = "Producto no encontrado", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Trabajador para asignar no encontrado", content = @Content)
+    })
+    @Operation(summary = "addProductoToPedidoAbierto", description = "Añadir producto al carrito")
     @PostMapping("/pedido/addProducto/{id}")
     public GetDetallePedidoDto addProductoToPedidoAbierto(@PathVariable String id, @AuthenticationPrincipal Cliente c){
         return pedidoService.getPedidoDetailsDto(pedidoService.addProductoToPedidoOpen(id, c).getId());
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Obtener el Pedido abierto (carrito)", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetPedidoEnCocinero.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a84001-8c1a-1778-818c-1a47b92a0011",
+                                                "direccion": "c/Evangelista, 3",
+                                                "telefono": "334665121",
+                                                "estadoPedido": "ABIERTO",
+                                                "horaLlegada": "29-11-2023 09:52",
+                                                "lineasPedido": [
+                                                    {
+                                                        "nombreProducto": "Patatas Bravas",
+                                                        "cantidadProductos": 2,
+                                                        "precioUnit": 2.3,
+                                                        "subtotal": 4.6
+                                                    },
+                                                    {
+                                                        "nombreProducto": "Tarta de queso",
+                                                        "cantidadProductos": 6,
+                                                        "precioUnit": 4.3,
+                                                        "subtotal": 25.799999999999997
+                                                    },
+                                                    {
+                                                        "nombreProducto": "Hamburguesa Queso",
+                                                        "cantidadProductos": 3,
+                                                        "precioUnit": 3.55,
+                                                        "subtotal": 10.649999999999999
+                                                    }
+                                                ],
+                                                "total": 41.05
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "500", description = "Obtener el Pedido abierto (carrito)", content = @Content),
+    })
+    @Operation(summary = "getOpenPedido", description = "Añadir producto al carrito")
+    @GetMapping("/pedido/carrito")
+    public GetDetallePedidoDto getOpenPedido(@AuthenticationPrincipal Cliente c){
+        return pedidoService.getPedidoDetailsDto(pedidoService.getOpenPedido(c).getId());
     }
 
 }

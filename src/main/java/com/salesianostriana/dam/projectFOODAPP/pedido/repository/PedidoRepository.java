@@ -64,10 +64,12 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
 
 
     @Query("""
-            select ln
-            from LineaPedido ln
-            where ln.producto.id = ?1
-            and ln.pedido.id = ?2
+            select l
+             from LineaPedido l
+             where l.producto.id = ?1
+             and l.pedido.id = ?2
+             order by l.producto.id asc
+             limit 1
             """)
     Optional<LineaPedido> buscarLineaPedidoPorProductoyPedido(UUID idProducto, UUID idPedido);
 

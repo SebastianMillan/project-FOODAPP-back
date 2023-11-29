@@ -49,7 +49,7 @@ public class PedidoService {
         Optional<Pedido> pedido = pedidoRepository.getPedidoDeClienteById(idCliente);
 
         if (pedido.isEmpty())
-            throw new PedidoNotFoundException(idCliente);
+            throw new PedidoNotFoundException();
 
         return pedido;
     }
@@ -60,7 +60,7 @@ public class PedidoService {
     public Pedido changeEstadoPedidoCocinero(String id, EditEstadoPedidoDto editEstadoPedidoDto) {
         Optional<Pedido> result = pedidoRepository.buscarPedidoPorId(UUID.fromString(id));
         if (result.isEmpty()) {
-            throw new PedidoNotFoundException(id);
+            throw new PedidoNotFoundException();
         }
         result.get().setEstadoPedido(EstadoPedido.valueOf(editEstadoPedidoDto.estadoPedido()));
         return pedidoRepository.save(result.get());
@@ -69,7 +69,7 @@ public class PedidoService {
     public Pedido getPedidoDetails(UUID idPedido) {
 
         return pedidoRepository.buscarPedidoPorId(idPedido)
-                .orElseThrow(() -> new PedidoNotFoundException(idPedido.toString()));
+                .orElseThrow(PedidoNotFoundException::new);
 
     }
 
@@ -129,12 +129,27 @@ public class PedidoService {
         Optional<LineaPedido> lnEncontrada= pedidoRepository.buscarLineaPedidoPorProductoyPedido(productoToAdd.get().getId(), pedidoOpen.get().getId());
 
         if(lnEncontrada.isEmpty()){
-            throw new LineaPedidoNotFoundException();
+            LineaPedido nuevaLineaPedido = LineaPedido.builder()
+                    .precioUnitario(productoToAdd.get().getPrecio())
+                    .cantidad(1)
+                    .producto(productoToAdd.get())
+                    .build();
+            pedidoOpen.get().addLineaPedido(nuevaLineaPedido);
+            return pedidoRepository.save(pedidoOpen.get());
         }
         lnEncontrada.get().setCantidad(lnEncontrada.get().getCantidad()+1);
+        pedidoOpen.get().removeLineaPedido(lnEncontrada.get());
         pedidoOpen.get().addLineaPedido(lnEncontrada.get());
         return pedidoRepository.save(pedidoOpen.get());
 
+    }
+
+    public Pedido getOpenPedido(Cliente c){
+        Optional<Pedido> pedidoOpen = pedidoRepository.buscarPedidoAbiertoByClienteId(c.getId().toString());
+        if(pedidoOpen.isEmpty()){
+            throw new PedidoNotFoundException();
+        }
+        return pedidoOpen.get();
     }
 
 }
