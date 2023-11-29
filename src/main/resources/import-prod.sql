@@ -120,7 +120,7 @@ INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tag
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0453', 'Guisantes', 'https://www.cnature.es/wp-content/uploads/elementor/thumbs/hamburguesa-con-guacamole-qatb9dfxztr5an44q7dowb74i3r76ru30c25o10ymw.jpg', 'Para los veganos', '12', '0', '{Vegano, verde}', '1a730d09-2667-411b-9f8d-c5cd965e044d');
 
 
-INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0453', 'Ensaladilla', 'https://www.petitchef.es/imgupl/recipe/ensaladilla-rusa--md-466471p742864.jpg', 'Enladilla de bar de toda la vida', '12', '0', '{No le digas rusa}', '1a730d09-2667-411b-9f8d-c5cd965e044e');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e046f', 'Ensaladilla', 'https://www.petitchef.es/imgupl/recipe/ensaladilla-rusa--md-466471p742864.jpg', 'Enladilla de bar de toda la vida', '12', '0', '{No le digas rusa}', '1a730d09-2667-411b-9f8d-c5cd965e044e');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('2a730d09-2667-411b-9f8d-c5cd965e0454', 'Tortilla de papas', 'https://lacocinadefrabisa.lavozdegalicia.es/wp-content/uploads/2019/05/tortilla-española.jpg', 'Deliciosa tortilla de patatas casera', '10', '0', '{tortilla, patatas, cebolla por supuesto}', '1a730d09-2667-411b-9f8d-c5cd965e044e');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('3a730d09-2667-411b-9f8d-c5cd965e0455', 'Croquetas de jamón', 'https://s1.eestatic.com/2023/06/15/cocinillas/recetas/aperitivos-y-entrantes/771683179_233966774_1706x960.jpg', 'Como las de tu madre, literal porque la tenemos secuestrada', '8', '0', '{croquetas, jamón}', '1a730d09-2667-411b-9f8d-c5cd965e044e');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('4a730d09-2667-411b-9f8d-c5cd965e0456', 'Calamares a la romana', 'https://cdn.elcocinerocasero.com/imagen/receta/1000/2022-05-25-21-02-06/calamares-a-la-romana.jpeg', 'Deliciosos calamares fritos con una fina capa crujiente', '15', '0', '{calamares, fritos}', '1a730d09-2667-411b-9f8d-c5cd965e044e');
@@ -155,11 +155,11 @@ INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, produc
 INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0471', '1a730d09-2667-411b-9f8d-c5cd965e0420', 2, 1.5, '1a730d09-2667-411b-9f8d-c5cd965e0464')
 
 INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0421', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed22', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'ENTREGADO', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456');
-INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0472', '1a730d09-2667-411b-9f8d-c5cd965e0421', 1, 8.0, '1a730d09-2667-411b-9f8d-c5cd965e0454');
-INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0473', '1a730d09-2667-411b-9f8d-c5cd965e0421', 2, 1.0, '1a730d09-2667-411b-9f8d-c5cd965e0458');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0472', '1a730d09-2667-411b-9f8d-c5cd965e0421', 1, 8.0, '1a730d09-2667-411b-9f8d-c5cd965e0447');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0473', '1a730d09-2667-411b-9f8d-c5cd965e0421', 2, 1.0, '1a730d09-2667-411b-9f8d-c5cd965e0447');
 
-INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0422', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed61', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'EN_PREPARACION', null);
-INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0474', '1a730d09-2667-411b-9f8d-c5cd965e0422', 1, 2.0, '1a730d09-2667-411b-9f8d-c5cd965e0457');
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0422', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed22', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'EN_PREPARACION', null);
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0474', '1a730d09-2667-411b-9f8d-c5cd965e0422', 1, 2.0, '1a730d09-2667-411b-9f8d-c5cd965e0447');
 
 
 
@@ -180,9 +180,40 @@ INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tag
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id) VALUES ('03be55ac-8eb8-11ee-b9d1-0242ac120012', 'Vasitos de crema', 'https://content-cocina.lecturas.com/medio/2018/07/19/vasitos-de-crema-de-queso-y-mermelada-de-tomate_3df5e88a_360x360.jpg', 'Queso y mermelada de tomate', '5', '0', '{tarta, queso, mermelada}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id) VALUES ('03be55ac-8eb8-11ee-b9d1-0242ac120013', 'Postre fresco', 'https://content-cocina.lecturas.com/medio/2023/07/21/postre-de-sandia-con-bolitas-de-queso-fresco_28c41bf7_360x360.jpg', 'Sandía y bolitas de queso', '5', '0', '{sandía, queso}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
 
-INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0453', 'Carrillada Ibérica', 'https://www.aceitesdeolivadeespana.com/wp-content/uploads/2020/12/receta-carrillera-cerdo-iberico.jpg', 'La de Casa Oliva está increible', '4,50', '3,30', '{Carne}', '1a730d09-2667-411b-9f8d-c5cd965e0447');
+INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e043e', 'Carrillada Ibérica', 'https://www.aceitesdeolivadeespana.com/wp-content/uploads/2020/12/receta-carrillera-cerdo-iberico.jpg', 'La de Casa Oliva está increible', '4.50', '3.30', '{Carne}', '1a730d09-2667-411b-9f8d-c5cd965e0447');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0454', 'Cachopo', 'https://imag.bonviveur.com/churrasco-de-ternera-a-la-parrilla-listo-para-degustar.jpg', 'El del nuevo Casa pepe de atrás de mi casa está increible', '7', '5.50', '{Carne}', '1a730d09-2667-411b-9f8d-c5cd965e0447');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0456', 'Montadito de gambas alioli', 'https://media-cdn.tripadvisor.com/media/photo-s/0d/1a/9c/e5/montadito-de-gambas-alioli.jpg', 'El de Casa Oliva es un escándalo', '4', '2.50', '{Alioli exquisito}', '1a730d09-2667-411b-9f8d-c5cd965e0448');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0457', 'Montadito de lomo', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFwv3EPH4AYZesLIy3DHcP_vnmHfhHA09WTQ&usqp=CAU', 'El mondadito más mítico', '3.50', '2.50', '{Mítico del 100 montaditos}', '1a730d09-2667-411b-9f8d-c5cd965e0448');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0458', 'Petisui', 'https://sgfm.elcorteingles.es/SGFM/dctm/MEDIA03/202201/25/00118821000306____29__600x600.jpg', 'Petisui de toda la vida', '1', '0.50', '{Para que crezca el niño}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
 INSERT INTO PRODUCTO(id, nombre, imagen, descripcion, precio, precio_oferta, tags, categoria_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e0459', 'Tortitas', 'https://imag.bonviveur.com/tortitas-americanas-caseras-o-pancakes.jpg', 'Tortitas buenísimas', '2', '1', '{tortitas, leche}', '1a730d09-2667-411b-9f8d-c5cd965e0446');
+
+
+
+
+
+
+
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e022d', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed61', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'EN_PREPARACION', null);
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05e5', '1a730d09-2667-411b-9f8d-c5cd965e022d', 1, 2.0, 'b7fa6846-8eb1-11ee-b9d1-0242ac120006');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05f5', '1a730d09-2667-411b-9f8d-c5cd965e022d', 1, 2.0, 'b7fa6846-8eb1-11ee-b9d1-0242ac120007');
+
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e055f', '2023-11-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed61', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'EN_PREPARACION', null);
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05e7', '1a730d09-2667-411b-9f8d-c5cd965e055f', 1, 2.0, '1a730d09-2667-411b-9f8d-c5cd965e043e');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05fe', '1a730d09-2667-411b-9f8d-c5cd965e055f', 1, 2.0, '1a730d09-2667-411b-9f8d-c5cd965e0456');
+
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e066d', '2023-11-28 12:30:00', '95be9812-3bae-43ca-b3bc-31ee702247dd', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'EN_CAMINO', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05e9', '1a730d09-2667-411b-9f8d-c5cd965e066d', 1, 2.0, 'b7fa6846-8eb1-11ee-b9d1-0242ac120009');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05fd', '1a730d09-2667-411b-9f8d-c5cd965e066d', 1, 2.0, 'b7fa6846-8eb1-11ee-b9d1-0242ac120008');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05f1', '1a730d09-2667-411b-9f8d-c5cd965e066d', 1, 2.0, '1a730d09-2667-411b-9f8d-c5cd965e0451');
+
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f8d-c5cd965e067d', '2023-11-28 12:30:00', '95be9812-3bae-43ca-b3bc-31ee702247ff', 'b1a5ae54-9942-46b0-8976-cf6f763670a5', 'EN_CAMINO', 'da8ac66d-c0fd-4153-8b6e-20aa86d4b4f1');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05e9', '1a730d09-2667-411b-9f8d-c5cd965e067d', 1, 2.0, 'b7fa6846-8eb1-11ee-b9d1-0242ac120005');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05fd', '1a730d09-2667-411b-9f8d-c5cd965e067d', 1, 2.0, 'b7fa6846-8eb1-11ee-b9d1-0242ac120006');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e05f1', '1a730d09-2667-411b-9f8d-c5cd965e067d', 1, 2.0, '03be55ac-8eb8-11ee-b9d1-0242ac120013');
+
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-9f7d-c5cd965e067d', '2023-11-28 12:30:00', '95be9812-3bae-43ca-b3bc-31ee702247ff', 'b1a5ae54-9942-46b0-8976-cf6f763670a5', 'EN_CAMINO', 'da8ac66d-c0fd-4153-8b6e-20aa86d4b4f1');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e06e9', '1a730d09-2667-411b-9f7d-c5cd965e067d', 1, 2.0, 'b7fa6846-8eb1-11ee-b9d1-0242ac120005');
+
+INSERT INTO PEDIDO(id, fecha, cliente, cocinero, estado_pedido, repartidor)VALUES('1a730d09-2667-411b-5f8d-c5cd965e022d', '2023-12-28 12:30:00', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbed68', '1ce9c1c7-7a02-4c7f-bf69-6d0306cbe555', 'ENTREGADO', 'da8ac66d-c0fd-4153-8b6e-20aa86d4b4f1');
+INSERT INTO LINEA_PEDIDO(cod_linea, pedido_id, cantidad, precio_unitario, producto_id)VALUES('1a730d09-2667-411b-9f8d-c5cd965e16e9', '1a730d09-2667-411b-5f8d-c5cd965e022d', 1, 2.0, 'b7fa6846-8eb1-11ee-b9d1-0242ac120005');
+
