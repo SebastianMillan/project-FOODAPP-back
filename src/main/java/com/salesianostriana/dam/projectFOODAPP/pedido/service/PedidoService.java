@@ -78,4 +78,9 @@ public class PedidoService {
                         x.getCantidad()).sum());
 
     }
+
+    public List<GetLineaPedidoClienteDto> lineasPedidos (String idPedido){
+
+        return pedidoRepository.lineaPedido(idPedido);
+    }
 }

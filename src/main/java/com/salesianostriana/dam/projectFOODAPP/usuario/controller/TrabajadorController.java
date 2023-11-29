@@ -6,6 +6,7 @@ import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaProductsDto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetDetallePedidoDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoClienteDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoEnPedidoDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDto;
@@ -420,12 +421,18 @@ public class TrabajadorController {
     }
 
 
-    @GetMapping("/admin/pedido/{id}")
-    public GetPedidoDto pedidoId (@Valid @PathVariable String id){
+//    @GetMapping("/admin/pedido/{id}")
+//    public GetPedidoDto pedidoId (@Valid @PathVariable String id){
+//
+//        Pedido p = pedidoService.getPedidoDetails(UUID.fromString(id));
+//
+//        return GetPedidoDto.of(p);
+//    }
 
-        Pedido p = pedidoService.getPedidoDetails(UUID.fromString(id));
+    @GetMapping("/admin/pedido/{idPedido}")
+    public GetDetallePedidoDto getDetallesDeUnPedido(@PathVariable UUID idPedido){
 
-        return GetPedidoDto.of(p);
+        return pedidoService.getPedidoDetailsDto(idPedido);
     }
 
 }

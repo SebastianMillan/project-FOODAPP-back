@@ -62,4 +62,18 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
             from Pedido p
             """)
     List<GetPedidoDto> pedidosWithClientes ();
+
+
+    @Query("""
+            SELECT NEW com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoClienteDto(
+                        lp.pedido.id.toString(),
+                        lp.producto.nombre,
+                        lp.precioUnitario,
+                        lp.cantidad,
+                        lp.precioUnitario * lp.cantidad
+                        )
+            FROM LineaPedido lp
+            WHERE lp.codId.toString() = ?1
+            """)
+    List<GetLineaPedidoClienteDto> lineaPedido (String idPedido);
 }
