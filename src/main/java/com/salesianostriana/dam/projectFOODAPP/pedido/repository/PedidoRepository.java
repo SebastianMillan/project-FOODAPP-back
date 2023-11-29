@@ -1,7 +1,9 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.repository;
 
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoClienteDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoEnCocinero;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

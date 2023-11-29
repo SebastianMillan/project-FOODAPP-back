@@ -2,6 +2,7 @@ package com.salesianostriana.dam.projectFOODAPP.pedido.service;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.*;
 import com.salesianostriana.dam.projectFOODAPP.pedido.exception.PedidoNotFoundException;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.EstadoPedido;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepository;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;

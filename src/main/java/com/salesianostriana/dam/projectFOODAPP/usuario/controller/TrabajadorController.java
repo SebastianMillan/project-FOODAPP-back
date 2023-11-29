@@ -6,8 +6,10 @@ import com.salesianostriana.dam.projectFOODAPP.View.ProductView;
 
 import com.salesianostriana.dam.projectFOODAPP.categoria.dto.GetCategoriaProductsDto;
 import com.salesianostriana.dam.projectFOODAPP.categoria.service.CategoriaService;
+import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoClienteDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetLineaPedidoEnPedidoDto;
 import com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoDto;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepository;
 import com.salesianostriana.dam.projectFOODAPP.pedido.service.PedidoService;
