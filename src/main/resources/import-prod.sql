@@ -35,18 +35,18 @@ INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, ac
 INSERT INTO CLIENTE (id, pin, direccion, cod_postal, poblacion, provincia, puntos) VALUES ('95be9812-3bae-43ca-b3bc-31ee702247ff','342','C/Orilluela nº55', '444441', 'Pilas','Sevilla',145);
 INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (2,'95be9812-3bae-43ca-b3bc-31ee702247ff');
 
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('95be9812-3bae-43ca-b3bc-31ee702247gg', 'carlos01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Carlos Molina', 'carlos@gmail.com','545222767', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO CLIENTE (id, pin, direccion, cod_postal, poblacion, provincia, puntos) VALUES ('95be9812-3bae-43ca-b3bc-31ee702247gg','129','C/Morera nº51', '32132166', 'Valencina','Sevilla',145);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (2,'95be9812-3bae-43ca-b3bc-31ee702247gg');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('cf5fdd22-60f4-4ad9-9a3c-0afd65f3b204', 'carlos01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Carlos Molina', 'carlos@gmail.com','545222767', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO CLIENTE (id, pin, direccion, cod_postal, poblacion, provincia, puntos) VALUES ('cf5fdd22-60f4-4ad9-9a3c-0afd65f3b204','129','C/Morera nº51', '32132166', 'Valencina','Sevilla',145);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (2,'cf5fdd22-60f4-4ad9-9a3c-0afd65f3b204');
 
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('95be9812-3bae-43ca-b3bc-31ee702247hh', 'tomas01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Tomas Rebolledo', 'tomas@gmail.com','455443128', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO CLIENTE (id, pin, direccion, cod_postal, poblacion, provincia, puntos) VALUES ('95be9812-3bae-43ca-b3bc-31ee702247hh','129','C/Nazaret nº51', '1231234', 'Olivares','Sevilla',122);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (2,'95be9812-3bae-43ca-b3bc-31ee702247hh');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('9d027c06-1ae7-4e3c-b3fa-f0186c875c6e', 'tomas01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Tomas Rebolledo', 'tomas@gmail.com','455443128', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO CLIENTE (id, pin, direccion, cod_postal, poblacion, provincia, puntos) VALUES ('9d027c06-1ae7-4e3c-b3fa-f0186c875c6e','129','C/Nazaret nº51', '1231234', 'Olivares','Sevilla',122);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (2,'9d027c06-1ae7-4e3c-b3fa-f0186c875c6e');
 
 --COCINEROS
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77', 'luismi01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Luis Miguel López', 'lm@gmail.com','443221332', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77','1999-06-30',1);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbed77');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('cb63f0d7-cb98-4e46-b399-a189bfd3f103', 'luisma01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Luis Miguel López', 'lm@gmail.com','443221332', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('cb63f0d7-cb98-4e46-b399-a189bfd3f103','1999-06-30',1);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'cb63f0d7-cb98-4e46-b399-a189bfd3f103');
 
 INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe529', 'alvaro01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Alvaro López', 'alvaro@gmail.com','878787878', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
 INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe529','1991-03-30',1);
@@ -56,11 +56,11 @@ INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, ac
 INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe555','1991-02-04',1);
 INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbe555');
 
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbeabc', 'josefa01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Jose Francisca', 'josefa@gmail.com','65923472', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbeabc','2001-12-14',1);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbeabc');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('b1a5ae54-9942-46b0-8976-cf6f763670a5', 'josefa01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Jose Francisca', 'josefa@gmail.com','65923472', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('b1a5ae54-9942-46b0-8976-cf6f763670a5','2001-12-14',1);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'b1a5ae54-9942-46b0-8976-cf6f763670a5');
 
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbeabc', 'josefa01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Jose Francisca', 'josefa@gmail.com','65923472', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbeabc', 'josefina01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Jose Francisca', 'josefa@gmail.com','65923472', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
 INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbeabc','2001-12-14',1);
 INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbeabc');
 
@@ -69,7 +69,7 @@ INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7
 INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbebcd');
 
 --REPARTIDORES
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456', 'miguel01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Miguel Campos', 'miguel@gmail.com','443778999', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456', 'miguel02','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Miguel Campos', 'miguel@gmail.com','443778999', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
 INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456','1922-10-15',2);
 INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbe456');
 
@@ -81,26 +81,26 @@ INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, ac
 INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbed03','1922-03-20',2);
 INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbed03');
 
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbfff', 'maria01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Maria Bernal', 'maria@gmail.com','657657888', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbfff','1972-05-22',2);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbfff');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('4bae7a13-1bb0-4aaa-a551-026442a3188b', 'maria01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Maria Bernal', 'maria@gmail.com','657657888', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('4bae7a13-1bb0-4aaa-a551-026442a3188b','1972-05-22',2);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'4bae7a13-1bb0-4aaa-a551-026442a3188b');
 
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbefg', 'cristina01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Cristina Torre', 'cristina@gmail.com','9292929291', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbefg','1989-03-13',2);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbefg');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('da8ac66d-c0fd-4153-8b6e-20aa86d4b4f1', 'cristina01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Cristina Torre', 'cristina@gmail.com','9292929291', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('da8ac66d-c0fd-4153-8b6e-20aa86d4b4f1','1989-03-13',2);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (1,'da8ac66d-c0fd-4153-8b6e-20aa86d4b4f1');
 
 --ADMINISTRADORES
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbed99', 'angel01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Angel', 'angel@gmail.com','333223311', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbed99','1995-11-11',0);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbed99');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('86cc45ac-7e72-40d7-b528-2863a1e2500f', 'angel02','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Angel', 'angel@gmail.com','333223311', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('86cc45ac-7e72-40d7-b528-2863a1e2500f','1995-11-11',0);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'86cc45ac-7e72-40d7-b528-2863a1e2500f');
 
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe111', 'manolo01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Manolo Sanchez', 'manolo@gmail.com','332334111', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe111','1991-02-12',0);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbe111');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('3120f318-8a2b-4ca6-8da8-671e998db8c4', 'manolo01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Manolo Sanchez', 'manolo@gmail.com','332334111', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('3120f318-8a2b-4ca6-8da8-671e998db8c4','1991-02-12',0);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'3120f318-8a2b-4ca6-8da8-671e998db8c4');
 
-INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe666', 'ale01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Alejandro Pepe', 'ale@gmail.com','556554445', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
-INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('1ce9c1c7-7a02-4c7f-bf69-6d0306cbe666','1967-03-22',0);
-INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'1ce9c1c7-7a02-4c7f-bf69-6d0306cbe666');
+INSERT INTO USUARIO (id, username, password, nombre, email, telefono, avatar, account_non_expired, account_non_locked,credentials_non_expired, enabled) VALUES ('ebc0d46c-7b76-43dd-80a4-9b35acb93324', 'ale01','{bcrypt}$2a$12$qG8MR/W6ExYtPPdpr2Ry/eEy.x30mvHWlRyLuG6fP57lCK.6Kuz.W', 'Alejandro Pepe', 'ale@gmail.com','556554445', 'https://media.istockphoto.com/id/92044396/es/foto/rana-con-gafas-de-sol.jpg?s=170667a&w=0&k=20&c=jEh4ZMUWU9Y3gx5odmT-LmbCGymtiBVzzEPerkawqm0=', true, true, true, true);
+INSERT INTO TRABAJADOR (id, fecha_nacimiento, tipo_trabajador) VALUES ('ebc0d46c-7b76-43dd-80a4-9b35acb93324','1967-03-22',0);
+INSERT INTO USUARIO_ROLES (roles, usuario_id) VALUES (0,'ebc0d46c-7b76-43dd-80a4-9b35acb93324');
 
 
 
