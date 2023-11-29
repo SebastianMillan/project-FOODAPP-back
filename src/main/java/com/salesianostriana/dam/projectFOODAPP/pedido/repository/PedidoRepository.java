@@ -54,10 +54,18 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
     Optional<Pedido> buscarPedidoPorId(UUID id);
 
     @Query("""
-            SELECT p
-            FROM Pedido p
-            JOIN FETCH p.lineasPedido
-            WHERE p.repartidor = ?2
+             select new com.salesianostriana.dam.projectFOODAPP.pedido.dto.GetPedidoRepartidorDTO(
+             cast(p.id as string),
+             (select c.nombre from Usuario c where cast(c.id as string) = p.cliente),
+             cast(p.fecha as string),
+             cast(p.estadoPedido as string),
+             (select c.direccion from Usuario c where cast(c.id as string) = p.cliente),
+             (select c.telefono from Usuario c where cast(c.id as string) = p.cliente),
+             (select sum(l.precioUnitario * l.cantidad) from LineaPedido l where l.pedido.id = p.id))
+             from Pedido p
+             where p.repartidor = ?1
             """)
-    Page<GetPedidoRepartidorDTO> getPedidosDelRepartidor(Pageable pageable, String idRepartidor);
+    Page<GetPedidoRepartidorDTO> getPedidosDelRepartidor(String idRepartidor, Pageable pageable);
+
+
 }

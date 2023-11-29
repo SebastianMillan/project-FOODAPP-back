@@ -107,8 +107,6 @@ public class PedidoController {
         return pedidoService.getAllPedidosDelCocinero(pageable, cocinero.getId().toString());
     }
 
-
-
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Modificar el estado del pedido", content = {
                     @Content(mediaType = "application/json",
@@ -143,5 +141,12 @@ public class PedidoController {
 
         return pedidoService.getPedidosDelRepartidor(pageable, repartidor.getId().toString());
 
+    }
+
+    @PutMapping("/repartidor/pedido/{idPedido}")
+    public GetPedidoRepartidorDTO cambiarEstadoPedidoRepartidor(@PathVariable String idPedido,
+                                                                @Valid @RequestBody  EditEstadoPedidoDto estado){
+
+        return pedidoService.cambiarEstadoPedidoRepartidor(idPedido, estado);
     }
 }

@@ -75,17 +75,16 @@ public class PedidoService {
 
     public Page<GetPedidoRepartidorDTO> getPedidosDelRepartidor (Pageable pageable, String idRepartidor){
 
-        return pedidoRepository.getPedidosDelRepartidor(pageable, idRepartidor);
+        return pedidoRepository.getPedidosDelRepartidor(idRepartidor, pageable);
+
+    }
+
+    public Pedido cambiarEstadoPedidoRepartidor (String idPedido, EditEstadoPedidoDto nuevoEstado){
+
+        Pedido pedido = pedidoRepository.getPedidoById(idPedido)
+                .orElseThrow(() -> new PedidoNotFoundException(idPedido));
+
+        pedido.setEstadoPedido(EstadoPedido.valueOf(nuevoEstado.estadoPedido()));
+        return pedidoRepository.save(pedido);
     }
 }
-/*
-List<GetPedidoDTO> pedidosDto = new ArrayList<>();
-        for (Pedido pedido : pedidos) {
-            pedidosDto.add(GetPedidoDTO.of(pedido,
-                    pedidoServicio.calcularImporteTotal(pedido),
-                    pedidoServicio.obtenerProductosDiferentes(pedido),
-                    pedidoServicio.obtenerTotalProductos(pedido)));
-        }
-        return ResponseEntity.ok(pedidosDto);
-    }
- */

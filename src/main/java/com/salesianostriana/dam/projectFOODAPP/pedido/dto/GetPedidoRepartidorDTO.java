@@ -1,10 +1,14 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.dto;
 
+import ch.qos.logback.core.net.server.Client;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
+
+import java.time.format.DateTimeFormatter;
 
 public record GetPedidoRepartidorDTO (
 
-        String idCliente,
+        String idPedido,
 
         String nombreCliente,
 
@@ -18,16 +22,18 @@ public record GetPedidoRepartidorDTO (
 
         double importe
 ){
-
+/*
     public static GetPedidoRepartidorDTO of (Pedido p){
         return new GetPedidoRepartidorDTO(
-                p.getCliente().toString(),
+                p.getId().toString(),
                 null,
-                p.getFecha().toString(),
+                p.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
                 p.getEstadoPedido().toString(),
                 null,
                 null,
                 p.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() * x.getPrecioUnitario()).sum()
         );
     }
+
+ */
 }
