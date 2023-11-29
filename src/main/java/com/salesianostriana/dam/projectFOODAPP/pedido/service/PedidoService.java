@@ -78,13 +78,21 @@ public class PedidoService {
         return pedidoRepository.getPedidosDelRepartidor(idRepartidor, pageable);
 
     }
+/*
+    public GetPedidoRepartidorDTO cambiarEstadoPedidoRepartidor (String idPedido, EditEstadoPedidoDto nuevoEstado){
 
-    public Pedido cambiarEstadoPedidoRepartidor (String idPedido, EditEstadoPedidoDto nuevoEstado){
+        Cliente cliente = clienteService.buscarClientePorId(pedido.getCliente());
 
-        Pedido pedido = pedidoRepository.getPedidoById(idPedido)
-                .orElseThrow(() -> new PedidoNotFoundException(idPedido));
-
-        pedido.setEstadoPedido(EstadoPedido.valueOf(nuevoEstado.estadoPedido()));
-        return pedidoRepository.save(pedido);
-    }
+        return new GetPedidoRepartidorDTO(
+                pedido.getId().toString(),
+                cliente.getNombre(),
+                pedido.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+                nuevoEstado.estadoPedido(),
+                cliente.getDireccion(),
+                cliente.getTelefono(),
+                pedido.getLineasPedido().stream().mapToDouble(x -> x.getPrecioUnitario() *
+                        x.getCantidad()).sum());
+        }
+*/
 }
+
