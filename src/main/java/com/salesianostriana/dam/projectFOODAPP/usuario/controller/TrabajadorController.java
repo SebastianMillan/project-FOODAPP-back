@@ -61,6 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -113,13 +114,12 @@ public class TrabajadorController {
                     content = @Content)
     })
     @GetMapping("/admin/producto/{nombreCategoria}")
-    public List<GetProductShortDto> getProductoCategory(@Valid @PathVariable String nombreCategoria) {
+    public Page<GetProductShortDto> getProductoCategory(@Valid @PathVariable String nombreCategoria, @PageableDefault(page=0, size =4)Pageable pageable) {
 
-        List<Producto> productos = categoriaService.getProductsCategory(nombreCategoria.toLowerCase());
+        Page<Producto> productos = categoriaService.getProductsCategory(nombreCategoria.toLowerCase(), pageable);
 
-        return productos.stream()
-                .map(GetProductShortDto::of)
-                .toList();
+        return productos.map(GetProductShortDto::of);
+
     }
 
 
