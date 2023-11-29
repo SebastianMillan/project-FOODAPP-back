@@ -29,10 +29,10 @@ public class PedidoService {
         return pedidoRepository.getAllPedidosConLineas();
     }
 
-//    public List<GetPedidoDto> getAllPedidosv2() {
-//
-//        return pedidoRepository.pedidosWithClientes();
-//    }
+    public List<GetPedidoDto> getAllPedidosv2() {
+
+        return pedidoRepository.pedidosWithClientes();
+    }
 
     public Optional<Pedido> getPedidoDeClienteById(String idCliente){
 

@@ -1,6 +1,8 @@
 package com.salesianostriana.dam.projectFOODAPP.pedido.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
+import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -9,10 +11,10 @@ import java.util.List;
 
 public record GetPedidoDto(
         String id,
-        String fecha,
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+        LocalDateTime fecha,
         String cliente,
         String estadoPedido,
-        List<GetLineaPedidoEnPedidoDto> ln,
         double importe
 ) {
 
@@ -20,13 +22,9 @@ public record GetPedidoDto(
 
         return new GetPedidoDto(
                 p.getId().toString(),
-                p.getFecha().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+                p.getFecha(),
                 p.getCliente(),
                 p.getEstadoPedido().toString(),
-                p.getLineasPedido()
-                        .stream()
-                        .map(GetLineaPedidoEnPedidoDto::of)
-                        .toList(),
                 p.getLineasPedido().stream().mapToDouble(a -> a.getPrecioUnitario() * a.getCantidad()).sum()
         );
     }

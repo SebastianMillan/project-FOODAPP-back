@@ -380,19 +380,29 @@ public class TrabajadorController {
                             array = @ArraySchema(schema = @Schema(implementation = Pedido.class)),
                             examples = {@ExampleObject(
                                     value = """
-                                            {
-                                                  "id": "ac19c001-8c17-10bb-818c-17f0c7e8000a",
-                                                  "fecha": "28-11-2023 22:58",
-                                                  "cliente": "ac19c001-8c17-10bb-818c-17f0c6dd0002",
-                                                  "estadoPedido": "EN_PREPARACION",
-                                                  "ln": [
-                                                      {
-                                                          "producto": "Patatas Bravas",
-                                                          "cantidad": 1
-                                                      }
-                                                  ],
-                                                  "importe": 2.3
-                                              }
+                                            [
+                                                   {
+                                                       "id": "ac1ce001-8c1a-1090-818c-1a409af7000a",
+                                                       "fecha": "29/11/2023 09:44",
+                                                       "cliente": "Sebastián Millán",
+                                                       "estadoPedido": "EN_PREPARACION",
+                                                       "importe": 2.3
+                                                   },
+                                                   {
+                                                       "id": "ac1ce001-8c1a-1090-818c-1a409afc000c",
+                                                       "fecha": "29/11/2023 09:44",
+                                                       "cliente": "Francisco Claro",
+                                                       "estadoPedido": "CONFIRMADO",
+                                                       "importe": 10.9
+                                                   },
+                                                   {
+                                                       "id": "ac1ce001-8c1a-1090-818c-1a409afd000f",
+                                                       "fecha": "29/11/2023 09:44",
+                                                       "cliente": "Francisco Claro",
+                                                       "estadoPedido": "CONFIRMADO",
+                                                       "importe": 12.6
+                                                   }
+                                               ]
                                             """
                             )}
                     )}),
@@ -404,112 +414,18 @@ public class TrabajadorController {
     @GetMapping("/admin/pedido")
     public List<GetPedidoDto> getPedidos() {
 
-        List<Pedido> p = pedidoService.getAllPedidos();
-
-        return p.stream()
-                .map(GetPedidoDto::of)
-                .toList();
+        return pedidoService.getAllPedidosv2();
     }
 
 
     @GetMapping("/admin/pedido/{id}")
-    public GetPedidoDto pedidoId (@PathVariable String id){
+    public GetPedidoDto pedidoId (@Valid @PathVariable String id){
 
         Pedido p = pedidoService.getPedidoDetails(UUID.fromString(id));
 
         return GetPedidoDto.of(p);
     }
 
-//    @GetMapping("/admin/pedido")
-//    public List<GetPedidoDto> getPedidos() {
-//
-//        return pedidoService.getAllPedidosv2();
-//    }
-
-//    @Operation(summary = "Menú de un restaurante")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200",
-//                    description = "Menú del Restaurante",
-//                    content = { @Content(mediaType = "aplication/json",
-//                            array = @ArraySchema(schema = @Schema(implementation = Producto.class)),
-//                            examples = {@ExampleObject(
-//                                    value = """
-//                                            [
-//                                                 {
-//                                                     "id": "ac19c001-8c11-176c-818c-11a777a80004",
-//                                                     "nombre": "Patatas Bravas",
-//                                                     "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Patatas_bravas_madrid.jpg/640px-Patatas_bravas_madrid.jpg",
-//                                                     "descripcion": "Patatas fritas acompañadas con una salsa picante de tomate Goya.",
-//                                                     "precio": 2.3,
-//                                                     "tags": [
-//                                                         "patatas",
-//                                                         "bravas"
-//                                                     ],
-//                                                     "categoria": {
-//                                                         "nombre": "Tapas"
-//                                                     }
-//                                                 },
-//                                                 {
-//                                                     "id": "ac19c001-8c11-176c-818c-11a777a90005",
-//                                                     "nombre": "Plato de Jamón Ibérico",
-//                                                     "imagen": "https://phantom-expansion.unidadeditorial.es/4a18f7865539ab348461b2ff7fc87fe4/crop/0x455/1197x1253/f/jpg/assets/multimedia/imagenes/2022/02/24/16457011092381.jpg",
-//                                                     "descripcion": "Plato de Jamón 100% Ibérico y curado",
-//                                                     "precio": 6.3,
-//                                                     "tags": [
-//                                                         "Jamón",
-//                                                         "Ibérico",
-//                                                         "De Bellota"
-//                                                     ],
-//                                                     "categoria": {
-//                                                         "nombre": "Tapas"
-//                                                     }
-//                                                 },
-//                                                 {
-//                                                     "id": "ac19c001-8c11-176c-818c-11a777a90007",
-//                                                     "nombre": "Hamburguesa Queso",
-//                                                     "imagen": "https://i.blogs.es/75907e/tarta_queso_philadelphia-min/1366_2000.jpeg",
-//                                                     "descripcion": "Hamburguesa de Buey con queso de cabra",
-//                                                     "precio": 2.4,
-//                                                     "tags": [
-//                                                         "Queso",
-//                                                         "Hamburguesa",
-//                                                         "Buey"
-//                                                     ],
-//                                                     "categoria": {
-//                                                         "nombre": "Tapas"
-//                                                     }
-//                                                 },
-//                                                 {
-//                                                     "id": "ac19c001-8c11-176c-818c-11a777a90006",
-//                                                     "nombre": "Tarta de queso",
-//                                                     "imagen": "https://i.blogs.es/75907e/tarta_queso_philadelphia-min/1366_2000.jpeg",
-//                                                     "descripcion": "Tarta de queso philadelphia super cremosa.",
-//                                                     "precio": 3.0,
-//                                                     "tags": [
-//                                                         "Tarta",
-//                                                         "Queso",
-//                                                         "Cremosa"
-//                                                     ],
-//                                                     "categoria": {
-//                                                         "nombre": "Postres"
-//                                                     }
-//                                                 }
-//                                             ]
-//                                            """
-//                            )}
-//                    )}),
-//
-//            @ApiResponse(responseCode = "500",
-//                    description = "Error al cargar el menú",
-//                    content = @Content)
-//    })
-//        @JsonView(MenuProductosView.menu.class)
-//        @GetMapping("/admin/menu2")
-//        public List<GetCategoriaProductsDto> categoriaProductsDtoList () {
-//
-//            return categoriaService.categoryWithProductsV2();
-//
-//        }
 }
 
 
