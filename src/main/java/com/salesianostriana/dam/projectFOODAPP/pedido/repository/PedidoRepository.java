@@ -105,7 +105,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
              from LineaPedido l
              where l.producto.id = ?1
              and l.pedido.id = ?2
-             order by l.producto.id asc
+             order by random()
              limit 1
             """)
     Optional<LineaPedido> buscarLineaPedidoPorProductoyPedido(UUID idProducto, UUID idPedido);

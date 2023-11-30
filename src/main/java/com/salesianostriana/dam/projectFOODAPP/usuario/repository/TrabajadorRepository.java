@@ -21,7 +21,7 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, UUID> {
             select t
             from Trabajador t
             where t.tipoTrabajador = 1
-            order by function('RAND') limit 1
+            order by random() limit 1
             """)
     Optional<Trabajador> randomSelectCocinero();
 
@@ -29,7 +29,7 @@ public interface TrabajadorRepository extends JpaRepository<Trabajador, UUID> {
             select t
             from Trabajador t
             where t.tipoTrabajador = 2
-            order by function('RAND') limit 1
+            order by random() limit 1
             """)
     Optional<Trabajador> randomSelectRepartidor();
 }
