@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.security;
 
+import com.salesianostriana.dam.projectFOODAPP.security.errorhandling.MySimpleUrlAuthenticationSuccessHandler;
 import com.salesianostriana.dam.projectFOODAPP.security.jwt.access.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
@@ -113,7 +115,11 @@ public class SecurityConfig {
                         .requestMatchers(antMatcher("/cocinero/**")).hasRole("TRABAJADOR")
                         .requestMatchers(antMatcher("/repartidor/**")).hasRole("TRABAJADOR")
                         .requestMatchers(antMatcher("/admin/**")).hasRole("ADMIN")
-                        .anyRequest().authenticated());
+                        .anyRequest().authenticated())
+
+                .formLogin(formlogin ->
+                        formlogin.successHandler(myAuthenticationSuccessHandler()));
+
 
 
 
@@ -141,6 +147,11 @@ public class SecurityConfig {
                         antMatcher("/error")
                 ));
 
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MySimpleUrlAuthenticationSuccessHandler();
     }
 
 
