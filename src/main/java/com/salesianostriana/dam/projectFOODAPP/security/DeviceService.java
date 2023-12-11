@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
 import ua_parser.Client;
@@ -23,18 +24,17 @@ import java.util.*;
 import static java.util.Objects.nonNull;
 
 @Service
-@RequiredArgsConstructor
 public class DeviceService {
 
     private static final String UNKNOWN = "UNKNOWN";
 
     @Value("${support.email}")
     private String from;
-    private final JavaMailSender mailSender;
-    private final Parser parser;
-    private final DeviceMetadataRepository deviceMetadataRepository;
-    private final DatabaseReader databaseReader;
-    private final MessageSource messages;
+    private JavaMailSender mailSender;
+    private Parser parser;
+    private DeviceMetadataRepository deviceMetadataRepository;
+    private DatabaseReader databaseReader;
+    private MessageSource messages;
 
 
 
