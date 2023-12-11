@@ -1,20 +1,19 @@
 package com.salesianostriana.dam.projectFOODAPP.security;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 @NoArgsConstructor
 public class DeviceMetadata {
 
@@ -36,4 +35,17 @@ public class DeviceMetadata {
     private String deviceDetails;
     private String location;
     private Date lastLoggedIn;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeviceMetadata that = (DeviceMetadata) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface DeviceMetadataRepository extends JpaRepository<DeviceMetadata, UUID> {
-    List<DeviceMetadata> findByUserId(UUID userId);
+    List<DeviceMetadata> findByUserId(UUID id);
 
 }

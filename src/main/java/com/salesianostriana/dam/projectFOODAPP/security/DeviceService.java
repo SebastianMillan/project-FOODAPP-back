@@ -80,9 +80,9 @@ public class DeviceService {
         return location;
     }
 
-    private DeviceMetadata findExistingDevice(UUID userId, String deviceDetails, String location) {
+    private DeviceMetadata findExistingDevice(UUID id, String deviceDetails, String location) {
 
-        List<DeviceMetadata> knownDevices = deviceMetadataRepository.findByUserId(userId);
+        List<DeviceMetadata> knownDevices = deviceMetadataRepository.findByUserId(id);
 
         for (DeviceMetadata existingDevice : knownDevices) {
             if (existingDevice.getDeviceDetails().equals(deviceDetails) &&
@@ -109,7 +109,7 @@ public class DeviceService {
                     ip, user.getEmail(), request.getLocale());
 
             DeviceMetadata deviceMetadata = new DeviceMetadata();
-            deviceMetadata.setUserId(user.getId());
+            deviceMetadata.setId(user.getId());
             deviceMetadata.setLocation(location);
             deviceMetadata.setDeviceDetails(deviceDetails);
             deviceMetadata.setLastLoggedIn(new Date());
