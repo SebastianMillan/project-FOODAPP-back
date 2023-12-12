@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
+import com.salesianostriana.dam.projectFOODAPP.security.DeviceService;
 import com.salesianostriana.dam.projectFOODAPP.security.jwt.access.JwtProvider;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.*;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
@@ -36,6 +37,7 @@ public class UsuarioController {
     private final ClienteService clienteService;
     private final AuthenticationManager authManager;
     private final JwtProvider jwtProvider;
+    private final DeviceService deviceService;
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Registrarme como Cliente", content = {

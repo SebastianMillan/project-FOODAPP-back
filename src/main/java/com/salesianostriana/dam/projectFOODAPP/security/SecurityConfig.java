@@ -37,6 +37,8 @@ public class SecurityConfig {
     private final AccessDeniedHandler jwtAccessDeniedHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private final MySimpleUrlAuthenticationSuccessHandler mySimpleUrlAuthenticationSuccessHandler;
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder =
@@ -118,7 +120,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
 
                 .formLogin(formlogin ->
-                        formlogin.successHandler(myAuthenticationSuccessHandler()));
+                        formlogin.successHandler(mySimpleUrlAuthenticationSuccessHandler)
+                                .defaultSuccessUrl("/"));
 
 
 
