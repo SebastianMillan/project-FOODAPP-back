@@ -59,7 +59,7 @@ public class Usuario implements UserDetails {
     @Builder.Default
     private boolean credentialsNonExpired = true;
     @Builder.Default
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<RolUsuario> roles;

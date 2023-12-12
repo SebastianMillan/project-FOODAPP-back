@@ -1,7 +1,10 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
+import com.salesianostriana.dam.projectFOODAPP.config.VerificationToken;
 import com.salesianostriana.dam.projectFOODAPP.security.jwt.access.JwtProvider;
+import com.salesianostriana.dam.projectFOODAPP.usuario.OnClientRegistrationCompleteEvent;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.*;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.ClientAlreadyExistException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.service.ClienteService;
@@ -13,8 +16,12 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
+import org.springframework.cglib.core.Local;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,9 +30,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Optional;
 
 @RestController
@@ -36,6 +49,7 @@ public class UsuarioController {
     private final ClienteService clienteService;
     private final AuthenticationManager authManager;
     private final JwtProvider jwtProvider;
+    private final ApplicationEventPublisher eventPublisher;
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Registrarme como Cliente", content = {
@@ -60,11 +74,59 @@ public class UsuarioController {
     })
     @Operation(summary = "createUser", description = "Registrarme como Cliente")
     @PostMapping("/auth/register")
-    public ResponseEntity<UserResponse> createUserWithUserRole(@Valid @RequestBody CreateClientDto created) {
-        Cliente cliente = userService.createUserWithUserRole(created);
+    public ModelAndView registerUserAccount(
+            @ModelAttribute("user") @Valid CreateClientDto clienteDto,
+            HttpServletRequest request, Errors errors) {
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(UserResponse.fromUser(cliente));
+        try {
+            Cliente registrado = userService.createUserWithUserRole(clienteDto);
+
+            String appUrl = request.getContextPath();
+            eventPublisher.publishEvent(new OnClientRegistrationCompleteEvent(registrado,
+                    request.getLocale(), appUrl));
+        } catch (ClientAlreadyExistException caeEx) {
+            ModelAndView mav = new ModelAndView("register", "cliente", clienteDto);
+            mav.addObject("message", "An account for that username/email already exists.");
+            return mav;
+        } catch (RuntimeException ex) {
+            return new ModelAndView("emailError", "cliente", clienteDto);
+        }
+
+        return new ModelAndView("successRegister", "cliente", clienteDto);
+    }
+
+
+//    @PostMapping("/auth/register")
+//    public ResponseEntity<UserResponse> createUserWithUserRole(@Valid @RequestBody CreateClientDto created) {
+//        Cliente cliente = userService.createUserWithUserRole(created);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED)
+//                .body(UserResponse.fromUser(cliente));
+//    }
+
+    @GetMapping("auth/registerConfirm")
+    public String confirmRegistration(WebRequest request, Model model, @RequestParam("token") String token) {
+
+        Locale locale = request.getLocale();
+
+        VerificationToken verificationToken = service.getVerificationToken(token);
+        if (verificationToken == null) {
+            String message = messages.getMessage("auth.message.invalidToken", null, locale);
+            model.addAttribute("message", message);
+            return "redirect:/badUser.html?lang=" + locale.getLanguage();
+        }
+
+        User user = verificationToken.getUser();
+        Calendar cal = Calendar.getInstance();
+        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+            String messageValue = messages.getMessage("auth.message.expired", null, locale)
+            model.addAttribute("message", messageValue);
+            return "redirect:/badUser.html?lang=" + locale.getLanguage();
+        }
+
+        user.setEnabled(true);
+        service.saveRegisteredUser(user);
+        return "redirect:/login.html?lang=" + request.getLocale().getLanguage();
     }
 
     @ApiResponses(value = {
