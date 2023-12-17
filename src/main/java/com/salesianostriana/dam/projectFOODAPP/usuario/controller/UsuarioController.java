@@ -1,6 +1,10 @@
 package com.salesianostriana.dam.projectFOODAPP.usuario.controller;
 
 import com.salesianostriana.dam.projectFOODAPP.security.jwt.access.JwtProvider;
+import com.salesianostriana.dam.projectFOODAPP.security.jwt.refresh.RefreshToken;
+import com.salesianostriana.dam.projectFOODAPP.security.jwt.refresh.RefreshTokenException;
+import com.salesianostriana.dam.projectFOODAPP.security.jwt.refresh.RefreshTokenRequest;
+import com.salesianostriana.dam.projectFOODAPP.security.jwt.refresh.RefreshTokenService;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.*;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
@@ -24,9 +28,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,6 +37,7 @@ public class UsuarioController {
     private final ClienteService clienteService;
     private final AuthenticationManager authManager;
     private final JwtProvider jwtProvider;
+    private final RefreshTokenService refreshTokenService;
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Registrarme como Cliente", content = {
@@ -101,8 +103,12 @@ public class UsuarioController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
         Usuario user = (Usuario) authentication.getPrincipal();
+
+        refreshTokenService.deleteByUser(user);
+
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(JwtUserResponse.of(user, token));
+                .body(JwtUserResponse.of(user, token, refreshToken.getToken()));
     }
 
     @ApiResponses(value = {
@@ -209,6 +215,28 @@ public class UsuarioController {
     @PutMapping("/profile/edit")
     public GetClienteDtoDetail editLoggedUser(@Valid @RequestBody EditLoggedUserDto editado, @AuthenticationPrincipal Cliente c){
         return GetClienteDtoDetail.of(clienteService.editLoggedUser(editado,c), clienteService.buscarPedidosByClienteId(c.getId().toString()));
+    }
+
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<?> refreshtoken (@RequestBody RefreshTokenRequest refreshTokenRequest){
+
+        String refreshToken = refreshTokenRequest.getRefreshToken();
+
+        return refreshTokenService.findByToken(refreshToken)
+                .map(refreshTokenService::verify)
+                .map(RefreshToken::getUser)
+                .map(usuario -> {
+                    String token =jwtProvider.generateToken(usuario);
+                    refreshTokenService.deleteByUser(usuario);
+                    RefreshToken refreshToken1 = refreshTokenService.createRefreshToken(usuario);
+                    return ResponseEntity.status(HttpStatus.CREATED)
+                            .body(JwtUserResponse.builder()
+                                    .token(token)
+                                    .refreshToken(refreshToken1.getToken())
+                                    .build()
+                            );
+                })
+                .orElseThrow(()-> new RefreshTokenException("El token no ha sido encontrado"));
     }
 
 
