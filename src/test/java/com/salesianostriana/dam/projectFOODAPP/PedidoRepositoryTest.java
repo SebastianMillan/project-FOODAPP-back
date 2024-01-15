@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 public class PedidoRepositoryTest {
@@ -29,9 +30,11 @@ public class PedidoRepositoryTest {
     void buscarPedidoAbiertoByClienteId(){
 
         Cliente cliente1 = Cliente.builder()
+                .username("Sebastián")
                 .id(UUID.randomUUID())
                 .build();
         Cliente cliente2 = Cliente.builder()
+                .username("Fernando")
                 .id(UUID.randomUUID())
                 .build();
         Pedido p1 = Pedido.builder()
@@ -59,7 +62,9 @@ public class PedidoRepositoryTest {
 
         Optional<Pedido> result = pedidoRepository.buscarPedidoAbiertoByClienteId(cliente1.getId().toString());
 
-        assertEquals(result.get(), cliente1);
+        assertTrue(result.isPresent());
+        assertEquals(result.get().getId(), p1.getId());
+        assertEquals(result.get().getCliente(), cliente1.getId().toString());
 
 
     }
