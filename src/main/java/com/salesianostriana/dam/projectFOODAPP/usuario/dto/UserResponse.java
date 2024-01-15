@@ -23,6 +23,7 @@ public class UserResponse {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     protected LocalDateTime createdAt;
+    protected int edad;
 
 
     public static UserResponse fromUser(Usuario user) {
@@ -36,6 +37,7 @@ public class UserResponse {
                         .map(Enum::name)
                         .collect(Collectors.toSet()))
                 .createdAt(user.getCreatedAt())
+                .edad(user.getEdad())
                 .build();
     }
 

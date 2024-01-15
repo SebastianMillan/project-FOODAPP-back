@@ -24,6 +24,9 @@ public interface ProductoRepository extends JpaRepository<Producto, UUID> {
     @Query("SELECT p FROM Producto p GROUP BY p.categoria, p.id")
     List<Producto> findAllGroupByCategoria();
 
+    @Query("Select p From Producto p where p.categoria = ?1")
+    List<Producto> findByCategoria(Categoria c);
+
     List<Producto> findByCategoriaId(UUID categoriaId);
 
     @Query("""

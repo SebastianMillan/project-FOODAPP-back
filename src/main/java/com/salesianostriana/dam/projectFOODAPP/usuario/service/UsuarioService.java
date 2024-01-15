@@ -2,13 +2,17 @@ package com.salesianostriana.dam.projectFOODAPP.usuario.service;
 
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.CreateClientDto;
 import com.salesianostriana.dam.projectFOODAPP.usuario.dto.CreateUserRequest;
+import com.salesianostriana.dam.projectFOODAPP.usuario.dto.GetUserDtoDetail;
 import com.salesianostriana.dam.projectFOODAPP.usuario.exception.PasswordNotValidException;
+import com.salesianostriana.dam.projectFOODAPP.usuario.exception.TrabajadoresListEmptyException;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.RolUsuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Usuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.ClienteRepository;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -100,6 +104,25 @@ public class UsuarioService {
 
     public boolean passwordMatch(Usuario user, String clearPassword) {
         return passwordEncoder.matches(clearPassword, user.getPassword());
+    }
+
+    public Page<GetUserDtoDetail> listadoUsiariosDtoExmanen(Pageable pageable){
+        Page<GetUserDtoDetail> user = userRepository.allUsuarios(pageable);
+        if(user.isEmpty()){
+            throw new TrabajadoresListEmptyException();
+        }
+        return user;
+    }
+
+
+    //Cambiar La contraseña
+    public void changePassword(Usuario user, String newPassword) {
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+
+        user.setPasswordChangedTime(new Date());
+
+        userRepository.save(user);
     }
 
 

@@ -12,8 +12,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -51,6 +53,7 @@ public class Usuario implements UserDetails {
     private String email;
     private String telefono;
     private String avatar;
+    private int edad;
 
     @Builder.Default
     private boolean accountNonExpired = true;
@@ -106,5 +109,22 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+
+    private static final long PASSWORD_EXPIRATION_TIME
+            //= 30L * 24L * 60L * 60L * 1000L;    // 30 days
+    = 1L * 60L * 100L; //1min
+
+    @Column(name = "password_changed_time")
+    private Date passwordChangedTime;
+
+    public boolean isPasswordExpired() {
+        if (this.passwordChangedTime == null) return false;
+
+        long currentTime = System.currentTimeMillis();
+        long lastChangedTime = this.passwordChangedTime.getTime();
+
+        return currentTime > lastChangedTime + PASSWORD_EXPIRATION_TIME;
     }
 }

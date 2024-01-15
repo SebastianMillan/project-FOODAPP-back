@@ -16,5 +16,6 @@ public class CreateUserRequest {
     private String verifyPassword;
     private String avatar;
     private String fullName;
+    private int edad;
 
 }
