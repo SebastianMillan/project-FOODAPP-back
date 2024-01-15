@@ -30,7 +30,7 @@ Para el entendimiento de la API REST se dispondrá de pautas a seguir en Postman
   - "sebas01" -> Cliente
   - "luisma01" -> Cocinero
   - "miguel02" -> Repartidor
-  - "angel02" -> Administrador
+  - "angel01" -> Administrador
  
     los usuarios tienen todos la contraseña 1234.
 
