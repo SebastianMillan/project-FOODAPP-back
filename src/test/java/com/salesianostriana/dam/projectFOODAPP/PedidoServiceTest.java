@@ -51,12 +51,12 @@ public class PedidoServiceTest {
         Producto productToAdd =new Producto(UUID.randomUUID(), "Camisa","url","descripcion",20.2, 20.2,new String[2], new Categoria(UUID.randomUUID(), "Ropa"));
 
         //Precondiciones
-        lenient().when(pedidoRepository.buscarPedidoAbiertoByClienteId(cliente.getId().toString())).thenReturn(Optional.of(pedido));
-        lenient().when(productoRepository.encontrarProductoPorId(productToAdd.getId().toString())).thenReturn(Optional.of(productToAdd));
-        lenient().when(trabajadorRepository.randomSelectRepartidor()).thenReturn(Optional.of(repartidor));
-        lenient().when(trabajadorRepository.randomSelectCocinero()).thenReturn(Optional.of(cocinero));
-        lenient().when(pedidoRepository.save(Mockito.any(Pedido.class))).thenAnswer(i -> i.getArguments()[0]);
-        lenient().when(pedidoRepository.buscarLineaPedidoPorProductoyPedido(productToAdd.getId(), pedido.getId())).thenReturn(Optional.of(ln));
+        when(pedidoRepository.buscarPedidoAbiertoByClienteId(cliente.getId().toString())).thenReturn(Optional.of(pedido));
+        when(productoRepository.encontrarProductoPorId(productToAdd.getId().toString())).thenReturn(Optional.of(productToAdd));
+        //when(trabajadorRepository.randomSelectRepartidor()).thenReturn(Optional.of(repartidor));
+        //when(trabajadorRepository.randomSelectCocinero()).thenReturn(Optional.of(cocinero));
+        when(pedidoRepository.save(Mockito.any(Pedido.class))).thenAnswer(i -> i.getArguments()[0]);
+        when(pedidoRepository.buscarLineaPedidoPorProductoyPedido(productToAdd.getId(), pedido.getId())).thenReturn(Optional.of(ln));
 
         //Test
         Pedido expectedResult = pedidoService.addProductoToPedidoOpen(productToAdd.getId().toString(), cliente);
