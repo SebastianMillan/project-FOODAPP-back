@@ -8,13 +8,12 @@ import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepositor
 import com.salesianostriana.dam.projectFOODAPP.pedido.service.PedidoService;
 import com.salesianostriana.dam.projectFOODAPP.producto.model.Producto;
 import com.salesianostriana.dam.projectFOODAPP.producto.repository.ProductoRepository;
+import com.salesianostriana.dam.projectFOODAPP.producto.service.ProductoService;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
+import com.salesianostriana.dam.projectFOODAPP.usuario.model.RolUsuario;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.TipoTrabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Trabajador;
 import com.salesianostriana.dam.projectFOODAPP.usuario.repository.TrabajadorRepository;
-import org.hibernate.annotations.Any;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,84 +21,85 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class PedidoTest {
 
-
-    UUID uuid = java.util.UUID.randomUUID();
-
-    Trabajador cocinero = Trabajador.builder()
-            .id(new UUID(1L, 9L))
-            .nombre("Paco")
-            .tipoTrabajador(TipoTrabajador.COCINERO)
+    Categoria categoria = Categoria.builder()
+            .id(UUID.randomUUID())
+            .nombre("Bebida")
             .build();
-    Trabajador repartidor = Trabajador.builder()
-            .id(new UUID(1L, 9L))
-            .nombre("Luis")
+    Cliente cliente = Cliente.builder()
+            .id(UUID.randomUUID())
+            .nombre("Luis Lopez")
+            .build();
+    Trabajador repartidor= Trabajador.builder()
+            .id(UUID.randomUUID())
+            .nombre("Paco Pepe")
+            .roles(Set.of(RolUsuario.TRABAJADOR))
             .tipoTrabajador(TipoTrabajador.REPARTIDOR)
             .build();
-
-    Categoria categoria = Categoria.builder()
-            .id(uuid)
-            .nombre("Bebida")
+    Trabajador cocinero= Trabajador.builder()
+            .id(UUID.randomUUID())
+            .nombre("Fernando Torres")
+            .roles(Set.of(RolUsuario.TRABAJADOR))
+            .tipoTrabajador(TipoTrabajador.COCINERO)
+            .build();
+    Pedido pedido = Pedido.builder()
+            .id(UUID.randomUUID())
+            .estadoPedido(EstadoPedido.ABIERTO)
+            .cliente(cliente.getId().toString())
+            .cocinero(cocinero.getId().toString())
+            .repartidor(repartidor.getId().toString())
+            .build();
+    LineaPedido lineaPedido = LineaPedido.builder()
+            .codLinea(UUID.randomUUID())
             .build();
 
     Producto producto = Producto.builder()
-            .id(new UUID(1L, 9L))
-            .nombre("Coca-Cola")
-            .precio(2.0)
+            .id(UUID.randomUUID())
+            .nombre("Coca-cola")
+            .precio(1.20)
+            .precioOferta(0.90)
             .categoria(categoria)
             .build();
 
 
-    Cliente cliente = Cliente.builder()
-            .id(uuid)
-            .nombre("Jose")
-            .build();
-
-    Pedido pedido = Pedido.builder()
-            .estadoPedido(EstadoPedido.ABIERTO)
-            .id(new UUID(1L, 9L))
-            .build();
-
-
-    @Mock
-    PedidoRepository pedidoRepository;
-
-    @Mock
-    ProductoRepository productoRepository;
-
-    @Mock
-    TrabajadorRepository trabajadorRepository;
 
     @InjectMocks
-    PedidoService pedidoService;
+    private PedidoService pedidoService;
 
-
-
-
+    @Mock
+    private ProductoRepository productoRepository;
+    @Mock
+    private PedidoRepository pedidoRepository;
+    @Mock
+    private TrabajadorRepository trabajadorRepository;
 
     @Test
-    void addProductoToPedidoOpen (){
+    void comprobarExisteProductoToAdd(){
 
-        Optional<Pedido> pedidoEncontrado = Mockito.doReturn(Optional.of(pedido)).when(pedidoRepository).buscarPedidoAbiertoByClienteId(uuid.toString());
-        Optional <Producto> productoAgregado = Mockito.doReturn(Optional.of(producto)).when(productoRepository).encontrarProductoPorId(uuid.toString());
 
-        Optional<Trabajador> repartidorAsginado = Mockito.doReturn(Optional.of(repartidor)).when(trabajadorRepository).randomSelectRepartidor();
-        Optional<Trabajador> cocineroAsignado = Mockito.doReturn(Optional.of(cocinero)).when(trabajadorRepository).randomSelectCocinero();
 
-        LineaPedido nuevaLineaPedido = LineaPedido.builder()
-                .precioUnitario(productoAgregado.get().getPrecio())
-                .cantidad(1)
-                .producto(productoAgregado.get())
-                .build();
+        when(pedidoRepository.buscarPedidoAbiertoByClienteId(cliente.getId().toString())).thenReturn(Optional.of(pedido));
+        when(productoRepository.encontrarProductoPorId(producto.getId().toString())).thenReturn(Optional.of(producto));
 
-      pedidoEncontrado.get().addLineaPedido(nuevaLineaPedido);
+        when(pedidoRepository.save(Mockito.any(Pedido.class))).thenAnswer(i -> i.getArguments()[0]);
+        when(pedidoRepository.buscarLineaPedidoPorProductoyPedido(producto.getId(), pedido.getId())).thenReturn(Optional.of(lineaPedido));
 
-      Assertions.assertEquals(1, pedidoEncontrado.get().getLineasPedido().size());
+
+        Pedido resultado = pedidoService.addProductoToPedidoOpen(producto.getId().toString(), cliente);
+        assertEquals(pedido.getId(), resultado.getId());
+        assertEquals(1, resultado.getLineasPedido().size());
+        assertEquals(pedido.getEstadoPedido(), resultado.getEstadoPedido());
+        assertEquals(pedido.getCliente(), resultado.getCliente());
+
     }
 
 }
