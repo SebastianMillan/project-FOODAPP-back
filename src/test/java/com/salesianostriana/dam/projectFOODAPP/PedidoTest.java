@@ -29,15 +29,15 @@ import java.util.UUID;
 public class PedidoTest {
 
 
-    UUID uuid = java.util.UUID.randomUUID();
+    UUID uuid = new UUID (1L, 9L);
 
     Trabajador cocinero = Trabajador.builder()
-            .id(new UUID(1L, 9L))
+            .id(uuid)
             .nombre("Paco")
             .tipoTrabajador(TipoTrabajador.COCINERO)
             .build();
     Trabajador repartidor = Trabajador.builder()
-            .id(new UUID(1L, 9L))
+            .id(uuid)
             .nombre("Luis")
             .tipoTrabajador(TipoTrabajador.REPARTIDOR)
             .build();
@@ -48,7 +48,7 @@ public class PedidoTest {
             .build();
 
     Producto producto = Producto.builder()
-            .id(new UUID(1L, 9L))
+            .id(uuid)
             .nombre("Coca-Cola")
             .precio(2.0)
             .categoria(categoria)
@@ -62,7 +62,10 @@ public class PedidoTest {
 
     Pedido pedido = Pedido.builder()
             .estadoPedido(EstadoPedido.ABIERTO)
-            .id(new UUID(1L, 9L))
+            .id(uuid)
+            .cocinero(cocinero.getId().toString())
+            .repartidor(repartidor.getId().toString())
+            .cliente(cliente.getId().toString())
             .build();
 
 
@@ -85,21 +88,25 @@ public class PedidoTest {
     @Test
     void addProductoToPedidoOpen (){
 
-        Optional<Pedido> pedidoEncontrado = Mockito.doReturn(Optional.of(pedido)).when(pedidoRepository).buscarPedidoAbiertoByClienteId(uuid.toString());
-        Optional <Producto> productoAgregado = Mockito.doReturn(Optional.of(producto)).when(productoRepository).encontrarProductoPorId(uuid.toString());
+        Mockito.doReturn(Optional.of(pedido)).when(pedidoRepository).buscarPedidoAbiertoByClienteId(uuid.toString());
+        Mockito.doReturn(Optional.of(producto)).when(productoRepository).encontrarProductoPorId(uuid.toString());
 
-        Optional<Trabajador> repartidorAsginado = Mockito.doReturn(Optional.of(repartidor)).when(trabajadorRepository).randomSelectRepartidor();
-        Optional<Trabajador> cocineroAsignado = Mockito.doReturn(Optional.of(cocinero)).when(trabajadorRepository).randomSelectCocinero();
+        Pedido pedidoEncontrado = pedidoRepository.buscarPedidoAbiertoByClienteId(uuid.toString()).get();
+        Producto productoAgregado = productoRepository.encontrarProductoPorId(uuid.toString()).get();
 
         LineaPedido nuevaLineaPedido = LineaPedido.builder()
-                .precioUnitario(productoAgregado.get().getPrecio())
+                .precioUnitario(productoAgregado.getPrecio())
                 .cantidad(1)
-                .producto(productoAgregado.get())
+                .producto(productoAgregado)
                 .build();
 
-      pedidoEncontrado.get().addLineaPedido(nuevaLineaPedido);
+      pedidoEncontrado.addLineaPedido(nuevaLineaPedido);
+      Mockito.when(pedidoRepository.save(pedidoEncontrado)).thenReturn(pedidoEncontrado);
 
-      Assertions.assertEquals(1, pedidoEncontrado.get().getLineasPedido().size());
+      pedidoRepository.save(pedidoEncontrado);
+
+      Assertions.assertEquals(1, pedidoEncontrado.getLineasPedido().size());
+      Assertions.assertEquals(cliente.getId().toString(), pedidoEncontrado.getCliente().toString());
     }
 
 }
