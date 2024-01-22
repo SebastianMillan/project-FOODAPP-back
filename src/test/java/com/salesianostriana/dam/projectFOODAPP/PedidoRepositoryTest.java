@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.projectFOODAPP;
 
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.EstadoPedido;
+import com.salesianostriana.dam.projectFOODAPP.pedido.model.LineaPedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.model.Pedido;
 import com.salesianostriana.dam.projectFOODAPP.pedido.repository.PedidoRepository;
 import com.salesianostriana.dam.projectFOODAPP.usuario.model.Cliente;
@@ -52,6 +53,7 @@ public class PedidoRepositoryTest {
                 .estadoPedido(EstadoPedido.CONFIRMADO)
                 .cliente(cliente1.getId().toString())
                 .build();
+
 
         testEntityManager.merge(cliente1);
         testEntityManager.merge(cliente2);

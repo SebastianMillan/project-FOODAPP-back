@@ -33,7 +33,6 @@ public class PedidoServiceTest {
 
     @InjectMocks
     private PedidoService pedidoService;
-
     @Mock
     private ProductoRepository productoRepository;
     @Mock
@@ -63,9 +62,6 @@ public class PedidoServiceTest {
         assertEquals(pedido.getId(), expectedResult.getId());
         assertEquals(pedido.getEstadoPedido(), expectedResult.getEstadoPedido());
         assertEquals(1, expectedResult.getLineasPedido().size());
-
     }
-
-
 }
 
