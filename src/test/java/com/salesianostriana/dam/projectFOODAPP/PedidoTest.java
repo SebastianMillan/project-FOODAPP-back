@@ -31,19 +31,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class PedidoTest {
 
-<<<<<<< HEAD
 
-    UUID uuid = new UUID (1L, 9L);
-
-    Trabajador cocinero = Trabajador.builder()
-            .id(uuid)
-            .nombre("Paco")
-            .tipoTrabajador(TipoTrabajador.COCINERO)
-            .build();
-    Trabajador repartidor = Trabajador.builder()
-            .id(uuid)
-            .nombre("Luis")
-=======
     Categoria categoria = Categoria.builder()
             .id(UUID.randomUUID())
             .nombre("Bebida")
@@ -56,7 +44,6 @@ public class PedidoTest {
             .id(UUID.randomUUID())
             .nombre("Paco Pepe")
             .roles(Set.of(RolUsuario.TRABAJADOR))
->>>>>>> 7371880e17c3018c02c07322a6cf3f314eb30a26
             .tipoTrabajador(TipoTrabajador.REPARTIDOR)
             .build();
     Trabajador cocinero= Trabajador.builder()
@@ -77,33 +64,13 @@ public class PedidoTest {
             .build();
 
     Producto producto = Producto.builder()
-<<<<<<< HEAD
-            .id(uuid)
-            .nombre("Coca-Cola")
-            .precio(2.0)
-=======
             .id(UUID.randomUUID())
             .nombre("Coca-cola")
             .precio(1.20)
             .precioOferta(0.90)
->>>>>>> 7371880e17c3018c02c07322a6cf3f314eb30a26
             .categoria(categoria)
             .build();
 
-
-<<<<<<< HEAD
-    Cliente cliente = Cliente.builder()
-            .id(uuid)
-            .nombre("Jose")
-            .build();
-
-    Pedido pedido = Pedido.builder()
-            .estadoPedido(EstadoPedido.ABIERTO)
-            .id(uuid)
-            .cocinero(cocinero.getId().toString())
-            .repartidor(repartidor.getId().toString())
-            .cliente(cliente.getId().toString())
-            .build();
 
 
     @Mock
@@ -114,43 +81,15 @@ public class PedidoTest {
 
     @Mock
     TrabajadorRepository trabajadorRepository;
-=======
->>>>>>> 7371880e17c3018c02c07322a6cf3f314eb30a26
+
 
     @InjectMocks
     private PedidoService pedidoService;
 
-    @Mock
-    private ProductoRepository productoRepository;
-    @Mock
-    private PedidoRepository pedidoRepository;
-    @Mock
-    private TrabajadorRepository trabajadorRepository;
+
 
     @Test
     void comprobarExisteProductoToAdd(){
-
-<<<<<<< HEAD
-        Mockito.doReturn(Optional.of(pedido)).when(pedidoRepository).buscarPedidoAbiertoByClienteId(uuid.toString());
-        Mockito.doReturn(Optional.of(producto)).when(productoRepository).encontrarProductoPorId(uuid.toString());
-
-        Pedido pedidoEncontrado = pedidoRepository.buscarPedidoAbiertoByClienteId(uuid.toString()).get();
-        Producto productoAgregado = productoRepository.encontrarProductoPorId(uuid.toString()).get();
-
-        LineaPedido nuevaLineaPedido = LineaPedido.builder()
-                .precioUnitario(productoAgregado.getPrecio())
-                .cantidad(1)
-                .producto(productoAgregado)
-                .build();
-
-      pedidoEncontrado.addLineaPedido(nuevaLineaPedido);
-      Mockito.when(pedidoRepository.save(pedidoEncontrado)).thenReturn(pedidoEncontrado);
-
-      pedidoRepository.save(pedidoEncontrado);
-
-      Assertions.assertEquals(1, pedidoEncontrado.getLineasPedido().size());
-      Assertions.assertEquals(cliente.getId().toString(), pedidoEncontrado.getCliente().toString());
-=======
 
 
         when(pedidoRepository.buscarPedidoAbiertoByClienteId(cliente.getId().toString())).thenReturn(Optional.of(pedido));
@@ -166,7 +105,6 @@ public class PedidoTest {
         assertEquals(pedido.getEstadoPedido(), resultado.getEstadoPedido());
         assertEquals(pedido.getCliente(), resultado.getCliente());
 
->>>>>>> 7371880e17c3018c02c07322a6cf3f314eb30a26
     }
 
 }
